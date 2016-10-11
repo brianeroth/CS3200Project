@@ -1,0 +1,99 @@
+$white: #FFF;
+$black: #000;
+$text-color: #333333;
+
+$font-stack: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+$font-size: 16px;
+$line-height: 1.4em;
+
+@mixin transform($transforms) {
+    -webkit-transform: $transforms;
+       -moz-transform: $transforms;
+        -ms-transform: $transforms;
+         -o-transform: $transforms;
+            transform: $transforms;
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+     -moz-transition: $args;
+      -ms-transition: $args;
+       -o-transition: $args;
+          transition: $args;
+}
+
+@mixin linear-gradient( $top-color, $bottom-color ){
+    background: $top-color;
+    background: -webkit-linear-gradient($top-color 0%, $bottom-color 90%, $bottom-color 100%);
+    background: -o-linear-gradient($top-color 0%, $bottom-color 90%, $bottom-color 100%);
+    background: linear-gradient($top-color 0%, $bottom-color 90%, $bottom-color 100%);
+}
+
+@mixin flexbox(){
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex( $attrs ){
+  -webkit-flex: $attrs;
+      -ms-flex: $attrs;
+          flex: $attrs;
+}
+
+@mixin flex-wrap(){
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+
+@mixin flex-center(){
+  -webkit-align-items: center;
+    -webkit-box-align: center;
+       -ms-flex-align: center;
+          align-items: center;
+}
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}  
+}
+
+$desktop: 0px;
+$small-desktop: 0px;
+$tablet: 0px;
+$phone: 0px;
+
+@mixin desktop {
+  @media ( min-width: $desktop ){
+      @content;
+  }
+}
+
+@mixin small-desktop{
+  @media ( max-width: #{$small-desktop} ){
+      @content;
+  }
+}
+
+@mixin gt-tablet{
+  @media (min-width: $tablet + 1){
+      @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin phone{
+  @media (max-width: #{$phone}){
+      @content;
+  }
+}
