@@ -58,6 +58,5 @@ gulp.task('eslint', () => {
   if (yargs.argv.failTaskOnError) {
     stream = stream.pipe(eslint.failAfterError());
   }
-
   return stream;
 });
