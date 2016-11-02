@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/brianeroth/CS3200Project.svg?branch=master)](https://travis-ci.org/brianeroth/CS3200Project)
+
 # CS3200Project
 
 This repository contains the API and web app for our CS 3200 project. 
