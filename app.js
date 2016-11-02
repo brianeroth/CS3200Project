@@ -3,10 +3,10 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
-const request = require('request');
-const querystring = require('querystring');
+// const request = require('request'); TODO
+// const querystring = require('querystring'); TODO
 const cookieParser = require('cookie-parser');
-const constants = require('./lib/constants');
+// const constants = require('./lib/constants'); TODO
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));

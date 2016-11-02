@@ -7,6 +7,8 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const nodemon = require('gulp-nodemon');
+const eslint = require('gulp-eslint');
+const yargs = require('yargs');
 
 const themeDir = 'public/assets/';
 
@@ -41,4 +43,20 @@ gulp.task('scripts', function() {
     .pipe(concat('production.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(themeDir + 'js/build/'));
+});
+
+gulp.task('eslint', () => {
+  var stream = gulp.src(['**/*.js', '!node_modules/**', '!coverage/**'])
+    .pipe(eslint({
+      quiet: true,
+      globals: [
+        'angular'
+      ]
+    }))
+    .pipe(eslint.format());
+
+  if (yargs.argv.failTaskOnError) {
+    stream = stream.pipe(eslint.failAfterError());
+  }
+  return stream;
 });
