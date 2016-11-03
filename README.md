@@ -15,7 +15,7 @@ This repository contains the API and web app for our CS 3200 project.
 
 There is one gulp task setup for the project:
 
-1. `npm run gulp` or simply `gulp` will start the Node.js server, and watch Sass directories for changes. The Node.js server will restart whenever there's a file changed.
+1. `npm run serve` or simply `gulp` will start the Node.js server, and watch Sass directories for changes. The Node.js server will restart whenever there's a file changed.
 
 ## How it's running publicly right now
 
