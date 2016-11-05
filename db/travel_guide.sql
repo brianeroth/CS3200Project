@@ -92,6 +92,26 @@ CREATE TABLE images(
 										NOT NULL DEFAULT 'hero'
 );
 
+CREATE TABLE place_images(
+	id					INT 			PRIMARY KEY AUTO_INCREMENT,
+	image_id			INT   			NOT NULL,
+	place_id 			INT 			NOT	NUll,
+	FOREIGN KEY (image_id) REFERENCES images(id)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY	(place_id) REFERENCES places(id)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE city_images(
+	id					INT 			PRIMARY KEY AUTO_INCREMENT,
+	image_id			INT   			NOT NULL,
+	city_id 			INT 			NOT	NULL,
+	FOREIGN KEY (image_id) REFERENCES images(id)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY	(place_id) REFERENCES places(id)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 CREATE TABLE interest_type(
 	id					INT 				PRIMARY KEY AUTO_INCREMENT,
 	description			VARCHAR(128) 		NOT NULL
