@@ -41,7 +41,7 @@ function getImagesForPlace(req) {
 }
 
 /**
- * Create an image..
+ * Create an image.
  *
  * @param {Object} req The request object
  * @return {Promise} The promise

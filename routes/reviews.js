@@ -51,7 +51,7 @@ function updateReview(req) {
 }
 
 /**
- * Delete a review..
+ * Delete a review.
  *
  * @param {Object} req The request object
  * @return {Promise} The promise
