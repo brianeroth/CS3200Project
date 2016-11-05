@@ -7,6 +7,13 @@ const express = require('express');
 // const querystring = require('querystring'); TODO
 const cookieParser = require('cookie-parser');
 // const constants = require('./lib/constants'); TODO
+const accounts = require('./routes/accounts');
+const cities = require('./routes/cities');
+const hours = require('./routes/hours');
+const images = require('./routes/images');
+const interests = require('./routes/interests');
+const places = require('./routes/places');
+const reviews = require('./routes/reviews');
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -31,7 +38,7 @@ app.get('/accounts/:id', function(req, res) {
  * Create an account.
  */
 app.post('/accounts/:id', function(req, res) {
-  accounts.create(req)
+  accounts.createAccount(req)
     .then(function(data) {
       res.send(data);
     })
@@ -44,7 +51,7 @@ app.post('/accounts/:id', function(req, res) {
  * Update an account.
  */
 app.put('/accounts/:id', function(req, res) {
-  accounts.update(req)
+  accounts.updateAccount(req)
     .then(function(data) {
       res.send(data);
     })
@@ -57,7 +64,7 @@ app.put('/accounts/:id', function(req, res) {
  * Delete an account.
  */
 app.delete('/accounts/:id', function(req, res) {
-  accounts.delete(req)
+  accounts.deleteAccount(req)
     .then(function(data) {
       res.send(data);
     })
@@ -95,8 +102,21 @@ app.get('/places/:id', function(req, res) {
 /**
  * Get all places in a city.
  */
-app.get('/places/city', function(req, res) {
+app.get('/places/:city', function(req, res) {
   places.getPlacesInCity(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
+/**
+ * Get all places with intereset.
+ */
+app.get('/places/:interest', function(req, res) {
+  places.getPlaceWithInterest(req)
     .then(function(data) {
       res.send(data);
     })
@@ -109,7 +129,7 @@ app.get('/places/city', function(req, res) {
  * Create a place.
  */
 app.post('/places/:id', function(req, res) {
-  places.create(req)
+  places.createPlace(req)
     .then(function(data) {
       res.send(data);
     })
@@ -122,7 +142,7 @@ app.post('/places/:id', function(req, res) {
  * Update a place.
  */
 app.put('/places/:id', function(req, res) {
-  places.update(req)
+  places.updatePlace(req)
     .then(function(data) {
       res.send(data);
     })
@@ -135,7 +155,7 @@ app.put('/places/:id', function(req, res) {
  * Delete a place.
  */
 app.delete('/places/:id', function(req, res) {
-  places.delete(req)
+  places.deletePlace(req)
     .then(function(data) {
       res.send(data);
     })
@@ -187,7 +207,7 @@ app.get('/hours/:place', function(req, res) {
  * Create an hour of operation.
  */
 app.post('/hours/:id', function(req, res) {
-  hours.create(req)
+  hours.createHour(req)
     .then(function(data) {
       res.send(data);
     })
@@ -200,7 +220,7 @@ app.post('/hours/:id', function(req, res) {
  * Update an hour of operation.
  */
 app.put('/hours/:id', function(req, res) {
-  hours.update(req)
+  hours.updateHour(req)
     .then(function(data) {
       res.send(data);
     })
@@ -212,8 +232,8 @@ app.put('/hours/:id', function(req, res) {
 /**
  * Delete an hour of opperation.
  */
-app.delete('/hours/:id', function(req ,res) {
-  hours.delete(req)
+app.delete('/hours/:id', function(req, res) {
+  hours.deleteHour(req)
     .then(function(data) {
       res.send(data);
     })
@@ -238,7 +258,7 @@ app.get('/cities', function(req, res) {
 /**
  * Get city with id.
  */
-app.get('/cities/:id', function(req ,res) {
+app.get('/cities/:id', function(req, res) {
   cities.getCity(req)
     .then(function(data) {
       res.send(data);
@@ -252,7 +272,7 @@ app.get('/cities/:id', function(req ,res) {
  * Create a city.
  */
 app.post('/cities/:id', function(req, res) {
-  cities.create(req)
+  cities.createCity(req)
     .then(function(data) {
       res.send(data);
     })
@@ -265,7 +285,7 @@ app.post('/cities/:id', function(req, res) {
  * Update a city.
  */
 app.put('/cities/:id', function(req, res) {
-  cities.update(req)
+  cities.updateCity(req)
     .then(function(data) {
       res.send(data);
     })
@@ -278,7 +298,7 @@ app.put('/cities/:id', function(req, res) {
  * Delete a city.
  */
 app.delete('/cities/:id', function(req, res) {
-  cities.delete(req)
+  cities.deleteCity(req)
     .then(function(data) {
       res.send(data);
     })
@@ -343,7 +363,7 @@ app.get('images/:place', function(req, res) {
  * Create an image.
  */
 app.post('images/:id', function(req, res) {
-  images.create(req)
+  images.createImage(req)
     .then(function(data) {
       res.send(data);
     })
@@ -356,7 +376,7 @@ app.post('images/:id', function(req, res) {
  * Update an image.
  */
 app.put('images/:id', function(req, res) {
-  images.update(req)
+  images.updateImage(req)
     .then(function(data) {
       res.send(data);
     })
@@ -369,7 +389,7 @@ app.put('images/:id', function(req, res) {
  * Delete an image.
  */
 app.delete('images/:id', function(req, res) {
-  images.delete(req)
+  images.deleteImage(req)
     .then(function(data) {
       res.send(data);
     })
@@ -420,8 +440,8 @@ app.get('/review/:place', function(req, res) {
 /**
  * Create a review.
  */
-app.post('reviews/:id', function(req, res) {
-  reviews.create(req)
+app.post('/reviews/:id', function(req, res) {
+  reviews.createReview(req)
     .then(function(data) {
       res.send(data);
     })
@@ -433,8 +453,8 @@ app.post('reviews/:id', function(req, res) {
 /**
  * Update a review.
  */
-app.put('reviews/:id', function(req, res) {
-  reviews.update(req)
+app.put('/reviews/:id', function(req, res) {
+  reviews.updateReview(req)
     .then(function(data) {
       res.send(data);
     })
@@ -446,8 +466,73 @@ app.put('reviews/:id', function(req, res) {
 /**
  * Delete a review.
  */
-app.delete('reviews/:id', function(req, res) {
-  reviews.delete(req)
+app.delete('/reviews/:id', function(req, res) {
+  reviews.deleteReview(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
+/**
+ * Get all interests.
+ */
+app.get('/interests/', function(req, res) {
+  interests.getInterests(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
+/**
+ * Get an interest with id.
+ */
+app.get('/interests/:id', function(req, res) {
+  interests.getInterest(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
+/**
+ * Create an interest.
+ */
+app.post('/interests/:id', function(req, res) {
+  interests.createInterest(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
+/**
+ * Update an interest.
+ */
+app.put('/interests/:id', function(req, res) {
+  interests.updateInterest(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
+});
+
+/**
+ * Delete an interest.
+ */
+app.delete('/interests/:id', function(req, res) {
+  interests.deleteInterest(req)
     .then(function(data) {
       res.send(data);
     })
