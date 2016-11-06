@@ -3,124 +3,124 @@ CREATE DATABASE travel_guide;
 
 USE travel_guide;
 
-CREATE TABLE cities(
-  id            INT           PRIMARY KEY AUTO_INCREMENT,
-  name          VARCHAR(128)  NOT NULL,
-  description   TEXT,
-  country       VARCHAR(128)  NOT NULL,
-  state         VARCHAR(128)  NOT NULL
+CREATE TABLE cities (
+  city_id           INT           PRIMARY KEY AUTO_INCREMENT,
+  city_name         VARCHAR(128)  NOT NULL,
+  city_description  TEXT,
+  city_country      VARCHAR(128)  NOT NULL,
+  city_state        VARCHAR(128)  NOT NULL
 );
 
-CREATE TABLE places(
-  id                   INT           PRIMARY KEY AUTO_INCREMENT,
-  name                 VARCHAR(128)  NOT NULL,
-  description          TEXT,
-  address              VARCHAR(128)  NOT NULL,
-  price_range          INT           NOT NUll DEFAULT 1,
-  external_resource    VARCHAR(128)  NOT NULL,
-  city_id              INT           NOT NULL,
-  FOREIGN KEY	(city_id) REFERENCES cities(id)
+CREATE TABLE places (
+  place_id                  INT           PRIMARY KEY AUTO_INCREMENT,
+  place_name                VARCHAR(128)  NOT NULL,
+  place_description         TEXT,
+  place_address             VARCHAR(128)  NOT NULL,
+  place_price_range         INT           NOT NUll DEFAULT 1,
+  place_external_resource   VARCHAR(128)  NOT NULL,
+  place_city_id             INT           NOT NULL,
+  FOREIGN KEY	(place_city_id) REFERENCES cities(city_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE resturants(
-  id              INT           PRIMARY KEY AUTO_INCREMENT,
-  cuisine_type    VARCHAR(128)  NOT NULL,
-  place_id        INT           NOT NULL,
-  FOREIGN KEY (place_id) REFERENCES places(id)
+CREATE TABLE restaurant (
+  restaurant_id             INT           PRIMARY KEY AUTO_INCREMENT,
+  restaurant_cuisine_type   VARCHAR(128)  NOT NULL,
+  restaurant_place_id       INT           NOT NULL,
+  FOREIGN KEY (restaurant_place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE events(
-  id            INT  PRIMARY KEY AUTO_INCREMENT,
-  event_date    DATE NOT NULL,
-  clost         DECIMAL(21, 0),
-  place_id      INT  NOT NULL,
-  FOREIGN KEY (place_id) REFERENCES places(id)
+CREATE TABLE events (
+  event_id        INT             PRIMARY KEY AUTO_INCREMENT,
+  event_date      DATE            NOT NULL,
+  event_cost      DECIMAL(21, 0),
+  event_place_id  INT             NOT NULL,
+  FOREIGN KEY (event_place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE landmarks(
-  id          INT  PRIMARY KEY AUTO_INCREMENT,
-  cost        DECIMAL(21, 0),
-  place_id    INT  NOT NULL,
-  FOREIGN KEY (place_id) REFERENCES places(id)
+CREATE TABLE landmarks (
+  landmark_id         INT               PRIMARY KEY AUTO_INCREMENT,
+  landmark_cost       DECIMAL(21, 0),
+  landmark_place_id   INT               NOT NULL,
+  FOREIGN KEY (landmark_place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE admins(
-  id          INT           PRIMARY KEY AUTO_INCREMENT,
-  name        VARCHAR(128)  NOT NULL,
-  username    VARCHAR(128)  NOT NULL,
-  password    VARCHAR(128)  NOT NULL
-);
-
-CREATE TABLE hotels(
-  id          INT  PRIMARY KEY AUTO_INCREMENT,
-  place_id    INT  NOT NULL,
-  FOREIGN KEY (place_id) REFERENCES places(id)
+CREATE TABLE hotels (
+  hotel_id  INT  PRIMARY KEY AUTO_INCREMENT,
+  place_id  INT  NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE reviews(
-  id             INT           PRIMARY KEY AUTO_INCREMENT,
-  author         VARCHAR(128)  NOT NULL,
-  star_rating    INT           NOT NULL DEFAULT 0,
-  description    TEXT,
-  date_posted    DATE          NOT NULL,
-  place_id       INT           NOT NULL,
-  FOREIGN KEY (place_id) REFERENCES places(id)
+CREATE TABLE admins (
+  admin_id          INT           PRIMARY KEY AUTO_INCREMENT,
+  admin_name        VARCHAR(128)  NOT NULL,
+  admin_username    VARCHAR(128)  NOT NULL,
+  admin_password    VARCHAR(128)  NOT NULL
+);
+
+CREATE TABLE reviews (
+  review_id             INT           PRIMARY KEY AUTO_INCREMENT,
+  review_author         VARCHAR(128)  NOT NULL,
+  review_star_rating    INT           NOT NULL DEFAULT 0,
+  review_description    TEXT,
+  review_date_posted    DATE          NOT NULL,
+  review_place_id       INT           NOT NULL,
+  FOREIGN KEY (review_place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE operational_hours(
-  id             INT    PRIMARY KEY AUTO_INCREMENT,
-  day_of_week    ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
-                        NOT NULL,
-  open_time      TIME   NOT NULL,
-  close_time     TIME   NOT NULL,
-  place_id       INT    NOT NULL,
-  FOREIGN KEY	(place_id) REFERENCES places(id)
+CREATE TABLE operational_hours (
+  op_hours_id             INT    PRIMARY KEY AUTO_INCREMENT,
+  op_hours_day_of_week    ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
+  op_hours_open_time      TIME   NOT NULL,
+  op_hours_close_time     TIME   NOT NULL,
+  op_hours_place_id       INT    NOT NULL,
+  FOREIGN KEY	(op_hours_place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE images(
-  id            INT                        PRIMARY KEY AUTO_INCREMENT,
-  image_path    VARCHAR(128)               NOT NULL,
-  caption       VARCHAR(128),
-  type          ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero'
+CREATE TABLE images (
+  image_id        INT                        PRIMARY KEY AUTO_INCREMENT,
+  image_path      VARCHAR(128)               NOT NULL,
+  image_caption   VARCHAR(128),
+  image_type      ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero'
 );
 
-CREATE TABLE place_images(
-  id          INT  PRIMARY KEY AUTO_INCREMENT,
-  image_id    INT  NOT NULL,
-  place_id    INT  NOT	NUll,
-  FOREIGN KEY (image_id) REFERENCES images(id)
+CREATE TABLE place_images (
+  place_image_id  INT  PRIMARY KEY AUTO_INCREMENT,
+  image_id        INT  NOT NULL,
+  place_id        INT  NOT NUll,
+  FOREIGN KEY (image_id) REFERENCES images(image_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY	(place_id) REFERENCES places(id)
+  FOREIGN KEY	(place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE city_images(
-  id          INT  PRIMARY KEY AUTO_INCREMENT,
-  image_id    INT  NOT NULL,
-  city_id     INT  NOT	NULL,
-  FOREIGN KEY (image_id) REFERENCES images(id)
+CREATE TABLE city_images (
+  city_image_id   INT  PRIMARY KEY AUTO_INCREMENT,
+  image_id        INT  NOT NULL,
+  city_id         INT  NOT NULL,
+  FOREIGN KEY (image_id) REFERENCES images(image_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY	(place_id) REFERENCES places(id)
+  FOREIGN KEY	(city_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE interest_type(
-  id             INT           PRIMARY KEY AUTO_INCREMENT,
-  description    VARCHAR(128)  NOT NULL
+CREATE TABLE interest_type (
+  interest_id             INT           PRIMARY KEY AUTO_INCREMENT,
+  interest_description    VARCHAR(128)  NOT NULL
 );
 
-CREATE TABLE places_interesttypes(
+CREATE TABLE places_interesttypes (
+  place_interest_id   INT  PRIMARY KEY AUTO_INCREMENT,
   place_id            INT  NOT NULL,
   interest_type_id    INT  NOT NULL,
-  FOREIGN KEY (place_id) REFERENCES places(id)
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (interest_type_id) REFERENCES interest_type(id)
+  FOREIGN KEY (interest_type_id) REFERENCES interest_type(interest_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
