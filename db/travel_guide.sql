@@ -50,7 +50,7 @@ CREATE TABLE landmarks(
 
 CREATE TABLE admins(
   id          INT           PRIMARY KEY AUTO_INCREMENT,
-  name				VARCHAR(128)  NOT NULL,
+  name        VARCHAR(128)  NOT NULL,
   username    VARCHAR(128)  NOT NULL,
   password    VARCHAR(128)  NOT NULL
 );
@@ -87,8 +87,8 @@ CREATE TABLE operational_hours(
 CREATE TABLE images(
   id            INT                        PRIMARY KEY AUTO_INCREMENT,
   image_path    VARCHAR(128)               NOT NULL,
-	caption       VARCHAR(128),
-	type          ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero'
+  caption       VARCHAR(128),
+  type          ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero'
 );
 
 CREATE TABLE place_images(
