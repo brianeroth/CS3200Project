@@ -1,0 +1,35 @@
+.container {
+    max-width: 1100px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+
+.city-chooser {
+    @include flexbox();
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .city-chooser__city {
+        @include flexbox();
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+#site-header {
+    @include flexbox();
+    justify-content: space-between;
+}
+
+.city__places {
+    @include flexbox();
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .city__place {
+        @include flexbox();
+        justify-content: space-around;
+        align-items: center;
+    }
+}
