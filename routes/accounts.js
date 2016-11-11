@@ -37,7 +37,7 @@ function createAccount(req) {
   }
 
   return Promise.using(getSqlConnection(), function(pool) {
-    return pool.query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' +  req.body.admin_username + '", "' + req.body.admin_password + '")')
+    return pool.query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '")')
       .then(function(rows) {
         return rows;
       })
@@ -71,8 +71,8 @@ function updateAccount(req) {
   }
 
   return Promise.using(getSqlConnection(), function(pool) {
-    return Promise.map(updates, (update) => {
-      return pool.query('UPDATE admins SET ' + update[0] + ' = "' +  update[1] + '" WHERE admin_id = ' + req.params.id);
+    return Promise.map(updates, function(update) {
+      return pool.query('UPDATE admins SET ' + update[0] + ' = "' + update[1] + '" WHERE admin_id = ' + req.params.id);
     });
   })
   .catch(function(err) {

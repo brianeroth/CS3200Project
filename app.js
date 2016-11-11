@@ -14,7 +14,7 @@ const images = require('./routes/images');
 const interests = require('./routes/interests');
 const places = require('./routes/places');
 const reviews = require('./routes/reviews');
-const bodyParser= require('body-parser').json();
+const bodyParser = require('body-parser').json();
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
