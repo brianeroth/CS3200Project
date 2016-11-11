@@ -38,8 +38,45 @@
     margin-bottom: 45px;
 }
 
+.city__places__featured {
+    .city__place__featured {
+        background-size: cover;
+        background-position: center center;
+
+        padding: 30px;
+        width: calc(33.3% - 15px);
+        height: 450px;
+        margin-top: 30px;
+
+        border-radius: 3px;
+        text-decoration: none;
+
+        @include transition(0.3s all);
+
+        .city__place__featured__country {
+            text-transform: uppercase;
+            color: $gray;
+            font-weight: 300;
+        }
+
+        .city-city__place__featured__name {
+            font-weight: 300;
+            color: $white;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
 .city__places {
     margin-top: 30px;
+    margin-bottom: 60px;
+
+    & + .city__places {
+        margin-top: 60px;
+    }
 
     .city__place {
         border-top: 1px solid transparentize($gray, 0.6);

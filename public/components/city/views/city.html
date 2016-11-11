@@ -7,7 +7,15 @@
 
 <div class="city__hero" style="background-image: url(http://placehold.it/5000x2000);"></div>
 
-<h3 class="block-headline container">Popular Landmarks</h3>
+<h4 class="block-headline container">Popular Landmarks</h4>
+
+<div class="city__places__featured city__landmarks__featured container">
+    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)">
+        <h4 ng-bind="city.country" class="city__place__featured__country"></h4>
+        <h2 ng-bind="city.city_name" class="city__place__featured__name"></h2>
+    </a>
+</div>
+
 <div class="city__places city__landmarks container">
     <a class="city__place" href="#">
         <div class="city__place__image">
@@ -19,45 +27,22 @@
             <span class="city__place__address">123 Main St.</span>
         </div>
     </a>
-    <a class="city__place" href="#">
-        <div class="city__place__image">
-            <img src="http://placehold.it/100x75">
-        </div>
-        <div class="city__place__info">
-            <h3 class="city__place__headline">This is an example</h3>
-            <span class="city__place__address">123 Main St.</span>
-        </div>
+</div>
+
+<h4 class="block-headline container">Popular Restaurants</h4>
+
+<div class="city__places__featured city__landmarks__featured container">
+    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)">
+        <h4 ng-bind="city.country" class="city__place__featured__country"></h4>
+        <h2 ng-bind="city.city_name" class="city__place__featured__name"></h2>
     </a>
+</div>
+
+<div class="city__places city__restaurants container">
     <a class="city__place" href="#">
         <div class="city__place__image">
             <img src="http://placehold.it/100x75">
-        </div>
-        <div class="city__place__info">
-            <h3 class="city__place__headline">This is an example</h3>
-            <span class="city__place__address">123 Main St.</span>
-        </div>
-    </a>
-    <a class="city__place" href="#">
-        <div class="city__place__image">
-            <img src="http://placehold.it/100x75">
-        </div>
-        <div class="city__place__info">
-            <h3 class="city__place__headline">This is an example</h3>
-            <span class="city__place__address">123 Main St.</span>
-        </div>
-    </a>
-    <a class="city__place" href="#">
-        <div class="city__place__image">
-            <img src="http://placehold.it/100x75">
-        </div>
-        <div class="city__place__info">
-            <h3 class="city__place__headline">This is an example</h3>
-            <span class="city__place__address">123 Main St.</span>
-        </div>
-    </a>
-    <a class="city__place" href="#">
-        <div class="city__place__image">
-            <img src="http://placehold.it/100x75">
+            <div class="city__place__number">1</div>
         </div>
         <div class="city__place__info">
             <h3 class="city__place__headline">This is an example</h3>
@@ -66,11 +51,8 @@
     </a>
 </div>
 
-<div class="city__places city__hotels">
+<div class="city__places city__hotels container">
 </div>
 
-<div class="city__places city__events">
-</div>
-
-<div class="city__places city__restaurants">
+<div class="city__places city__events container">
 </div>
