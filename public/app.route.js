@@ -9,5 +9,9 @@ angular.module('cs3200project').config(function($routeProvider, CONFIG) {
     .when('/', {
       templateUrl: 'components/home/views/home.html',
       controller: 'homeController'
+    })
+    .when('/city/:city', {
+      templateUrl: 'components/city/views/city.html',
+      controller: 'cityController'
     });
 });
