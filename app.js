@@ -14,6 +14,7 @@ const images = require('./routes/images');
 const interests = require('./routes/interests');
 const places = require('./routes/places');
 const reviews = require('./routes/reviews');
+const bodyParser= require('body-parser').json();
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -30,27 +31,29 @@ app.get('/accounts/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
 /*
  * Create an account.
  */
-app.post('/accounts/:id', function(req, res) {
+app.post('/accounts/new', bodyParser, function(req, res) {
   accounts.createAccount(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
 /**
  * Update an account.
  */
-app.put('/accounts/:id', function(req, res) {
+app.put('/accounts/:id', bodyParser, function(req, res) {
   accounts.updateAccount(req)
     .then(function(data) {
       res.send(data);
