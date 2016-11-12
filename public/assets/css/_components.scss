@@ -25,3 +25,19 @@
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
+#site-footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-size: 0.95em;
+
+    a {
+        color: $gray;
+        text-decoration: none;
+
+        & + a {
+            margin-left: 15px;
+        }
+    }
+}
