@@ -1,21 +1,17 @@
 <div class="page-headline container">
-    <h1 class="page-headline__header">This is an example</h1>
-    <p class="page-headline__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+    <h1 class="page-headline__header" ng-bind="city.city_name"></h1>
+    <p class="page-headline__description" ng-bind="city.city_description"></p>
 </div>
 
 <div class="city__hero" style="background-image: url(http://placehold.it/5000x2000);"></div>
 
 <h4 class="block-headline container">Popular Landmarks</h4>
-
 <div class="city__places__featured city__landmarks__featured container">
     <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)">
         <h4 ng-bind="city.country" class="city__place__featured__country"></h4>
         <h2 ng-bind="city.city_name" class="city__place__featured__name"></h2>
     </a>
 </div>
-
 <div class="city__places city__landmarks container">
     <a class="city__place" href="#">
         <div class="city__place__image">
@@ -29,15 +25,36 @@
     </a>
 </div>
 
-<h4 class="block-headline container">Popular Restaurants</h4>
+<h4 class="block-headline container">Upcoming Events</h4>
+<div class="city__events container">
+    <div class="city__event">
+        <div class="city__event__image">
+            <img src="http://placehold.it/500x300">
+        </div>
+        <div class="city__event__info">
+            <div class="city__event__headline__info">
+                <div>
+                    <h3 class="city__event__headline">Example Event 1</h3>
+                    <p class="city__event__time">7:00 PM</p>
+                </div>
+                <div class="city__event__date">
+                    <div class="city__event__date__month"> November </div> 
+                    <div class="city__event__date__day"> 25 </div> 
+                </div>
+            </div>
+            <p class="city__event__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+            <a class="city__event__link" href="#">View event details</a>
+        </div>
+    </div>
+</div>
 
+<h4 class="block-headline container" style="margin-top: 60px;">Popular Restaurants</h4>
 <div class="city__places__featured city__landmarks__featured container">
     <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)">
         <h4 ng-bind="city.country" class="city__place__featured__country"></h4>
         <h2 ng-bind="city.city_name" class="city__place__featured__name"></h2>
     </a>
 </div>
-
 <div class="city__places city__restaurants container">
     <a class="city__place" href="#">
         <div class="city__place__image">
@@ -51,8 +68,13 @@
     </a>
 </div>
 
-<div class="city__places city__hotels container">
+<h4 class="block-headline container">Popular Hotels</h4>
+<div class="city__places__featured city__hotels__featured container">
+    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)">
+        <h4 ng-bind="city.country" class="city__place__featured__country"></h4>
+        <h2 ng-bind="city.city_name" class="city__place__featured__name"></h2>
+    </a>
 </div>
 
-<div class="city__places city__events container">
+<div class="city__places city__interest_type container">
 </div>

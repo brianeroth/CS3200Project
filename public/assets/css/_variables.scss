@@ -3,6 +3,7 @@ $black: #000;
 $text-color: #333333;
 
 $gray: #999999;
+$gray--lighter: transparentize($gray, 0.6);
 $blue: #297cbb;
 
 $font-stack: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;

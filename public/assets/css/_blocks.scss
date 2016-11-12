@@ -79,7 +79,7 @@
     }
 
     .city__place {
-        border-top: 1px solid transparentize($gray, 0.6);
+        border-top: 1px solid $gray--lighter;
         padding: 7px 0;
         width: calc(33.3% - 15px);
         text-decoration: none;
@@ -102,7 +102,7 @@
             height: 30px;
             background-color: $white;
             border-radius: 50%;
-            box-shadow: 0 2px 2px $gray;
+            box-shadow: 0 0 4px $gray;
             text-align: center;
             font-size: 0.95em;
             color: $gray;
@@ -118,5 +118,89 @@
             color: $gray;
             font-size: 0.95em;
         }
+    }
+}
+
+.city__event {
+    margin-top: 30px;
+
+    & + .city__event {
+        padding-top: 30px;
+        border-top: 1px solid $gray--lighter;
+    }
+
+    .city__event__info {
+        margin-left: 30px;
+
+        .city__event__time {
+            margin-top: 7px;
+            color: $gray;
+        }
+
+        .city__event__headline__info {
+            margin-bottom: 15px;
+        }
+
+        .city__event__date {
+            .city__event__date__month {
+                padding: 7px;
+                text-transform: uppercase;
+                background-color: #d50000;
+                text-align: center;
+                color: $white;
+                font-size: 0.75em;
+            }
+
+            .city__event__date__day {
+                text-align: center;
+                font-weight: 700;
+                padding: 15px 0;
+                font-size: 1.4em;
+                border-left: 1px solid $gray--lighter;
+                border-bottom: 1px solid $gray--lighter;
+                border-right: 1px solid $gray--lighter;
+            }
+        }
+
+        .city__event__link {
+            display: block;
+            border-top: 1px solid $gray--lighter;
+            padding-top: 15px;
+            font-size: 0.95em;
+            text-decoration: none;
+            color: $gray;
+            text-transform: uppercase;
+
+            &:after {
+                content: '\2192';
+                margin-left: 7px;
+            }
+        }
+    }
+}
+
+.login-form {
+    margin-top: 30px;
+    width: 50%;
+
+    input {
+        display: block;
+        width: 100%;
+        border: 1px solid $gray--lighter;
+        padding: 15px;
+        font-size: 1.1em;
+        min-width: 300px;
+        font-weight: 300;
+
+        & + input {
+            margin-top: 15px;
+        }
+    }
+
+    input[type="submit"] {
+        background-color: $blue;
+        color: $white;
+        border-color: transparent;
+        cursor: pointer;
     }
 }

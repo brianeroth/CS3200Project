@@ -19,7 +19,13 @@
 
 #site-header {
     @include flexbox();
+    @include flex-center();
     justify-content: space-between;
+}
+
+.header__search {
+    @include flexbox();
+    @include flex-center();
 }
 
 .city__places__featured {
@@ -34,7 +40,18 @@
 
     .city__place {
         @include flexbox();
+        @include flex-center();
         justify-content: space-around;
-        align-items: center;
+    }
+}
+
+.city__event {
+    @include flexbox();
+    @include flex-center();
+
+    .city__event__headline__info {
+        @include flexbox();
+        @include flex-center();
+        justify-content: space-between;
     }
 }
