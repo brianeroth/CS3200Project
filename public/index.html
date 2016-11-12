@@ -12,6 +12,8 @@
 
         <main id="main" ng-view></main>
 
+        <footer id="site-footer" class="container" ng-controller="footerController" ng-include="'components/footer/views/footer.html'"></footer>
+
         <!-- dependencies -->
             <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
@@ -28,6 +30,7 @@
         <!-- end factories -->
         <!-- controllers -->
             <script src="components/header/header.controller.js"></script>
+            <script src="components/footer/footer.controller.js"></script>
             <script src="components/home/home.controller.js"></script>
             <script src="components/city/city.controller.js"></script>
         <!-- end controllers -->
