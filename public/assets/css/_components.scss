@@ -26,6 +26,24 @@
     padding-bottom: 30px;
 }
 
+.header__search {
+    .search-icon {
+        width: 45px;
+        height: 45px;
+        padding-right: 15px;
+        border-right: 1px solid $gray--lighter;
+    }
+
+    input {
+        margin-left: 15px;
+        border: 0;
+        padding: 15px;
+        font-size: 1.1em;
+        min-width: 300px;
+        font-weight: 300;
+    }
+}
+
 #site-footer {
     padding-top: 30px;
     padding-bottom: 30px;
