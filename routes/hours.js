@@ -1,5 +1,9 @@
 'use strict';
 
+const Promise = require('bluebird');
+const getSqlConnection = require('../lib/constants').getSqlConnection;
+const internalServerError = require('../lib/constants').internalServerError;
+
 /**
  * Get all hours of operation.
  *
@@ -7,7 +11,15 @@
  * @return {Promise} The promise
  */
 function getHours(req) {
-  return Promise.resolve('stub');
+  return Promise.using(getSqlConnection(), function(pool) {
+    return pool.query('SELECT * FROM operational_hours')
+      .then(function(rows) {
+        return rows;
+      })
+      .catch(function() {
+        return internalServerError;
+      });
+  });
 }
 
 /**
@@ -17,7 +29,15 @@ function getHours(req) {
  * @return {Promise} The promise
  */
 function getHour(req) {
-  return Promise.resolve('stub');
+  return Promise.using(getSqlConnection(), function(pool) {
+    return pool.query('SELECT * FROM operational_hours WHERE op_hours_id = ' + req.params.id)
+      .then(function(rows) {
+        return rows;
+      })
+      .catch(function() {
+        return internalServerError;
+      });
+  });
 }
 
 /**
@@ -27,7 +47,15 @@ function getHour(req) {
  * @return {Promise} The promise
  */
 function getHoursForPlace(req) {
-  return Promise.resolve('stub');
+  return Promise.using(getSqlConnection(), function(pool) {
+    return pool.query('SELECT * FROM operational_hours WHERE op_hours_place_id = ' + req.params.id)
+      .then(function(rows) {
+        return rows;
+      })
+      .catch(function() {
+        return internalServerError;
+      });
+  });
 }
 
 /**
@@ -57,7 +85,15 @@ function updateHour(req) {
  * @return {Promise} The promise
  */
 function deleteHour(req) {
-  return Promise.resolve('stub');
+  return Promise.using(getSqlConnection(), function(pool) {
+    return pool.query('DELETE FROM operational_hours WHERE op_hours_id = ' + req.params.id)
+      .then(function(rows) {
+        return rows;
+      })
+      .catch(function() {
+        return internalServerError;
+      });
+  });
 }
 
 module.exports = {
