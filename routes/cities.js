@@ -1,5 +1,9 @@
 'use strict';
 
+const Promise = require('bluebird');
+const getSqlConnection = require('../lib/constants').getSqlConnection;
+const internalServerError = require('../lib/constants').internalServerError;
+
 /**
  * Get all cities.
  *
@@ -7,7 +11,15 @@
  * @return {Promise} The promise
  */
 function getCities(req) {
-  return Promise.resolve('stub');
+  return Promise.using(getSqlConnection(), function(pool) {
+    return pool.query('SELECT * FROM cities')
+      .then(function(rows) {
+        return rows;
+      })
+      .catch(function() {
+        return internalServerError;
+      });
+  });
 }
 
 /**
@@ -17,7 +29,15 @@ function getCities(req) {
  * @return {Promise} The promise
  */
 function getCity(req) {
-  return Promise.resolve('stub');
+  return Promise.using(getSqlConnection(), function(pool) {
+    return pool.query('SELECT * FROM cities WHERE city_id = ' + req.params.id)
+      .then(function(rows) {
+        return rows;
+      })
+      .catch(function() {
+        return internalServerError;
+      });
+  });
 }
 
 /**
