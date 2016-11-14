@@ -27,7 +27,7 @@ function createAccount(req) {
     });
   }
 
-  return pool.query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '")');
+  return query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '")');
 }
 
 /**
@@ -69,7 +69,7 @@ function updateAccount(req) {
  * @return {Promise} The promise
  */
 function deleteAccount(req) {
-  return query('DELETE FROM admins WHERE admin_id = ' req.params.id);
+  return query('DELETE FROM admins WHERE admin_id = ' + req.params.id);
 }
 
 module.exports = {

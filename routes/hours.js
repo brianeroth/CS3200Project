@@ -40,14 +40,14 @@ function getHoursForPlace(req) {
  * @return {Promise} The promise
  */
 function createHour(req) {
-  if (!req.body || !req.body.op_hours_day_of_week || !req.body.op_hours_open_time || !req.body.op_hours_close_time !! !req.body.op_hours_place_id) {
+  if (!req.body || !req.body.op_hours_day_of_week || !req.body.op_hours_open_time || !req.body.op_hours_close_time || !req.body.op_hours_place_id) {
     return Promise.reject({
       status: 406,
       message: 'Must provide an hours\'s day, open time, close time, and place'
     });
   }
 
-  return pool.query('INSERT INTO operational_hours (op_hours_day_of_week, op_hours_open_time, op_hours_close_time, op_hours_place_id) VALUES ("' + req.body.op_hours_day_of_week + '",  "' + req.body.op_hours_open_time + '", "' + req.body.op_hours_close_time + '", "' + req.body.op_hours_place_id + '")');
+  return query('INSERT INTO operational_hours (op_hours_day_of_week, op_hours_open_time, op_hours_close_time, op_hours_place_id) VALUES ("' + req.body.op_hours_day_of_week + '",  "' + req.body.op_hours_open_time + '", "' + req.body.op_hours_close_time + '", "' + req.body.op_hours_place_id + '")');
 }
 
 /**

@@ -30,14 +30,14 @@ function getCity(req) {
  * @return {Promise} The promise
  */
 function createCity(req) {
-  if (!req.body || !req.body.city_name || !req.body.city_description || !req.body.city_country !! !req.body.city_state) {
+  if (!req.body || !req.body.city_name || !req.body.city_description || !req.body.city_country || !req.body.city_state) {
     return Promise.reject({
       status: 406,
       message: 'Must provide city\'s name, description, country, and state'
     });
   }
 
-  return pool.query('INSERT INTO cities (city_name, city_description, city_country, city_state) VALUES ("' + req.body.city_name + '",  "' + req.body.city_description + '", "' + req.body.city_country + '", "' + req.body.city_state + '")');
+  return query('INSERT INTO cities (city_name, city_description, city_country, city_state) VALUES ("' + req.body.city_name + '",  "' + req.body.city_description + '", "' + req.body.city_country + '", "' + req.body.city_state + '")');
 }
 
 /**
@@ -84,7 +84,7 @@ function updateCity(req) {
  * @return {Promise} The promise
  */
 function deleteCity(req) {
-  return query('DELETE FROM cities WHERE city_id = ' req.params.id);
+  return query('DELETE FROM cities WHERE city_id = ' + req.params.id);
 }
 
 module.exports = {
