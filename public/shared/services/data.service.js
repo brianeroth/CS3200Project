@@ -7,10 +7,10 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     var defer = $q.defer();
 
     $http.get('/cities')
-      .success(function(res) {
+      .then(function(res) {
         defer.resolve(res);
       })
-      .error(function(err) {
+      .catch(function(err) {
         defer.reject(err);
       });
 
@@ -21,10 +21,24 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     var defer = $q.defer();
 
     $http.get('/cities/' + id)
-      .success(function(res) {
+      .then(function(res) {
         defer.resolve(res);
       })
-      .error(function(err) {
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.getPlacesInCity = function(id, type) {
+    var defer = $q.defer();
+
+    $http.get('/places/city/' + id + '?type=' + type)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
         defer.reject(err);
       });
 

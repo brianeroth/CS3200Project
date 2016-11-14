@@ -1,5 +1,8 @@
 'use strict';
 
+const Promise = require('bluebird');
+const query = require('../lib/utils').query;
+
 /**
  * Get all places.
  *
@@ -7,7 +10,7 @@
  * @return {Promise} The promise
  */
 function getPlaces(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM places');
 }
 
 /**
@@ -17,7 +20,7 @@ function getPlaces(req) {
  * @return {Promise} The promise
  */
 function getPlace(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM places WHERE place_id = ' + req.params.id);
 }
 
 /**
@@ -27,7 +30,13 @@ function getPlace(req) {
  * @return {Promise} The promise
  */
 function getPlacesInCity(req) {
-  return Promise.resolve('stub');
+  if (!req.query || !req.query.type) {
+    return Promise.rejected({
+      status: 406,
+      message: 'Type parameter required.',
+    });
+  }
+  return query('SELECT * FROM places INNER JOIN '+ req.query.type + ' ON ' + req.query.type + '.place_id = places.place_id AND place_city_id = ' + req.params.id);
 }
 
 /**
@@ -67,7 +76,7 @@ function updatePlace(req) {
  * @return {Promise} The promise
  */
 function deletePlace(req) {
-  return Promise.resolve('stub');
+  return query('DELETE FROM places WHERE place_id = ' + req.params.id);
 }
 
 module.exports = {

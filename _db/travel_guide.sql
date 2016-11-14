@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS travel_guide;
-CREATE DATABASE travel_guide;
+-- Setting variables for Heroku
+SET FOREIGN_KEY_CHECKS = 0;
+SET @@auto_increment_increment = 1;
 
-USE travel_guide;
-
+DROP TABLE IF EXISTS cities;
 CREATE TABLE cities (
   city_id           INT           PRIMARY KEY AUTO_INCREMENT,
   city_name         VARCHAR(128)  NOT NULL,
@@ -11,6 +11,7 @@ CREATE TABLE cities (
   city_state        VARCHAR(128)  NOT NULL
 );
 
+DROP TABLE IF EXISTS places;
 CREATE TABLE places (
   place_id                  INT           PRIMARY KEY AUTO_INCREMENT,
   place_name                VARCHAR(128)  NOT NULL,
@@ -23,31 +24,35 @@ CREATE TABLE places (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE restaurant (
+DROP TABLE IF EXISTS restaurants;
+CREATE TABLE restaurants (
   restaurant_id             INT           PRIMARY KEY AUTO_INCREMENT,
   restaurant_cuisine_type   VARCHAR(128)  NOT NULL,
-  restaurant_place_id       INT           NOT NULL,
-  FOREIGN KEY (restaurant_place_id) REFERENCES places(place_id)
+  place_id                  INT           NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS events;
 CREATE TABLE events (
   event_id        INT             PRIMARY KEY AUTO_INCREMENT,
   event_date      DATE            NOT NULL,
   event_cost      DECIMAL(21, 0),
-  event_place_id  INT             NOT NULL,
-  FOREIGN KEY (event_place_id) REFERENCES places(place_id)
+  place_id        INT             NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS landmarks;
 CREATE TABLE landmarks (
-  landmark_id         INT               PRIMARY KEY AUTO_INCREMENT,
-  landmark_cost       DECIMAL(21, 0),
-  landmark_place_id   INT               NOT NULL,
-  FOREIGN KEY (landmark_place_id) REFERENCES places(place_id)
+  landmark_id     INT               PRIMARY KEY AUTO_INCREMENT,
+  landmark_cost   DECIMAL(21, 0),
+  place_id        INT               NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS hotels;
 CREATE TABLE hotels (
   hotel_id  INT  PRIMARY KEY AUTO_INCREMENT,
   place_id  INT  NOT NULL,
@@ -55,6 +60,7 @@ CREATE TABLE hotels (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS admins;
 CREATE TABLE admins (
   admin_id          INT           PRIMARY KEY AUTO_INCREMENT,
   admin_name        VARCHAR(128)  NOT NULL,
@@ -62,6 +68,7 @@ CREATE TABLE admins (
   admin_password    VARCHAR(128)  NOT NULL
 );
 
+DROP TABLE IF EXISTS reviews;
 CREATE TABLE reviews (
   review_id             INT           PRIMARY KEY AUTO_INCREMENT,
   review_author         VARCHAR(128)  NOT NULL,
@@ -73,6 +80,7 @@ CREATE TABLE reviews (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS operational_hours;
 CREATE TABLE operational_hours (
   op_hours_id             INT    PRIMARY KEY AUTO_INCREMENT,
   op_hours_day_of_week    ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
@@ -83,6 +91,7 @@ CREATE TABLE operational_hours (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS images;
 CREATE TABLE images (
   image_id        INT                        PRIMARY KEY AUTO_INCREMENT,
   image_path      VARCHAR(128)               NOT NULL,
@@ -90,6 +99,7 @@ CREATE TABLE images (
   image_type      ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero'
 );
 
+DROP TABLE IF EXISTS place_images;
 CREATE TABLE place_images (
   place_image_id  INT  PRIMARY KEY AUTO_INCREMENT,
   image_id        INT  NOT NULL,
@@ -100,6 +110,7 @@ CREATE TABLE place_images (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS city_images;
 CREATE TABLE city_images (
   city_image_id   INT  PRIMARY KEY AUTO_INCREMENT,
   image_id        INT  NOT NULL,
@@ -110,11 +121,13 @@ CREATE TABLE city_images (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE interest_type (
+DROP TABLE IF EXISTS interest_types;
+CREATE TABLE interest_types (
   interest_id             INT           PRIMARY KEY AUTO_INCREMENT,
   interest_description    VARCHAR(128)  NOT NULL
 );
 
+DROP TABLE IF EXISTS places_interesttypes;
 CREATE TABLE places_interesttypes (
   place_interest_id   INT  PRIMARY KEY AUTO_INCREMENT,
   place_id            INT  NOT NULL,
@@ -124,3 +137,6 @@ CREATE TABLE places_interesttypes (
   FOREIGN KEY (interest_type_id) REFERENCES interest_type(interest_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+-- Setting variables for Heroku
+SET FOREIGN_KEY_CHECKS = 1;

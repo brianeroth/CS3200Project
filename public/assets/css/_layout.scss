@@ -31,6 +31,12 @@
 .city__places__featured {
     @include flexbox();
     justify-content: space-between;
+
+    .city__place__featured {
+        @include flexbox();
+        flex-direction: column;
+        justify-content: space-between;        
+    }
 }
 
 .city__places {

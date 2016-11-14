@@ -53,13 +53,13 @@
 
         @include transition(0.3s all);
 
-        .city__place__featured__country {
+        .city__place__featured__extra {
             text-transform: uppercase;
             color: $gray;
             font-weight: 300;
         }
 
-        .city-city__place__featured__name {
+        .city__place__featured__name {
             font-weight: 300;
             color: $white;
         }

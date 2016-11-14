@@ -105,13 +105,14 @@ app.get('/places/:id', function(req, res) {
 /**
  * Get all places in a city.
  */
-app.get('/places/:city', function(req, res) {
+app.get('/places/city/:id', function(req, res) {
   places.getPlacesInCity(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
