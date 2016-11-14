@@ -56,7 +56,14 @@ function getPlaceWithInterest(req) {
  * @return {Promise} The promise
  */
 function createPlace(req) {
-  return Promise.resolve('stub');
+  if (!req.body || !req.body.place_name || !req.body.place_address || !req.body.place_price_range || !req.body.place_external_resource || !req.body.place_city_id) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide a place\'s name, address, price range, external resource, and place'
+    });
+  }
+
+  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_place_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "'+ req.body.place_external_resource + ', "' + req.body.place_city_id + '")');
 }
 
 /**

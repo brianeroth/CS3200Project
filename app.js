@@ -3,10 +3,7 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
-// const request = require('request'); TODO
-// const querystring = require('querystring'); TODO
 const cookieParser = require('cookie-parser');
-// const constants = require('./lib/constants'); TODO
 const accounts = require('./routes/accounts');
 const cities = require('./routes/cities');
 const hours = require('./routes/hours');
@@ -59,7 +56,8 @@ app.put('/accounts/:id', bodyParser, function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -72,7 +70,8 @@ app.delete('/accounts/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -85,7 +84,8 @@ app.get('/places', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -98,7 +98,8 @@ app.get('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -125,7 +126,8 @@ app.get('/places/:interest', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -138,7 +140,8 @@ app.post('/places', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -151,7 +154,8 @@ app.put('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -164,7 +168,8 @@ app.delete('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -177,7 +182,8 @@ app.get('/hours', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -190,20 +196,22 @@ app.get('/hours/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
 /**
  * Get hours of operation for a place.
  */
-app.get('/hours/:place', function(req, res) {
+app.get('/hours/place/:id', function(req, res) {
   hours.getHoursForPlace(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -216,7 +224,8 @@ app.post('/hours', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -229,7 +238,8 @@ app.put('/hours/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -242,7 +252,8 @@ app.delete('/hours/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -255,7 +266,8 @@ app.get('/cities', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -268,7 +280,8 @@ app.get('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -281,7 +294,8 @@ app.post('/cities', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -294,7 +308,8 @@ app.put('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -307,7 +322,8 @@ app.delete('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -320,7 +336,8 @@ app.get('/images', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -333,33 +350,36 @@ app.get('/images/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
 /**
  * Get all images for a city.
  */
-app.get('/images/:city', function(req, res) {
+app.get('/images/city/:id', function(req, res) {
   images.getImagesForCity(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
 /**
  * Get all images for a place.
  */
-app.get('/images/:place', function(req, res) {
+app.get('/images/place/:id', function(req, res) {
   images.getImagesForPlace(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -372,7 +392,8 @@ app.post('/images', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -385,7 +406,8 @@ app.put('images/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -398,7 +420,8 @@ app.delete('images/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -411,7 +434,8 @@ app.get('/reviews', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -424,7 +448,8 @@ app.get('/reviews/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -437,7 +462,8 @@ app.get('/review/:place', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -450,7 +476,8 @@ app.post('/reviews', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -463,7 +490,8 @@ app.put('/reviews/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -476,7 +504,8 @@ app.delete('/reviews/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -489,7 +518,8 @@ app.get('/interests/', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -502,7 +532,8 @@ app.get('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -515,7 +546,8 @@ app.post('/interests', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -528,7 +560,8 @@ app.put('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
@@ -541,7 +574,8 @@ app.delete('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.sendStatus(err.status);
+      res.send(err.message);
     });
 });
 
