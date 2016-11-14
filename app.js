@@ -39,7 +39,7 @@ app.get('/accounts/:id', function(req, res) {
 /*
  * Create an account.
  */
-app.post('/accounts/new', bodyParser, function(req, res) {
+app.post('/accounts', bodyParser, function(req, res) {
   accounts.createAccount(req)
     .then(function(data) {
       res.send(data);
@@ -131,7 +131,7 @@ app.get('/places/:interest', function(req, res) {
 /**
  * Create a place.
  */
-app.post('/places/:id', function(req, res) {
+app.post('/places', function(req, res) {
   places.createPlace(req)
     .then(function(data) {
       res.send(data);
@@ -209,7 +209,7 @@ app.get('/hours/:place', function(req, res) {
 /**
  * Create an hour of operation.
  */
-app.post('/hours/:id', function(req, res) {
+app.post('/hours', function(req, res) {
   hours.createHour(req)
     .then(function(data) {
       res.send(data);
@@ -274,7 +274,7 @@ app.get('/cities/:id', function(req, res) {
 /**
  * Create a city.
  */
-app.post('/cities/:id', function(req, res) {
+app.post('/cities', function(req, res) {
   cities.createCity(req)
     .then(function(data) {
       res.send(data);
@@ -339,7 +339,7 @@ app.get('/images/:id', function(req, res) {
 /**
  * Get all images for a city.
  */
-app.get('images/:city', function(req, res) {
+app.get('/images/:city', function(req, res) {
   images.getImagesForCity(req)
     .then(function(data) {
       res.send(data);
@@ -352,7 +352,7 @@ app.get('images/:city', function(req, res) {
 /**
  * Get all images for a place.
  */
-app.get('images/:place', function(req, res) {
+app.get('/images/:place', function(req, res) {
   images.getImagesForPlace(req)
     .then(function(data) {
       res.send(data);
@@ -365,7 +365,7 @@ app.get('images/:place', function(req, res) {
 /**
  * Create an image.
  */
-app.post('images/:id', function(req, res) {
+app.post('/images', function(req, res) {
   images.createImage(req)
     .then(function(data) {
       res.send(data);
@@ -443,7 +443,7 @@ app.get('/review/:place', function(req, res) {
 /**
  * Create a review.
  */
-app.post('/reviews/:id', function(req, res) {
+app.post('/reviews', function(req, res) {
   reviews.createReview(req)
     .then(function(data) {
       res.send(data);
@@ -508,7 +508,7 @@ app.get('/interests/:id', function(req, res) {
 /**
  * Create an interest.
  */
-app.post('/interests/:id', function(req, res) {
+app.post('/interests', function(req, res) {
   interests.createInterest(req)
     .then(function(data) {
       res.send(data);

@@ -1,8 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
-const getSqlConnection = require('../lib/constants').getSqlConnection;
-const internalServerError = require('../lib/constants').internalServerError;
+const query = require('../lib/utils').query;
 
 /**
  * Get all hours of operation.
@@ -11,15 +10,7 @@ const internalServerError = require('../lib/constants').internalServerError;
  * @return {Promise} The promise
  */
 function getHours(req) {
-  return Promise.using(getSqlConnection(), function(pool) {
-    return pool.query('SELECT * FROM operational_hours')
-      .then(function(rows) {
-        return rows;
-      })
-      .catch(function() {
-        return internalServerError;
-      });
-  });
+  return query('SELECT * FROM operational_hours');
 }
 
 /**
@@ -29,15 +20,7 @@ function getHours(req) {
  * @return {Promise} The promise
  */
 function getHour(req) {
-  return Promise.using(getSqlConnection(), function(pool) {
-    return pool.query('SELECT * FROM operational_hours WHERE op_hours_id = ' + req.params.id)
-      .then(function(rows) {
-        return rows;
-      })
-      .catch(function() {
-        return internalServerError;
-      });
-  });
+  return query('SELECT * FROM operational_hours WHERE op_hours_id = ' + req.params.id);
 }
 
 /**
@@ -47,15 +30,7 @@ function getHour(req) {
  * @return {Promise} The promise
  */
 function getHoursForPlace(req) {
-  return Promise.using(getSqlConnection(), function(pool) {
-    return pool.query('SELECT * FROM operational_hours WHERE op_hours_place_id = ' + req.params.id)
-      .then(function(rows) {
-        return rows;
-      })
-      .catch(function() {
-        return internalServerError;
-      });
-  });
+  return query('SELECT * FROM operational_hours WHERE op_hours_place_id = ' + req.params.id)
 }
 
 /**
@@ -65,7 +40,14 @@ function getHoursForPlace(req) {
  * @return {Promise} The promise
  */
 function createHour(req) {
-  return Promise.resolve('stub');
+  if (!req.body || !req.body.op_hours_day_of_week || !req.body.op_hours_open_time || !req.body.op_hours_close_time !! !req.body.op_hours_place_id) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide an hours\'s day, open time, close time, and place'
+    });
+  }
+
+  return pool.query('INSERT INTO operational_hours (op_hours_day_of_week, op_hours_open_time, op_hours_close_time, op_hours_place_id) VALUES ("' + req.body.op_hours_day_of_week + '",  "' + req.body.op_hours_open_time + '", "' + req.body.op_hours_close_time + '", "' + req.body.op_hours_place_id + '")');
 }
 
 /**
@@ -75,7 +57,34 @@ function createHour(req) {
  * @return {Promise} The promise
  */
 function updateHour(req) {
-  return Promise.resolve('stub');
+  if (!req.body || (!req.body.op_hours_day_of_week && !req.body.op_hours_open_time && !req.body.op_hours_close_time && !req.body.op_hours_place_id)) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide an hours\'s day, open time, close time, or place'
+    });
+  }
+
+  return Promise.resolve()
+    .then(function() {
+      if (req.body.op_hours_day_of_week) {
+        return query('UPDATE operational_hours SET op_hours_day_of_week = "' + req.body.op_hours_day_of_week + '" WHERE op_hours_place_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.op_hours_open_time) {
+        return query('UPDATE operational_hours SET op_hours_open_time = "' + req.body.op_hours_open_time + '" WHERE op_hours_place_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.op_hours_close_time) {
+        return query('UPDATE operational_hours SET op_hours_close_time = "' + req.body.op_hours_close_time + '" WHERE op_hours_place_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.op_hours_place_id) {
+        return query('UPDATE operational_hours SET op_hours_place_id = "' + req.body.op_hours_place_id + '" WHERE op_hours_place_id = ' + req.params.id);
+      }
+    });
 }
 
 /**
@@ -85,15 +94,7 @@ function updateHour(req) {
  * @return {Promise} The promise
  */
 function deleteHour(req) {
-  return Promise.using(getSqlConnection(), function(pool) {
-    return pool.query('DELETE FROM operational_hours WHERE op_hours_id = ' + req.params.id)
-      .then(function(rows) {
-        return rows;
-      })
-      .catch(function() {
-        return internalServerError;
-      });
-  });
+  return query('DELETE FROM operational_hours WHERE op_hours_id = ' + req.params.id);
 }
 
 module.exports = {
