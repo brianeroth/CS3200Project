@@ -19,6 +19,7 @@ CREATE TABLE places (
   place_address             VARCHAR(128)  NOT NULL,
   place_price_range         INT           NOT NUll DEFAULT 1,
   place_external_resource   VARCHAR(128)  NOT NULL,
+  place_image               VARCHAR(128),
   place_city_id             INT           NOT NULL,
   FOREIGN KEY	(place_city_id) REFERENCES cities(city_id)
     ON UPDATE CASCADE ON DELETE CASCADE
@@ -91,33 +92,14 @@ CREATE TABLE operational_hours (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS images;
-CREATE TABLE images (
+DROP TABLE IF EXISTS city_images;
+CREATE TABLE city_images (
   image_id        INT                        PRIMARY KEY AUTO_INCREMENT,
   image_path      VARCHAR(128)               NOT NULL,
   image_caption   VARCHAR(128),
-  image_type      ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero'
-);
-
-DROP TABLE IF EXISTS place_images;
-CREATE TABLE place_images (
-  place_image_id  INT  PRIMARY KEY AUTO_INCREMENT,
-  image_id        INT  NOT NULL,
-  place_id        INT  NOT NUll,
-  FOREIGN KEY (image_id) REFERENCES images(image_id)
-    ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY	(place_id) REFERENCES places(place_id)
-    ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS city_images;
-CREATE TABLE city_images (
-  city_image_id   INT  PRIMARY KEY AUTO_INCREMENT,
-  image_id        INT  NOT NULL,
-  city_id         INT  NOT NULL,
-  FOREIGN KEY (image_id) REFERENCES images(image_id)
-    ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY	(city_id) REFERENCES places(place_id)
+  image_type      ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero',
+  image_city_id   INT                        NOT NULL,
+  FOREIGN KEY (image_city_id) REFERENCES cities(city_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 

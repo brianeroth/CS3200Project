@@ -131,12 +131,8 @@
 
     .city__event__info {
         margin-left: 30px;
-
-        .city__event__time {
-            margin-top: 7px;
-            color: $gray;
-        }
-
+        @include flex(1);
+        
         .city__event__headline__info {
             margin-bottom: 15px;
         }

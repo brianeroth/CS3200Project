@@ -63,7 +63,7 @@ function createPlace(req) {
     });
   }
 
-  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_place_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "'+ req.body.place_external_resource + ', "' + req.body.place_city_id + '")');
+  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_image, place_place_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "'+ req.body.place_external_resource + ', "'+ req.body.place_image + ', "' + req.body.place_city_id + '")');
 }
 
 /**

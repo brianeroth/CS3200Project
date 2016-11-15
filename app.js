@@ -370,20 +370,6 @@ app.get('/images/city/:id', function(req, res) {
 });
 
 /**
- * Get all images for a place.
- */
-app.get('/images/place/:id', function(req, res) {
-  images.getImagesForPlace(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
  * Create an image.
  */
 app.post('/images', function(req, res) {

@@ -33,6 +33,7 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
     Data.getPlacesInCity($routeParams.id, 'events')
       .then(function(res) {
         $scope.events = res.data;
+        console.log($scope.events);
       })
       .catch(function(err) {
         console.log(err);
