@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const accounts = require('./routes/accounts');
 const cities = require('./routes/cities');
 const hours = require('./routes/hours');
-const images = require('./routes/images');
+const cityImages = require('./routes/cityImages');
 const interests = require('./routes/interests');
 const places = require('./routes/places');
 const reviews = require('./routes/reviews');
@@ -328,10 +328,10 @@ app.delete('/cities/:id', function(req, res) {
 });
 
 /**
- * Get all images.
+ * Get all city images.
  */
-app.get('/images', function(req, res) {
-  images.getImages(req)
+app.get('/cityImages', function(req, res) {
+  cityImages.getCityImages(req)
     .then(function(data) {
       res.send(data);
     })
@@ -342,10 +342,39 @@ app.get('/images', function(req, res) {
 });
 
 /**
- * Get an image with id.
+ * Get a city image with id.
  */
-app.get('/images/:id', function(req, res) {
-  images.getImage(req)
+app.get('/cityImages/:id', function(req, res) {
+  cityImages.getCityImage(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.sendStatus(err.status);
+      res.send(err.message);
+    });
+});
+
+
+/**
+ * Gets all city images for a city.
+ */
+app.get('cityImages/city/:id', function(req, res) {
+  cityImages.getCityImagesForCity(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .then(function(err) {
+      res.sendStatus(err.status);
+      res.send(err.message);
+    });
+});
+
+/**
+ * Create a cityImage.
+ */
+app.post('/cityImages', function(req, res) {
+  cityImages.createCityImage(req)
     .then(function(data) {
       res.send(data);
     })
@@ -356,10 +385,10 @@ app.get('/images/:id', function(req, res) {
 });
 
 /**
- * Get all images for a city.
+ * Update a city image.
  */
-app.get('/images/city/:id', function(req, res) {
-  images.getImagesForCity(req)
+app.put('cityImages/:id', function(req, res) {
+  cityImages.updateCityImage(req)
     .then(function(data) {
       res.send(data);
     })
@@ -370,38 +399,10 @@ app.get('/images/city/:id', function(req, res) {
 });
 
 /**
- * Create an image.
+ * Delete a city image.
  */
-app.post('/images', function(req, res) {
-  images.createImage(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Update an image.
- */
-app.put('images/:id', function(req, res) {
-  images.updateImage(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Delete an image.
- */
-app.delete('images/:id', function(req, res) {
-  images.deleteImage(req)
+app.delete('cityImages/:id', function(req, res) {
+  cityImages.deleteCityImage(req)
     .then(function(data) {
       res.send(data);
     })
