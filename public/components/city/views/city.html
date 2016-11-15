@@ -3,7 +3,7 @@
     <p class="page-headline__description" ng-bind="city.city_description"></p>
 </div>
 
-<div class="city__hero" style="background-image: url(http://placehold.it/5000x2000);"></div>
+<div class="city__hero" style="background-image: url({{cityImages[0].image_path}});"></div>
 
 <h4 class="block-headline container">Popular Landmarks</h4>
 <div class="city__places__featured city__landmarks__featured container">
@@ -37,8 +37,8 @@
                     <h3 class="city__event__headline" ng-bind="event.place_name"></h3>
                 </div>
                 <div class="city__event__date">
-                    <div class="city__event__date__month"> November </div> 
-                    <div class="city__event__date__day"> 25 </div> 
+                    <div class="city__event__date__month" ng-bind="createDate(event.event_date) | date:'LLLL'"></div> 
+                    <div class="city__event__date__day" ng-bind="createDate(event.event_date) | date:'d'"></div> 
                 </div>
             </div>
             <p class="city__event__description" ng-bind="event.place_description"></p>

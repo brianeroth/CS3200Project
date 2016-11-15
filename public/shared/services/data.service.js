@@ -31,6 +31,34 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.getCityImages = function(id) {
+    var defer = $q.defer();
+
+    $http.get('/cityImages/city/' + id)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.getAllCityImages = function(id) {
+    var defer = $q.defer();
+
+    $http.get('/cityImages')
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   Data.getPlacesInCity = function(id, type) {
     var defer = $q.defer();
 
