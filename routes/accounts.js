@@ -37,7 +37,7 @@ function createAccount(req) {
  * @return {Promise} The promise
  */
 function updateAccount(req) {
-  if (!body && (!req.body.admin_name && !req.body.admin_username && !req.body.admin_password)) {
+  if (!req.body && (!req.body.admin_name && !req.body.admin_username && !req.body.admin_password)) {
     return Promise.reject({
       status: 406,
       message: 'Must provide one of admin\'s name, username, or password'

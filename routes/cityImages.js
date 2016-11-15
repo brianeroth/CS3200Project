@@ -24,10 +24,13 @@ function getCityImage(req) {
 }
 
 /**
+ * Get a city images with from city.
  *
+ * @param {Object} req The request object
+ * @return {Promise} The promise
  */
 function getCityImagesForCity(req) {
-  return query('SELECT * FROM city_images WHERE image_city_id = ' + rea.params.id);
+  return query('SELECT * FROM city_images WHERE image_city_id = ' + req.params.id);
 }
 
 /**
@@ -95,5 +98,5 @@ function deleteCityImage(req) {
 }
 
 module.exports = {
-  getImages, getImage, getImagesForCity, createImage, updateImage, deleteImage
+  getCityImages, getCityImage, getCityImagesForCity, createCityImage, updateCityImage, deleteCityImage
 };

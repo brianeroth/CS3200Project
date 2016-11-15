@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cs3200project').controller('cityController', ['$scope', '$routeParams', 'Data' , function($scope, $routeParams, Data) {
+angular.module('cs3200project').controller('cityController', ['$scope', '$routeParams', 'Data', function($scope, $routeParams, Data) {
   $scope.init = function() {
     Data.getCity($routeParams.id)
       .then(function(res) {

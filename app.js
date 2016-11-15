@@ -118,20 +118,6 @@ app.get('/places/city/:id', function(req, res) {
 });
 
 /**
- * Get all places with intereset.
- */
-app.get('/places/:interest', function(req, res) {
-  places.getPlaceWithInterest(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
  * Create a place.
  */
 app.post('/places', function(req, res) {
@@ -354,7 +340,6 @@ app.get('/cityImages/:id', function(req, res) {
       res.send(err.message);
     });
 });
-
 
 /**
  * Gets all city images for a city.

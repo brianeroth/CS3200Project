@@ -30,7 +30,7 @@ function getHour(req) {
  * @return {Promise} The promise
  */
 function getHoursForPlace(req) {
-  return query('SELECT * FROM operational_hours WHERE op_hours_place_id = ' + req.params.id)
+  return query('SELECT * FROM operational_hours WHERE op_hours_place_id = ' + req.params.id);
 }
 
 /**
