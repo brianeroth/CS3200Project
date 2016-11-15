@@ -1,0 +1,61 @@
+.block-headline {
+    color: $gray;
+    text-transform: uppercase;
+    padding-left: 15px;
+    font-weight: 400;
+}
+
+.page-headline {
+    padding: 15px 0 45px 15px;
+
+    .page-headline__header {
+        margin-bottom: 30px;
+        font-weight: 400;
+    }
+
+    .page-headline__description {
+        color: $gray;
+        font-weight: 300;
+        font-size: 1.4em;
+        line-height: 1.5em;
+    }
+}
+
+#site-header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.header__search {
+    .search-icon {
+        width: 45px;
+        height: 45px;
+        padding-right: 15px;
+        border-right: 1px solid $gray--lighter;
+    }
+
+    input {
+        margin-left: 15px;
+        border: 0;
+        padding: 15px;
+        font-size: 1.1em;
+        min-width: 300px;
+        font-weight: 300;
+    }
+}
+
+#site-footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-size: 0.95em;
+
+    a {
+        color: $gray;
+        text-decoration: none;
+
+        & + a {
+            margin-left: 15px;
+        }
+    }
+}

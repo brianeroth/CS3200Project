@@ -1,1 +1,13 @@
-test
+<div class="page-headline container">
+    <h1 class="page-headline__header">Let's find your next trip!</h1>
+    <p class="page-headline__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+</div>
+
+<h4 class="block-headline container">Popular Cities</h4>
+<div class="city-chooser container">
+    <a href="#city/{{city.city_id}}" class="city-chooser__city" ng-repeat="city in cities" style="background-image: url(http://placehold.it/1000x1000)">
+        <h4 ng-bind="city.city_country" class="city-chooser__city__country"></h4>
+        <h2 ng-bind="city.city_name" class="city-chooser__city__name"></h2>
+    </a>
+</div>

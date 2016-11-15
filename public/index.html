@@ -8,9 +8,11 @@
         <link href="../assets/css/build/style.css" rel="stylesheet">
     </head>
     <body>
-        <header id="site-header" ng-controller="headerController" ng-include="'components/header/views/header.html'"></header>
+        <header id="site-header" class="container" ng-controller="headerController" ng-include="'components/header/views/header.html'"></header>
 
-        <main id="main" class="container" ng-view></main>
+        <main id="main" ng-view></main>
+
+        <footer id="site-footer" class="container" ng-controller="footerController" ng-include="'components/footer/views/footer.html'"></footer>
 
         <!-- dependencies -->
             <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
@@ -24,10 +26,15 @@
         <!-- directives -->
         <!-- end directives -->
         <!-- factories -->
+            <script src="shared/services/data.service.js"></script>
         <!-- end factories -->
         <!-- controllers -->
             <script src="components/header/header.controller.js"></script>
+            <script src="components/footer/footer.controller.js"></script>
+            <script src="components/login/login.controller.js"></script>
+            <script src="components/login/create.controller.js"></script>
             <script src="components/home/home.controller.js"></script>
+            <script src="components/city/city.controller.js"></script>
         <!-- end controllers -->
         <!-- routes -->
             <script src="app.route.js"></script>

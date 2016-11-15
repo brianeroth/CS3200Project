@@ -1,5 +1,8 @@
 'use strict';
 
+const Promise = require('bluebird');
+const query = require('../lib/utils').query;
+
 /**
  * Get all places.
  *
@@ -7,7 +10,7 @@
  * @return {Promise} The promise
  */
 function getPlaces(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM places');
 }
 
 /**
@@ -17,7 +20,7 @@ function getPlaces(req) {
  * @return {Promise} The promise
  */
 function getPlace(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM places WHERE place_id = ' + req.params.id);
 }
 
 /**
@@ -27,17 +30,14 @@ function getPlace(req) {
  * @return {Promise} The promise
  */
 function getPlacesInCity(req) {
-  return Promise.resolve('stub');
-}
+  if (!req.query || !req.query.type) {
+    return Promise.rejected({
+      status: 406,
+      message: 'Type parameter required.'
+    });
+  }
 
-/**
- * Get all places with interests.
- *
- * @param {Object} req The request object
- * @return {Promise} The promise
- */
-function getPlaceWithInterest(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM places INNER JOIN ' + req.query.type + ' ON ' + req.query.type + '.place_id = places.place_id AND place_city_id = ' + req.params.id);
 }
 
 /**
@@ -47,7 +47,14 @@ function getPlaceWithInterest(req) {
  * @return {Promise} The promise
  */
 function createPlace(req) {
-  return Promise.resolve('stub');
+  if (!req.body || !req.body.place_name || !req.body.place_address || !req.body.place_price_range || !req.body.place_external_resource || !req.body.place_city_id) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide a place\'s name, address, price range, external resource, and place'
+    });
+  }
+
+  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_image, place_place_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "' + req.body.place_external_resource + ', "' + req.body.place_image + ', "' + req.body.place_city_id + '")');
 }
 
 /**
@@ -57,7 +64,39 @@ function createPlace(req) {
  * @return {Promise} The promise
  */
 function updatePlace(req) {
-  return Promise.resolve('stub');
+  if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_city_id)) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide a place\'s name, address, price range, external resource, or place'
+    });
+  }
+
+  return Promise.resolve()
+    .then(function() {
+      if (req.body.place_name) {
+        return query('UPDATE places SET place_name = "' + req.body.place_name + '" WHERE place_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.place_address) {
+        return query('UPDATE places SET place_address = "' + req.body.place_address + '" WHERE place_id  = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.place_price_range) {
+        return query('UPDATE places SET place_price_range = "' + req.body.place_price_range + '" WHERE placeid = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.place_external_resource) {
+        return query('UPDATE places SET place_external_resource = "' + req.body.place_external_resource + '" WHERE place_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.place_city_id) {
+        return query('UPDATE places SET place_city_id = "' + req.body.place_city_id + '" WHERE place_id = ' + req.params.id);
+      }
+    });
 }
 
 /**
@@ -67,9 +106,9 @@ function updatePlace(req) {
  * @return {Promise} The promise
  */
 function deletePlace(req) {
-  return Promise.resolve('stub');
+  return query('DELETE FROM places WHERE place_id = ' + req.params.id);
 }
 
 module.exports = {
-  getPlaces, getPlace, getPlacesInCity, getPlaceWithInterest, createPlace, updatePlace, deletePlace
+  getPlaces, getPlace, getPlacesInCity, createPlace, updatePlace, deletePlace
 };

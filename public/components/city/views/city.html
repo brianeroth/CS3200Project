@@ -1,0 +1,79 @@
+<div class="page-headline container">
+    <h1 class="page-headline__header" ng-bind="city.city_name"></h1>
+    <p class="page-headline__description" ng-bind="city.city_description"></p>
+</div>
+
+<div class="city__hero" style="background-image: url(http://placehold.it/5000x2000);"></div>
+
+<h4 class="block-headline container">Popular Landmarks</h4>
+<div class="city__places__featured city__landmarks__featured container">
+    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)" ng-repeat="landmark in landmarks | limitTo:3">
+        <h4 class="city__place__featured__extra" ng-bind="landmark.place_address"></h4>
+        <h2 class="city__place__featured__name" ng-bind="landmark.place_name"></h2>
+    </a>
+</div>
+<div class="city__places city__landmarks container">
+    <a class="city__place" href="#" ng-repeat="landmark in landmarks track by $index" ng-if="$index + 1 > 3">
+        <div class="city__place__image">
+            <img src="http://placehold.it/100x75">
+            <div class="city__place__number" ng-bind="$index + 1"></div>
+        </div>
+        <div class="city__place__info">
+            <h3 class="city__place__headline" ng-bind="landmark.place_name"></h3>
+            <span class="city__place__address" ng-bind="landmark.place_address"></span>
+        </div>
+    </a>
+</div>
+
+<h4 class="block-headline container">Upcoming Events</h4>
+<div class="city__events container">
+    <div class="city__event" ng-repeat="event in events">
+        <div class="city__event__image">
+            <img ng-src="{{event.place_image}}">
+        </div>
+        <div class="city__event__info">
+            <div class="city__event__headline__info">
+                <div>
+                    <h3 class="city__event__headline" ng-bind="event.place_name"></h3>
+                </div>
+                <div class="city__event__date">
+                    <div class="city__event__date__month"> November </div> 
+                    <div class="city__event__date__day"> 25 </div> 
+                </div>
+            </div>
+            <p class="city__event__description" ng-bind="event.place_description"></p>
+            <a class="city__event__link" ng-href="{{event.place_external_resource}}">View event details</a>
+        </div>
+    </div>
+</div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">Popular Restaurants</h4>
+<div class="city__places__featured city__landmarks__featured container">
+    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)" ng-repeat="restaurant in restaurants | limitTo:3">
+        <h4 class="city__place__featured__extra" ng-bind="restaurant.restaurant_cuisine_type"></h4>
+        <h2 class="city__place__featured__name" ng-bind="restaurant.place_name"></h2>
+    </a>
+</div>
+<div class="city__places city__restaurants container">
+    <a class="city__place" href="#" ng-repeat="restaurant in restaurants track by $index" ng-if="$index + 1 > 3">
+        <div class="city__place__image">
+            <img src="http://placehold.it/100x75">
+            <div class="city__place__number" ng-bind="$index + 1"></div>
+        </div>
+        <div class="city__place__info">
+            <h3 class="city__place__headline" ng-bind="restaurant.place_name"></h3>
+            <span class="city__place__address" ng-bind="restaurant.place_address"></span>
+        </div>
+    </a>
+</div>
+
+<h4 class="block-headline container">Popular Hotels</h4>
+<div class="city__places__featured city__hotels__featured container">
+    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)" ng-repeat="hotel in hotels | limitTo:3">
+        <h4 class="city__place__featured__extra" ng-bind="hotel.place_price_range"></h4>
+        <h2 class="city__place__featured__name" ng-bind="hotel.place_name"></h2>
+    </a>
+</div>
+
+<div class="city__places city__interest_type container">
+</div>

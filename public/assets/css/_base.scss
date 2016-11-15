@@ -48,11 +48,15 @@ h6 {
 
 p {
 	margin: 0;
+	margin-bottom: 15px;
 }
 
 a {
-	&:hover {
+	color: $blue;
+	text-decoration: none;
 
+	&:hover {
+		text-decoration: underline;
 	}
 }
 

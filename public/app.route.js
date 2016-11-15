@@ -9,5 +9,17 @@ angular.module('cs3200project').config(function($routeProvider, CONFIG) {
     .when('/', {
       templateUrl: 'components/home/views/home.html',
       controller: 'homeController'
+    })
+    .when('/city/:id', {
+      templateUrl: 'components/city/views/city.html',
+      controller: 'cityController'
+    })
+    .when('/login', {
+      templateUrl: 'components/login/views/login.html',
+      controller: 'loginController'
+    })
+    .when('/login/create', {
+      templateUrl: 'components/login/views/create.html',
+      controller: 'createController'
     });
 });

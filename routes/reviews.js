@@ -1,5 +1,8 @@
 'use strict';
 
+const Promise = require('bluebird');
+const query = require('../lib/utils').query;
+
 /**
  * Get all reviews.
  *
@@ -7,7 +10,7 @@
  * @return {Promise} The promise
  */
 function getReviews(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM reviews');
 }
 
 /**
@@ -17,7 +20,7 @@ function getReviews(req) {
  * @return {Promise} The promise
  */
 function getReview(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM reviews WHERE review_id = ' + req.param.id);
 }
 
 /**
@@ -27,7 +30,7 @@ function getReview(req) {
  * @return {Promise} The promise
  */
 function getReviewsForPlace(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM reviews WHERE review_place_id = ' + req.param.id);
 }
 
 /**
@@ -37,7 +40,14 @@ function getReviewsForPlace(req) {
  * @return {Promise} The promise
  */
 function createReview(req) {
-  return Promise.resolve('stub');
+  if (!req.body || !req.body.review_author || !req.body.review_star_rating || !req.body.review_date_posted || !req.body.review_place_id) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide a review\'s author, star rating, date posted, and place'
+    });
+  }
+
+  return query('INSERT INTO reviews (review_author, review_star_rating, review_description, review_date_posted, review_place_id) VALUES ("' + req.body.review_author + '",  "' + req.body.review_star_rating + '", "' + req.body.review_description + '", "' + req.body.review_date_posted + '", "' + req.body.review_place_id + ')');
 }
 
 /**
@@ -47,7 +57,34 @@ function createReview(req) {
  * @return {Promise} The promise
  */
 function updateReview(req) {
-  return Promise.resolve('stub');
+  if (!req.body || (!req.body.review_author && !req.body.review_star_rating && !req.body.review_date_posted && !req.body.review_place_id)) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide a review\'s author, star rating, date posted, or place'
+    });
+  }
+
+  return Promise.resolve()
+    .then(function() {
+      if (req.body.review_author) {
+        return query('UPDATE reviews SET review_author = "' + req.body.review_author + '" WHERE review_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.review_star_rating) {
+        return query('UPDATE reviews SET review_star_rating = "' + req.body.review_star_rating + '" WHERE review_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.review_date_posted) {
+        return query('UPDATE reviews SET review_date_posted = "' + req.body.review_date_posted + '" WHERE review_id = ' + req.params.id);
+      }
+    })
+    .then(function() {
+      if (req.body.review_place_id) {
+        return query('UPDATE reviews SET review_place_id = "' + req.body.review_place_id + '" WHERE review_id = ' + req.params.id);
+      }
+    });
 }
 
 /**
@@ -57,7 +94,7 @@ function updateReview(req) {
  * @return {Promise} The promise
  */
 function deleteReview(req) {
-  return Promise.resolve('stub');
+  return query('DELETE FROM reviews WHERE review_id = ' + req.param.id);
 }
 
 module.exports = {
