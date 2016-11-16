@@ -27,13 +27,13 @@ function createAccount(req) {
     });
   }
 
-  return query('SELECT * FROM admin WHERE admin_username = ' req.body.admin_username)
+  return query('SELECT * FROM admin WHERE admin_username = ' + req.body.admin_username)
     .then(function(rows) {
       if (rows.length > 0) {
         return Promise.reject({
           status: 400,
           message: 'A user with that name already exists'
-        })
+        });
       }
       return query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '")');
     });
