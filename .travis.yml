@@ -1,10 +1,7 @@
-nguage: node_js
+language: node_js
 node_js:
       - '6'
 script:
     - npm run eslint -- --failTaskOnError
-before_install:
-    - export DISPLAY=:99.0
-    - sh -e /etc/init.d/xvfb start
 before_script:
     - npm install

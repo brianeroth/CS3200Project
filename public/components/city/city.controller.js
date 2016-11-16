@@ -48,7 +48,7 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
 
   $scope.createDate = function(date) {
     return new Date(date);
-  }
+  };
 
   $scope.init();
 }]);

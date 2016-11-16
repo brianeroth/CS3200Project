@@ -4,6 +4,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const auth = require('./routes/auth');
 const accounts = require('./routes/accounts');
 const cities = require('./routes/cities');
 const hours = require('./routes/hours');
@@ -18,6 +19,20 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+
+/**
+ * Login to the service.
+ */
+app.post('/login/:username/:password', function(req, res) {
+  auth.login(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.sendStatus(err.status);
+      res.send(err.message);
+    });
+});
 
 /*
  * Get account with the given id.
