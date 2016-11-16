@@ -73,5 +73,19 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.createAccount = function(newUser) {
+    var defer = $q.defer();
+
+    $http.post('/accounts', JSON.stringify(newUser))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   return Data;
 }]);

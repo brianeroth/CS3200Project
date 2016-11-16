@@ -21,5 +21,13 @@ angular.module('cs3200project').config(function($routeProvider, CONFIG) {
     .when('/login/create', {
       templateUrl: 'components/login/views/create.html',
       controller: 'createController'
+    })
+    .when('/admin', {
+      templateUrl: 'components/admin/views/admin.html',
+      controller: 'adminController'
+    })
+    .when('/admin/edit/:id', {
+      templateUrl: 'components/admin/views/edit.html',
+      controller: 'adminEditController'
     });
 });

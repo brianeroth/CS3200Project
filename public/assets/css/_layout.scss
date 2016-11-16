@@ -61,3 +61,7 @@
         justify-content: space-between;
     }
 }
+
+.admin-city {
+    @include flexbox();
+}
