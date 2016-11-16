@@ -178,25 +178,42 @@
 .login-form {
     margin-top: 30px;
     width: 50%;
+}
 
-    input {
-        display: block;
-        width: 100%;
-        border: 1px solid $gray--lighter;
-        padding: 15px;
-        font-size: 1.1em;
-        min-width: 300px;
-        font-weight: 300;
+.admin-city {
+    margin-top: 30px;
 
-        & + input {
-            margin-top: 15px;
-        }
+    & + .admin-city {
+        border-top: 1px solid $gray--lighter;
+        padding-top: 30px;
     }
 
-    input[type="submit"] {
-        background-color: $blue;
-        color: $white;
-        border-color: transparent;
-        cursor: pointer;
+    .admin-city__info {
+        margin-left: 30px;
+        @include flex(1);
+
+        .admin-city__edit__link {
+            display: block;
+            border-top: 1px solid $gray--lighter;
+            padding-top: 15px;
+            font-size: 0.95em;
+            text-decoration: none;
+            color: $gray;
+            text-transform: uppercase;
+
+            &:after {
+                content: '\2192';
+                margin-left: 7px;
+            }
+        }
+    }
+}
+
+.admin-edit-place {
+    margin-top: 30px;
+
+    & + .admin-edit-place {
+        border-top: 1px solid $gray--lighter;
+        padding-top: 30px;
     }
 }
