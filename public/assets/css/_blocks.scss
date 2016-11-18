@@ -53,9 +53,23 @@
 
         @include transition(0.3s all);
 
+        position: relative;
+        z-index: 0;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $gray--lighter;
+            z-index: -1;
+        }
+
         .city__place__featured__extra {
             text-transform: uppercase;
-            color: $gray;
+            color: $white;
             font-weight: 300;
         }
 
@@ -89,8 +103,16 @@
             color: $blue;
         }
 
+        .city__place__info {
+            margin-left: 30px;
+        }
+
         .city__place__image {
             position: relative;
+
+            img {
+                max-width: 100px;
+            }
         }
 
         .city__place__number {
@@ -127,6 +149,12 @@
     & + .city__event {
         padding-top: 30px;
         border-top: 1px solid $gray--lighter;
+    }
+
+    .city__event__image {
+        img {
+            max-width: 300px;
+        }
     }
 
     .city__event__info {

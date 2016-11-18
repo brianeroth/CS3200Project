@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const auth = require('./routes/auth');
 const accounts = require('./routes/accounts');
 const cities = require('./routes/cities');
-const hours = require('./routes/hours');
 const cityImages = require('./routes/cityImages');
 const interests = require('./routes/interests');
 const places = require('./routes/places');
@@ -165,90 +164,6 @@ app.put('/places/:id', function(req, res) {
  */
 app.delete('/places/:id', function(req, res) {
   places.deletePlace(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Get all hours of operation.
- */
-app.get('/hours', function(req, res) {
-  hours.getHours(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Get the hours of opperation with id.
- */
-app.get('/hours/:id', function(req, res) {
-  hours.getHour(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Get hours of operation for a place.
- */
-app.get('/hours/place/:id', function(req, res) {
-  hours.getHoursForPlace(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Create an hour of operation.
- */
-app.post('/hours', function(req, res) {
-  hours.createHour(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Update an hour of operation.
- */
-app.put('/hours/:id', function(req, res) {
-  hours.updateHour(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
-    });
-});
-
-/**
- * Delete an hour of opperation.
- */
-app.delete('/hours/:id', function(req, res) {
-  hours.deleteHour(req)
     .then(function(data) {
       res.send(data);
     })

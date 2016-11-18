@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cs3200project').controller('adminEditController', ['$scope', '$routeParams', '$timeout', 'Data', function($scope, $timeout, $routeParams, Data) {
+angular.module('cs3200project').controller('adminEditController', ['$scope', '$routeParams', 'Data', function($scope, $routeParams, Data) {
   $scope.init = function() {
     Data.getCity($routeParams.id)
       .then(function(res) {
@@ -38,6 +38,10 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
         console.log(err);
       });
   };
+
+  $scope.saveCity = function() {
+
+  }
 
   $scope.init();
 }]);

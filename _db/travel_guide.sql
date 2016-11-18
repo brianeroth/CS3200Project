@@ -17,7 +17,7 @@ CREATE TABLE places (
   place_name                VARCHAR(128)  NOT NULL,
   place_description         TEXT,
   place_address             VARCHAR(128)  NOT NULL,
-  place_price_range         INT           NOT NUll DEFAULT 1,
+  place_price_range         INT           NOT NUll DEFAULT 0,
   place_external_resource   VARCHAR(128)  NOT NULL,
   place_image               VARCHAR(128),
   place_city_id             INT           NOT NULL,
@@ -78,17 +78,6 @@ CREATE TABLE reviews (
   review_date_posted    DATE          NOT NULL,
   review_place_id       INT           NOT NULL,
   FOREIGN KEY (review_place_id) REFERENCES places(place_id)
-    ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-DROP TABLE IF EXISTS operational_hours;
-CREATE TABLE operational_hours (
-  op_hours_id             INT    PRIMARY KEY AUTO_INCREMENT,
-  op_hours_day_of_week    ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
-  op_hours_open_time      TIME   NOT NULL,
-  op_hours_close_time     TIME   NOT NULL,
-  op_hours_place_id       INT    NOT NULL,
-  FOREIGN KEY	(op_hours_place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
