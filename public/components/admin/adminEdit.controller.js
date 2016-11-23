@@ -41,13 +41,13 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
 
   $scope.saveCity = function() {
     Data.saveCity($scope.city)
-      .then(function(res){
-        
+      .then(function(res) {
+
       })
       .catch(function(err) {
 
       });
-  }
+  };
 
   $scope.init();
 }]);

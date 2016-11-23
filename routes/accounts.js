@@ -27,7 +27,7 @@ function createAccount(req) {
     });
   }
 
-  return query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '") WHERE "' + req.body.admin_username + '" NOT IN (SELECT admin_username FROM admins)')
+  return query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '")')
     .then(function(rows) {
       console.log(rows);
     });

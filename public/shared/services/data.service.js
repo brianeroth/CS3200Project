@@ -87,6 +87,20 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.login = function(user) {
+    var defer = $q.defer();
+
+    $http.post('/login/' + user.admin_username + '/' + user.admin_password)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   Data.saveCity = function(city) {
     var defer = $q.defer();
 
