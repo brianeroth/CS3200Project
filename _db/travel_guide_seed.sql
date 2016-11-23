@@ -22,7 +22,7 @@ INSERT INTO places(place_id, place_name, place_description, place_address, place
 (12, 'Pipero al Rex', '', 'Via Torino 149, 00184', 4, 'https://www.tripadvisor.com/Restaurant_Review-g187791-d2436520-Reviews-Pipero_al_Rex-Rome_Lazio.html', 'https://pickyglutton.files.wordpress.com/2014/12/pigeon-and-carrots-at-pipero-al-rex.jpg', 1),
 
 (13, 'Appia Antica Resort', '', 'Via Appia Pignatelli 368, 00178', 4, 'https://www.tripadvisor.com/Hotel_Review-g187791-d4698947-Reviews-Appia_Antica_Resort-Rome_Lazio.html', 'http://d2otjue8e2v73a.cloudfront.net/_novaimg/2840631-892021_19_0_1399_900_1400_900.rc.jpg', 1),
-(14, 'Portrait Roma', '', 'Via Bocca di Leone, 23, 00187', 4, 'https://www.tripadvisor.com/Hotel_Review-g187791-d601432-Reviews-Portrait_Roma-Rome_Lazio.html', 'http://i.dailymail.co.uk/i/pix/2015/03/30/10/26F8745700000578-3008972-Panoramic_From_the_hotel_s_rooftop_terrace_views_stretch_as_far_-a-2_1427707513209.jpg', 1),
+(14, 'Portrait Roma', '', 'Via Bocca di Leone, 23, 00187', 4, 'https://www.tripadvisor.com/Hotel_Review-g187791-d601432-Reviews-Portrait_Roma-Rome_Lazio.html', 'https://www.gha.com/var/ezwebin_site/storage/images/files/gha-images/brands/lungarno/portrait-roma/lungarnoportraitroma_room01/4993685-1-eng-GB/LungarnoPortraitRoma_Room01_property_banner.jpg', 1),
 (15, 'Deko Rome', '', 'Via Toscana 1, 00187', 3, 'https://www.tripadvisor.com/Hotel_Review-g187791-d2091012-Reviews-Deko_Rome-Rome_Lazio.html', 'http://www.dekorome.com/_include/img/profile/camera4.jpg', 1),
 (16, 'Lifestyle Suites Rome', '', 'Piazza Navona 93, 00186', 3, 'https://www.tripadvisor.com/Hotel_Review-g187791-d8687540-Reviews-Lifestyle_Suites_Rome-Rome_Lazio.html', 'http://r-ec.bstatic.com/images/hotel/840x460/603/60303587.jpg', 1),
 
@@ -254,3 +254,11 @@ INSERT INTO hotels(place_id) VALUES
 (84),
 (85),
 (86);
+
+INSERT INTO city_images(image_id, image_path, image_caption, image_type, image_city_id) VALUES
+(1, 'https://lonelyplanetimages.imgix.net/mastheads/stock-photo-roman-sunset-77415821.jpg?sharp=10&vib=20&w=1200', '', 'hero', 1),
+(2, 'https://lonelyplanetimages.imgix.net/a/g/hi/t/9cf024dfd5c0bcb2b17f4785340145ea-san-francisco.jpg?sharp=10&vib=20&w=1200', '', 'hero', 2),
+(3, 'https://media.timeout.com/images/100644443/image.jpg', '', 'hero', 3),
+(4, 'http://handluggageonly.co.uk/wp-content/uploads/2016/01/Paris-3.jpg', '', 'hero', 4),
+(5, 'http://happypeoplebarcelona.com/wp-content/uploads/2016/04/happy-people-barcelona-11.jpg', '', 'hero', 5),
+(6, 'http://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/tokyo-mud-bath-bar-mudbath0716.jpg?itok=dJ8lDXJh', '', 'hero', 6);

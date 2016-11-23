@@ -2,20 +2,29 @@
     .city-chooser__city {
         background-size: cover;
         background-position: center center;
-
         padding: 30px;
         width: calc(33.3% - 15px);
         height: 450px;
         margin-top: 30px;
-
         border-radius: 3px;
         text-decoration: none;
-
+        position: relative;
         @include transition(0.3s all);
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $gray--lighter;
+            z-index: -1;
+        }
 
         .city-chooser__city__country {
             text-transform: uppercase;
-            color: $gray;
+            color: $white;
             font-weight: 300;
         }
 

@@ -87,5 +87,19 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.saveCity = function(city) {
+    var defer = $q.defer();
+
+    $http.put('/cities/' + city.city_id, JSON.stringify(city))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   return Data;
 }]);

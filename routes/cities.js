@@ -47,6 +47,7 @@ function createCity(req) {
  * @return {Promise} The promise
  */
 function updateCity(req) {
+  console.log(req.body);
   if (!req.body || (!req.body.city_name && !req.body.city_description && !req.body.city_country && !req.body.city_state)) {
     return Promise.reject({
       status: 406,

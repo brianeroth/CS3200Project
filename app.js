@@ -274,7 +274,7 @@ app.get('/cityImages/:id', function(req, res) {
 /**
  * Gets all city images for a city.
  */
-app.get('cityImages/city/:id', function(req, res) {
+app.get('/cityImages/city/:id', function(req, res) {
   cityImages.getCityImagesForCity(req)
     .then(function(data) {
       res.send(data);

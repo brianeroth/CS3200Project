@@ -19,7 +19,7 @@ CREATE TABLE places (
   place_address             VARCHAR(128)  NOT NULL,
   place_price_range         INT           NOT NUll DEFAULT 0,
   place_external_resource   VARCHAR(128)  NOT NULL,
-  place_image               VARCHAR(128),
+  place_image               TEXT,
   place_city_id             INT           NOT NULL,
   FOREIGN KEY	(place_city_id) REFERENCES cities(city_id)
     ON UPDATE CASCADE ON DELETE CASCADE
