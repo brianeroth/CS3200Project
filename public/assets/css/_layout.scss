@@ -41,7 +41,7 @@
 
 .city__places {
     @include flexbox();
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 
     .city__place {
