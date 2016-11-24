@@ -26,8 +26,8 @@ angular.module('cs3200project').controller('adminController', ['$scope', '$route
       })
       .catch(function(err) {
         console.log(err);
-      });    
-  }
+      });
+  };
 
   $scope.getCityHeroImage = function(id) {
     for (var i = 0; i < $scope.allCityImages.length; i++) {

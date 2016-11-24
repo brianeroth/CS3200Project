@@ -60,7 +60,7 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
   $scope.loadIntoModal = function(place) {
     $scope.modalOpen = true;
     $scope.modalPlace = place;
-  }
+  };
 
   $scope.init();
 }]);
