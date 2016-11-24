@@ -51,8 +51,8 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
   };
 
   $scope.getNumber = function(num) {
-    return new Array(num);   
-  }
+    return new Array(num);
+  };
 
   $scope.init();
 }]);

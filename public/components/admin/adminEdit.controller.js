@@ -54,8 +54,8 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
         $route.reload();
       })
       .catch(function(err) {
-      });    
-  }
+      });
+  };
 
   $scope.init();
 }]);

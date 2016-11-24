@@ -27,6 +27,5 @@ angular.module('cs3200project').controller('adminController', ['$scope', 'Data',
     }
   };
 
-
   $scope.init();
 }]);
