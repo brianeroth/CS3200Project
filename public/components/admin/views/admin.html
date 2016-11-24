@@ -12,6 +12,7 @@
             <h3 class="admin-city__headline" ng-bind="city.city_name"></h3>
             <p class="admin-city__description" ng-bind="city.city_description"></p>
             <a class="admin-city__edit__link" href="#admin/edit/{{city.city_id}}">Edit</a>
+            <input type="submit" value="Delete" ng-click="deleteCity(city.city_id)" class="delete">
         </div>
     </div>
 </div>

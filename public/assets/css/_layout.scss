@@ -7,7 +7,7 @@
 
 .city-chooser {
     @include flexbox();
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 
     .city-chooser__city {
@@ -63,5 +63,9 @@
 }
 
 .admin-city {
+    @include flexbox();
+}
+
+.modal-content__main {
     @include flexbox();
 }

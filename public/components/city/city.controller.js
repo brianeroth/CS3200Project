@@ -44,6 +44,9 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
       .catch(function(err) {
         console.log(err);
       });
+
+    $scope.modalOpen = false;
+    $scope.modalPlace = {};
   };
 
   $scope.createDate = function(date) {
@@ -53,6 +56,11 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
   $scope.getNumber = function(num) {
     return new Array(num);
   };
+
+  $scope.loadIntoModal = function(place) {
+    $scope.modalOpen = true;
+    $scope.modalPlace = place;
+  }
 
   $scope.init();
 }]);

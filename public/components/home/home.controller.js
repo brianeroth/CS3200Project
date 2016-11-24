@@ -13,7 +13,6 @@ angular.module('cs3200project').controller('homeController', ['$scope', 'Data', 
     Data.getAllCityImages()
       .then(function(res) {
         $scope.allCityImages = res.data;
-        console.log($scope.allCityImages);
       })
       .catch(function(err) {
         console.log(err);

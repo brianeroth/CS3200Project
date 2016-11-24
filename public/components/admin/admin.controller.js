@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cs3200project').controller('adminController', ['$scope', 'Data', '$routeParams', function($scope, Data, $routeParams) {
+angular.module('cs3200project').controller('adminController', ['$scope', '$route', 'Data', '$routeParams', function($scope, $route, Data, $routeParams) {
   $scope.init = function() {
     Data.getCities()
       .then(function(res) {
@@ -18,6 +18,16 @@ angular.module('cs3200project').controller('adminController', ['$scope', 'Data',
         console.log(err);
       });
   };
+
+  $scope.deleteCity = function(id) {
+    Data.deleteCity(id)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+        console.log(err);
+      });    
+  }
 
   $scope.getCityHeroImage = function(id) {
     for (var i = 0; i < $scope.allCityImages.length; i++) {

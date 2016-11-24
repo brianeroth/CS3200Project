@@ -63,7 +63,6 @@
 }
 
 .modal {
-    display: none;
     position: fixed;
     background-color: transparentize($gray, 0.2);
     width: 100%;
@@ -94,6 +93,19 @@
         width: 50%;
         min-height: 50vh;
         @include transform(translate(-50%, -50%));
+
+        .modal-content__main {
+            padding-top: 30px;
+
+            .modal-content__main__image {
+                width: 40%;
+            }
+
+            .modal-content__main__content {
+                width: 60%;
+                padding-left: 30px;
+            }
+        }
     }
 
     .modal-content__headline {
