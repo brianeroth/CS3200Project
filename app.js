@@ -11,12 +11,13 @@ const cityImages = require('./routes/cityImages');
 const interests = require('./routes/interests');
 const places = require('./routes/places');
 const reviews = require('./routes/reviews');
-const bodyParser = require('body-parser').json();
+const bodyParser = require('body-parser');
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(cookieParser());
+app.use(bodyParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
 /**

@@ -12,7 +12,6 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
     Data.getCityImages($routeParams.id)
       .then(function(res) {
         $scope.cityImages = res.data;
-        console.log($scope.cityImages);
       })
       .catch(function(err) {
         console.log(err);
@@ -50,6 +49,10 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
   $scope.createDate = function(date) {
     return new Date(date);
   };
+
+  $scope.getNumber = function(num) {
+    return new Array(num);   
+  }
 
   $scope.init();
 }]);

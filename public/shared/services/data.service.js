@@ -115,5 +115,19 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.deletePlace = function(id) {
+    var defer = $q.defer();
+
+    $http.delete('/places/' + id)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   return Data;
 }]);

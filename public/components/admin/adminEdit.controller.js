@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cs3200project').controller('adminEditController', ['$scope', '$routeParams', 'Data', function($scope, $routeParams, Data) {
+angular.module('cs3200project').controller('adminEditController', ['$scope', '$routeParams', '$route', 'Data', function($scope, $routeParams, $route, Data) {
   $scope.init = function() {
     Data.getCity($routeParams.id)
       .then(function(res) {
@@ -42,12 +42,20 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
   $scope.saveCity = function() {
     Data.saveCity($scope.city)
       .then(function(res) {
-
+        $route.reload();
       })
       .catch(function(err) {
-
       });
   };
+
+  $scope.deletePlace = function(id) {
+    Data.deletePlace(id)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });    
+  }
 
   $scope.init();
 }]);

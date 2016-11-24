@@ -66,6 +66,11 @@ input[type="submit"] {
     color: $white;
     border-color: transparent;
     cursor: pointer;
+
+    &.delete {
+        width: auto;
+        background-color: #d50000;
+    }
 }
 
 p {

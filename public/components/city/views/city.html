@@ -9,7 +9,7 @@
 <div class="city__places__featured city__landmarks__featured container">
     <a class="city__place__featured" href="#" style="background-image: url({{landmark.place_image}})" ng-repeat="landmark in landmarks | limitTo:3">
         <h4 class="city__place__featured__extra" ng-bind="landmark.place_address"></h4>
-        <h2 class="city__place__featured__name" ng-bind="landmark.place_name"></h2>
+        <h2 class="city__place__featured__name">{{landmark.place_name}}, ${{landmark.landmark_cost}}</h2>
     </a>
 </div>
 <div class="city__places city__landmarks container">
@@ -19,7 +19,7 @@
             <div class="city__place__number" ng-bind="$index + 1"></div>
         </div>
         <div class="city__place__info">
-            <h3 class="city__place__headline" ng-bind="landmark.place_name"></h3>
+            <h3 class="city__place__headline">{{landmark.place_name}}, ${{landmark.landmark_cost}}</h3>
             <span class="city__place__address" ng-bind="landmark.place_address"></span>
         </div>
     </a>
@@ -41,6 +41,7 @@
                     <div class="city__event__date__day" ng-bind="createDate(event.event_date) | date:'d'"></div> 
                 </div>
             </div>
+            <p class="city__event__cost">${{event.event_cost}}</p>
             <p class="city__event__description" ng-bind="event.place_description"></p>
             <a class="city__event__link" ng-href="{{event.place_external_resource}}">View event details</a>
         </div>
@@ -70,7 +71,7 @@
 <h4 class="block-headline container">Popular Hotels</h4>
 <div class="city__places__featured city__hotels__featured container">
     <a class="city__place__featured" href="#" style="background-image: url({{hotel.place_image}})" ng-repeat="hotel in hotels | limitTo:3">
-        <h4 class="city__place__featured__extra" ng-bind="hotel.place_price_range"></h4>
+        <h4 class="city__place__featured__extra"><span ng-repeat="num in getNumber(hotel.place_price_range) track by $index">$</span></h4>
         <h2 class="city__place__featured__name" ng-bind="hotel.place_name"></h2>
     </a>
 </div>

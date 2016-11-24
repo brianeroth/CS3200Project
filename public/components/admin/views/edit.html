@@ -15,6 +15,7 @@
         <input type="text" ng-model="landmark.place_external_resource" placeholder="Landmark External Resource">
         <input type="text" ng-model="landmark.place_image" placeholder="Landmark Image">
         <input type="text" ng-model="landmark.landmark_cost" placeholder="Landmark Cost">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(landmark.place_id)">
     </div>
 </div>
 
@@ -29,6 +30,7 @@
         <input type="text" ng-model="event.place_image" placeholder="Event Image">
         <input type="text" ng-model="event.event_date" placeholder="Event Date">
         <input type="text" ng-model="event.event_cost" placeholder="Event Cost">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(event.place_id)">
     </div>
 </div>
 
@@ -42,6 +44,7 @@
         <input type="text" ng-model="restaurant.place_external_resource" placeholder="Restaurant External Resource">
         <input type="text" ng-model="restaurant.place_image" placeholder="Restaurant Image">
         <input type="text" ng-model="restaurant.restaurant_cuisine_type" placeholder="Restaurant Cuisine Type">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(restaurant.place_id)">
     </div>
 </div>
 
@@ -54,6 +57,7 @@
         <input type="text" ng-model="hotel.place_price_range" placeholder="Hotel Price Range">
         <input type="text" ng-model="hotel.place_external_resource" placeholder="Hotel External Resource">
         <input type="text" ng-model="hotel.place_image" placeholder="Hotel Image">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(hotel.place_id)">
     </div>
 </div>
 
