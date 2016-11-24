@@ -3,11 +3,13 @@
 
     <p style="margin-top: 15px;">Have an account? <a href="#login">Login.</a></p>
 
-    <form class="login-form">
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email Address">
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Confirm Password">
+    <p style="color: #d50000">{{errorMessage}}</p>
+
+    <form class="login-form" ng-submit="createAccount()">
+        <input type="text" placeholder="Name" name="name" ng-model="newUser.admin_name" required>
+        <input type="text" placeholder="Desired Username" name="username" ng-model="newUser.admin_username" required>
+        <input type="password" placeholder="Password" name="password" ng-model="newUser.admin_password" required>
+        <input type="password" placeholder="Confirm Password" name="confirmPassword" ng-model="newUser.admin_confirmPassword" required>
         <input type="submit" value="Create Account">
     </form>
 </div>

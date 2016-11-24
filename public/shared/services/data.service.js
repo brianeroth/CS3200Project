@@ -73,5 +73,75 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.createAccount = function(newUser) {
+    var defer = $q.defer();
+
+    $http.post('/accounts', JSON.stringify(newUser))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.login = function(user) {
+    var defer = $q.defer();
+
+    $http.post('/login/' + user.admin_username + '/' + user.admin_password)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.saveCity = function(city) {
+    var defer = $q.defer();
+
+    $http.put('/cities/' + city.city_id, JSON.stringify(city))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.deletePlace = function(id) {
+    var defer = $q.defer();
+
+    $http.delete('/places/' + id)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.deleteCity = function(id) {
+    var defer = $q.defer();
+
+    $http.delete('/cities/' + id)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   return Data;
 }]);

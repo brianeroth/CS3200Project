@@ -1,17 +1,10 @@
 'use strict';
 
-angular.module('cs3200project').controller('cityController', ['$scope', '$routeParams', 'Data', function($scope, $routeParams, Data) {
+angular.module('cs3200project').controller('adminEditController', ['$scope', '$routeParams', '$route', 'Data', function($scope, $routeParams, $route, Data) {
   $scope.init = function() {
     Data.getCity($routeParams.id)
       .then(function(res) {
         $scope.city = res.data[0];
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
-    Data.getCityImages($routeParams.id)
-      .then(function(res) {
-        $scope.cityImages = res.data;
       })
       .catch(function(err) {
         console.log(err);
@@ -44,22 +37,24 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
       .catch(function(err) {
         console.log(err);
       });
-
-    $scope.modalOpen = false;
-    $scope.modalPlace = {};
   };
 
-  $scope.createDate = function(date) {
-    return new Date(date);
+  $scope.saveCity = function() {
+    Data.saveCity($scope.city)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });
   };
 
-  $scope.getNumber = function(num) {
-    return new Array(num);
-  };
-
-  $scope.loadIntoModal = function(place) {
-    $scope.modalOpen = true;
-    $scope.modalPlace = place;
+  $scope.deletePlace = function(id) {
+    Data.deletePlace(id)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });
   };
 
   $scope.init();

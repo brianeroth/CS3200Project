@@ -2,20 +2,30 @@
     .city-chooser__city {
         background-size: cover;
         background-position: center center;
-
         padding: 30px;
         width: calc(33.3% - 15px);
         height: 450px;
         margin-top: 30px;
-
         border-radius: 3px;
         text-decoration: none;
-
+        position: relative;
+        z-index: 0;
         @include transition(0.3s all);
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparentize($text-color, 0.5);
+            z-index: -1;
+        }
 
         .city-chooser__city__country {
             text-transform: uppercase;
-            color: $gray;
+            color: $white;
             font-weight: 300;
         }
 
@@ -53,9 +63,23 @@
 
         @include transition(0.3s all);
 
+        position: relative;
+        z-index: 0;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparentize($text-color, 0.5);
+            z-index: -1;
+        }
+
         .city__place__featured__extra {
             text-transform: uppercase;
-            color: $gray;
+            color: $white;
             font-weight: 300;
         }
 
@@ -89,8 +113,16 @@
             color: $blue;
         }
 
+        .city__place__info {
+            margin-left: 30px;
+        }
+
         .city__place__image {
             position: relative;
+
+            img {
+                max-width: 100px;
+            }
         }
 
         .city__place__number {
@@ -127,6 +159,16 @@
     & + .city__event {
         padding-top: 30px;
         border-top: 1px solid $gray--lighter;
+    }
+
+    .city__event__image {
+        img {
+            max-width: 300px;
+        }
+    }
+
+    .city__event__cost {
+        color: $gray;
     }
 
     .city__event__info {
@@ -178,25 +220,48 @@
 .login-form {
     margin-top: 30px;
     width: 50%;
+}
 
-    input {
-        display: block;
-        width: 100%;
-        border: 1px solid $gray--lighter;
-        padding: 15px;
-        font-size: 1.1em;
-        min-width: 300px;
-        font-weight: 300;
+.admin-city {
+    margin-top: 30px;
 
-        & + input {
-            margin-top: 15px;
+    & + .admin-city {
+        border-top: 1px solid $gray--lighter;
+        padding-top: 30px;
+    }
+
+    .admin-city__image {
+        img {
+            width: 500px;
         }
     }
 
-    input[type="submit"] {
-        background-color: $blue;
-        color: $white;
-        border-color: transparent;
-        cursor: pointer;
+    .admin-city__info {
+        margin-left: 30px;
+        @include flex(1);
+
+        .admin-city__edit__link {
+            display: block;
+            border-top: 1px solid $gray--lighter;
+            padding-top: 15px;
+            font-size: 0.95em;
+            text-decoration: none;
+            color: $gray;
+            text-transform: uppercase;
+
+            &:after {
+                content: '\2192';
+                margin-left: 7px;
+            }
+        }
+    }
+}
+
+.admin-edit-place {
+    margin-top: 30px;
+
+    & + .admin-edit-place {
+        border-top: 1px solid $gray--lighter;
+        padding-top: 30px;
     }
 }

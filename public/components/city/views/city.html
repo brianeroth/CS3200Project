@@ -1,5 +1,5 @@
 <div class="page-headline container">
-    <h1 class="page-headline__header" ng-bind="city.city_name"></h1>
+    <h1 class="page-headline__header">{{city.city_name}}, {{city.city_country}}</h1>
     <p class="page-headline__description" ng-bind="city.city_description"></p>
 </div>
 
@@ -7,22 +7,22 @@
 
 <h4 class="block-headline container">Popular Landmarks</h4>
 <div class="city__places__featured city__landmarks__featured container">
-    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)" ng-repeat="landmark in landmarks | limitTo:3">
+    <div class="city__place__featured" ng-click="loadIntoModal(landmark)" style="background-image: url({{landmark.place_image}})" ng-repeat="landmark in landmarks | limitTo:3">
         <h4 class="city__place__featured__extra" ng-bind="landmark.place_address"></h4>
-        <h2 class="city__place__featured__name" ng-bind="landmark.place_name"></h2>
-    </a>
+        <h2 class="city__place__featured__name">{{landmark.place_name}}, ${{landmark.landmark_cost}}</h2>
+    </div>
 </div>
 <div class="city__places city__landmarks container">
-    <a class="city__place" href="#" ng-repeat="landmark in landmarks track by $index" ng-if="$index + 1 > 3">
+    <div class="city__place" ng-click="loadIntoModal(landmark)" ng-repeat="landmark in landmarks track by $index" ng-if="$index + 1 > 3">
         <div class="city__place__image">
-            <img src="http://placehold.it/100x75">
+            <img ng-src="{{landmark.place_image}}">
             <div class="city__place__number" ng-bind="$index + 1"></div>
         </div>
         <div class="city__place__info">
-            <h3 class="city__place__headline" ng-bind="landmark.place_name"></h3>
+            <h3 class="city__place__headline">{{landmark.place_name}}, ${{landmark.landmark_cost}}</h3>
             <span class="city__place__address" ng-bind="landmark.place_address"></span>
         </div>
-    </a>
+    </div>
 </div>
 
 <h4 class="block-headline container">Upcoming Events</h4>
@@ -35,12 +35,14 @@
             <div class="city__event__headline__info">
                 <div>
                     <h3 class="city__event__headline" ng-bind="event.place_name"></h3>
+                    <p ng-bind="event.place_address"></p>
                 </div>
                 <div class="city__event__date">
                     <div class="city__event__date__month" ng-bind="createDate(event.event_date) | date:'LLLL'"></div> 
                     <div class="city__event__date__day" ng-bind="createDate(event.event_date) | date:'d'"></div> 
                 </div>
             </div>
+            <p class="city__event__cost">${{event.event_cost}}</p>
             <p class="city__event__description" ng-bind="event.place_description"></p>
             <a class="city__event__link" ng-href="{{event.place_external_resource}}">View event details</a>
         </div>
@@ -48,32 +50,54 @@
 </div>
 
 <h4 class="block-headline container" style="margin-top: 60px;">Popular Restaurants</h4>
-<div class="city__places__featured city__landmarks__featured container">
-    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)" ng-repeat="restaurant in restaurants | limitTo:3">
-        <h4 class="city__place__featured__extra" ng-bind="restaurant.restaurant_cuisine_type"></h4>
+<div class="city__places__featured city__restaurants__featured container">
+    <a class="city__place__featured" ng-click="loadIntoModal(restaurant)" style="background-image: url({{restaurant.place_image}})" ng-repeat="restaurant in restaurants | limitTo:3">
+        <h4 class="city__place__featured__extra"><span ng-repeat="num in getNumber(hotel.place_price_range) track by $index">$</span>, {{restaurant.restaurant_cuisine_type}} <br><br> {{restaurant.place_address}}</h4>
         <h2 class="city__place__featured__name" ng-bind="restaurant.place_name"></h2>
     </a>
 </div>
 <div class="city__places city__restaurants container">
-    <a class="city__place" href="#" ng-repeat="restaurant in restaurants track by $index" ng-if="$index + 1 > 3">
+    <a class="city__place" ng-click="loadIntoModal(restaurant)" ng-repeat="restaurant in restaurants track by $index" ng-if="$index + 1 > 3">
         <div class="city__place__image">
-            <img src="http://placehold.it/100x75">
+            <img ng-src="{{restaurant.place_image}}">
             <div class="city__place__number" ng-bind="$index + 1"></div>
         </div>
         <div class="city__place__info">
             <h3 class="city__place__headline" ng-bind="restaurant.place_name"></h3>
-            <span class="city__place__address" ng-bind="restaurant.place_address"></span>
+            <span class="city__place__address" ng-bind="restaurant.place_address"></span> <br>
+            <span><span ng-repeat="num in getNumber(hotel.place_price_range) track by $index">$</span>, {{restaurant.restaurant_cuisine_type}}</span>
         </div>
     </a>
 </div>
 
 <h4 class="block-headline container">Popular Hotels</h4>
 <div class="city__places__featured city__hotels__featured container">
-    <a class="city__place__featured" href="#" style="background-image: url(http://placehold.it/1000x1000)" ng-repeat="hotel in hotels | limitTo:3">
-        <h4 class="city__place__featured__extra" ng-bind="hotel.place_price_range"></h4>
+    <a class="city__place__featured" ng-click="loadIntoModal(hotel)" style="background-image: url({{hotel.place_image}})" ng-repeat="hotel in hotels | limitTo:3">
+        <h4 class="city__place__featured__extra"><span ng-repeat="num in getNumber(hotel.place_price_range) track by $index">$</span> <br><br> {{hotel.place_address}}</h4>
         <h2 class="city__place__featured__name" ng-bind="hotel.place_name"></h2>
     </a>
 </div>
 
 <div class="city__places city__interest_type container">
+</div>
+
+<div class="modal" ng-show="modalOpen">
+    <div class="modal-content">
+        <div class="modal-close" ng-click="modalOpen = false"></div>
+        
+        <div class="modal-content__headline">
+            <h2>{{modalPlace.place_name}}</h2>
+        </div>
+
+        <div class="modal-content__main">
+            <div class="modal-content__main__image">
+                <img ng-src="{{modalPlace.place_image}}">
+            </div>
+            <div class="modal-content__main__content">
+                {{modalPlace.place_description}}   
+                <p><a ng-href="{{modalPlace.place_external_resource}}">More &rarr;</a></p>             
+            </div>
+        </div>
+
+    </div>
 </div>
