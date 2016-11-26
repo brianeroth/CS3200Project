@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint-disable camelcase */
 angular.module('cs3200project').controller('adminController', ['$scope', '$route', 'Data', '$routeParams', function($scope, $route, Data, $routeParams) {
   $scope.init = function() {
     $scope.newCity = {
@@ -55,8 +56,8 @@ angular.module('cs3200project').controller('adminController', ['$scope', '$route
       })
       .catch(function(err) {
         console.log(err);
-      });    
-  }
+      });
+  };
 
   $scope.init();
 }]);
