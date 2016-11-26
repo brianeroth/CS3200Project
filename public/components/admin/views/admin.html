@@ -16,3 +16,20 @@
         </div>
     </div>
 </div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">New City</h4>
+<div class="container">
+    <div class="admin-city">
+        <div class="admin-city__image">
+            <img src="http://placehold.it/500x312">
+        </div>
+        <div class="admin-city__info">
+            <p style="color: #d50000">{{errorMessage}}</p>
+            <input type="text" placeholder="City Name" ng-model="newCity.city_name" required>
+            <textarea placeholder="City Description" ng-model="newCity.city_description"></textarea>
+            <input type="text" placeholder="City Country" ng-model="newCity.city_country" required>
+            <input type="text" placeholder="City State/Province" ng-model="newCity.city_state" required>
+            <input type="submit" value="Create" ng-click="createCity()">
+        </div>
+    </div>
+</div>
