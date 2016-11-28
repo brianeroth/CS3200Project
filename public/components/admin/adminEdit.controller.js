@@ -1,7 +1,14 @@
 'use strict';
 
+/* eslint-disable camelcase */
 angular.module('cs3200project').controller('adminEditController', ['$scope', '$routeParams', '$route', 'Data', function($scope, $routeParams, $route, Data) {
   $scope.init = function() {
+    $scope.newImg = {
+      image_path: '',
+      image_type: '',
+      image_city_id: $routeParams.id
+    };
+
     Data.getCity($routeParams.id)
       .then(function(res) {
         $scope.city = res.data[0];
@@ -37,10 +44,17 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
       .catch(function(err) {
         console.log(err);
       });
+    Data.getCityImages($routeParams.id)
+      .then(function(res) {
+        $scope.cityImages = res.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   };
 
   $scope.saveCity = function() {
-    Data.saveCity($scope.city)
+    Data.saveCity($scope.city, $scope.cityImages, $scope.newImg)
       .then(function(res) {
         $route.reload();
       })
@@ -50,6 +64,15 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
 
   $scope.deletePlace = function(id) {
     Data.deletePlace(id)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });
+  };
+
+  $scope.deleteImg = function(id) {
+    Data.deleteImage(id)
       .then(function(res) {
         $route.reload();
       })

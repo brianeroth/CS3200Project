@@ -3,6 +3,34 @@
     <textarea ng-model="city.city_description" placeholder="City Description"></textarea>
     <input ng-model="city.city_country" placeholder="City Country">
     <input ng-model="city.city_state" placeholder="City State">
+
+    <div class="admin-city-images">
+        <div class="admin-city-images__entry" ng-repeat="img in cityImages">
+            <div class="admin-city-images__entry__image">
+                <img ng-src="{{img.image_path}}">
+            </div>
+            <div class="admin-city-images__entry__path">
+                <input type="text" placeholder="Image URL" ng-model="img.image_path">
+                <select ng-model="img.image_type">
+                    <option value="hero">Hero</option>
+                    <option value="thumbnail">Thumbnail</option>
+                </select>
+                <input type="submit" value="Delete" class="delete" ng-click="deleteImg(img.image_id)">
+            </div>
+        </div>
+        <div class="admin-city-images__entry">
+            <div class="admin-city-images__entry__image">
+                <img ng-src="{{newImg.image_path}}">
+            </div>
+            <div class="admin-city-images__entry__path">
+                <input type="text" placeholder="Image URL" ng-model="newImg.image_path">
+                <select ng-model="newImg.image_type">
+                    <option value="hero">Hero</option>
+                    <option selected value="thumbnail">Thumbnail</option>
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
 
 <h4 class="block-headline container">Landmarks</h4>
