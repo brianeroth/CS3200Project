@@ -27,9 +27,16 @@ function createAccount(req) {
     });
   }
 
-  return query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '")')
+  var func = 'does_username_exist("' + req.body.admin_username + '")';
+  return query('SELECT ' + func)
     .then(function(rows) {
-      console.log(rows);
+      if (rows[0][func] === 1) {
+        return [];
+      }
+      return query('INSERT INTO admins (admin_name, admin_username, admin_password) VALUES ("' + req.body.admin_name + '",  "' + req.body.admin_username + '", "' + req.body.admin_password + '")');
+    })
+    .then(function(rows) {
+      return rows;
     });
 }
 
