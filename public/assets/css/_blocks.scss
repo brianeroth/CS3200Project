@@ -265,3 +265,32 @@
         padding-top: 30px;
     }
 }
+
+.admin-city-images__entry {
+    margin-top: 15px;
+
+    .admin-city-images__entry__path {
+        @include flex(1);
+    }
+
+    .admin-city-images__entry__image {
+        padding-right: 30px;
+
+        img {
+            max-width: 250px;
+        }
+    }
+}
+
+.city__images {
+    margin-bottom: 30px;
+    
+    img {
+        width: 100px;
+        height: 100px;
+
+        & + img {
+            margin-left: 15px;
+        }
+    }
+}

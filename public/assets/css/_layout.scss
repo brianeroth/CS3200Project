@@ -69,3 +69,7 @@
 .modal-content__main {
     @include flexbox();
 }
+
+.admin-city-images__entry {
+    @include flexbox();
+}

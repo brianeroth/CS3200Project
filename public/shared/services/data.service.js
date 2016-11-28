@@ -115,7 +115,7 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
-  Data.saveCity = function(city) {
+  Data.saveCity = function(city, cityImages, newImg) {
     var defer = $q.defer();
 
     $http.put('/cities/' + city.city_id, JSON.stringify(city))
@@ -125,6 +125,24 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
       .catch(function(err) {
         defer.reject(err);
       });
+
+    $http.post('/cityImages/', JSON.stringify(newImg))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    for(var i = 0; i < cityImages.length; i++) {
+      $http.put('/cityImages/' + cityImages[i].image_id, JSON.stringify(cityImages[i]))
+        .then(function(res) {
+          defer.resolve(res);
+        })
+        .catch(function(err) {
+          defer.reject(err);
+        });
+    }
 
     return defer.promise;
   };
@@ -147,6 +165,20 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     var defer = $q.defer();
 
     $http.delete('/cities/' + id)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.deleteImage = function(id) {
+    var defer = $q.defer();
+
+    $http.delete('/cityImages/' + id)
       .then(function(res) {
         defer.resolve(res);
       })

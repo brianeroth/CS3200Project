@@ -40,10 +40,11 @@ function getCityImagesForCity(req) {
  * @return {Promise} The promise
  */
 function createCityImage(req) {
-  if (!req.body || !req.body.image_path || !req.body.image_caption || !req.body.image_type || !req.body.image_city_id) {
+  console.log(req.body);
+  if (!req.body || !req.body.image_path || !req.body.image_type || !req.body.image_city_id) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide image\'s path, caption, type, and associated city'
+      message: 'Must provide image\'s path, type, and associated city'
     });
   }
 
@@ -57,10 +58,11 @@ function createCityImage(req) {
  * @return {Promise} The promise
  */
 function updateCityImage(req) {
-  if (!req.body || (!req.body.image_path && req.body.image_caption && !req.body.image_type && !req.body.image_city_id)) {
+  console.log(req.body);
+  if (!req.body || (!req.body.image_path && !req.body.image_type && !req.body.image_city_id)) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide image\'s path, caption, type, or associated city'
+      message: 'Must provide image\'s path, type, or associated city'
     });
   }
 

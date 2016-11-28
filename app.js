@@ -303,7 +303,7 @@ app.post('/cityImages', function(req, res) {
 /**
  * Update a city image.
  */
-app.put('cityImages/:id', function(req, res) {
+app.put('/cityImages/:id', function(req, res) {
   cityImages.updateCityImage(req)
     .then(function(data) {
       res.send(data);
@@ -317,7 +317,7 @@ app.put('cityImages/:id', function(req, res) {
 /**
  * Delete a city image.
  */
-app.delete('cityImages/:id', function(req, res) {
+app.delete('/cityImages/:id', function(req, res) {
   cityImages.deleteCityImage(req)
     .then(function(data) {
       res.send(data);
