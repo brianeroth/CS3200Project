@@ -51,7 +51,7 @@ app.get('/accounts/:id', function(req, res) {
 /*
  * Create an account.
  */
-app.post('/accounts', bodyParser, function(req, res) {
+app.post('/accounts', function(req, res) {
   accounts.createAccount(req)
     .then(function(data) {
       res.send(data);
