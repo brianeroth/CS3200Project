@@ -134,7 +134,7 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
         defer.reject(err);
       });
 
-    for(var i = 0; i < cityImages.length; i++) {
+    for (var i = 0; i < cityImages.length; i++) {
       $http.put('/cityImages/' + cityImages[i].image_id, JSON.stringify(cityImages[i]))
         .then(function(res) {
           defer.resolve(res);

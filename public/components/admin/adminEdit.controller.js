@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint-disable camelcase */
 angular.module('cs3200project').controller('adminEditController', ['$scope', '$routeParams', '$route', 'Data', function($scope, $routeParams, $route, Data) {
   $scope.init = function() {
     $scope.newImg = {
@@ -70,14 +71,14 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
       });
   };
 
-$scope.deleteImg = function(id) {
+  $scope.deleteImg = function(id) {
     Data.deleteImage(id)
       .then(function(res) {
         $route.reload();
       })
       .catch(function(err) {
       });
-  };  
+  };
 
   $scope.init();
 }]);

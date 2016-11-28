@@ -54,7 +54,7 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
 
   $scope.setActiveImg = function(img) {
     $scope.activeImg = img;
-  }
+  };
 
   $scope.createDate = function(date) {
     return new Date(date);
