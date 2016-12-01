@@ -17,7 +17,7 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
       place_address: '',
       place_price_range: '',
       place_external_resource: '',
-      place_image: '',
+      place_image: ''
     };
 
     $scope.newLandmark = {
@@ -107,14 +107,14 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
   $scope.createPlace = function() {
     console.log($scope.newPlace);
 
-    if ($scope.newPlaceType == 'landmark') {
+    if ($scope.newPlaceType === 'landmark') {
       console.log($scope.newLandmark);
-    } else if ($scope.newPlaceType == 'event') {
+    } else if ($scope.newPlaceType === 'event') {
       console.log($scope.newEvent);
-    } else if ($scope.newPlaceType == 'restaurant') {
-      console.log($scoep.newRestaurant);
+    } else if ($scope.newPlaceType === 'restaurant') {
+      console.log($scope.newRestaurant);
     }
-  }
+  };
 
   $scope.init();
 }]);
