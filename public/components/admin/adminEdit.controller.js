@@ -9,6 +9,30 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
       image_city_id: $routeParams.id
     };
 
+    $scope.newPlaceType = 'landmark';
+
+    $scope.newPlace = {
+      place_name: '',
+      place_description: '',
+      place_address: '',
+      place_price_range: '',
+      place_external_resource: '',
+      place_image: '',
+    };
+
+    $scope.newLandmark = {
+      landmark_cost: ''
+    };
+
+    $scope.newEvent = {
+      event_cost: '',
+      event_date: null
+    };
+
+    $scope.newRestaurant = {
+      restaurant_cuisine_type: ''
+    };
+
     Data.getCity($routeParams.id)
       .then(function(res) {
         $scope.city = res.data[0];
@@ -79,6 +103,18 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
       .catch(function(err) {
       });
   };
+
+  $scope.createPlace = function() {
+    console.log($scope.newPlace);
+
+    if ($scope.newPlaceType == 'landmark') {
+      console.log($scope.newLandmark);
+    } else if ($scope.newPlaceType == 'event') {
+      console.log($scope.newEvent);
+    } else if ($scope.newPlaceType == 'restaurant') {
+      console.log($scoep.newRestaurant);
+    }
+  }
 
   $scope.init();
 }]);

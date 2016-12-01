@@ -89,6 +89,38 @@
     </div>
 </div>
 
+<h4 class="block-headline container" style="margin-top: 60px;">New Place</h4>
+<div class="container">
+    <select style="margin: 15px 0;" ng-model="newPlaceType">
+        <option value="landmark">Landmark</option>
+        <option value="event">Event</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="hotel">Hotel</option>
+    </select>
+
+    <div>
+        <input type="text" ng-model="newPlace.place_name" placeholder="Place Name">
+        <textarea ng-model="newPlace.place_description" placeholder="Place Description"></textarea>
+        <input type="text" ng-model="newPlace.place_address" placeholder="Place Address">
+        <input type="text" ng-model="newPlace.place_price_range" placeholder="Place Price Range">
+        <input type="text" ng-model="newPlace.place_external_resource" placeholder="Place External Resource">
+        <input type="text" ng-model="newPlace.place_image" placeholder="Place Image">        
+    </div>
+
+    <div ng-if="newPlaceType == 'landmark'">
+        <input style="margin-top: 15px;" type="text" ng-model="newLandmark.landmark_cost" placeholder="Landmark Cost">
+    </div>
+    <div ng-if="newPlaceType == 'event'">
+        <input style="margin-top: 15px;" type="text" ng-model="newEvent.event_cost" placeholder="Event Cost">
+        <input type="text" ng-model="newEvent.event_date" placeholder="Event Date">
+    </div>
+    <div ng-if="newPlaceType == 'restaurant'">
+        <input style="margin-top: 15px;" type="text" ng-model="newRestaurant.restaurant_cuisine_type" placeholder="Restaurant Cuisine Type">
+    </div>
+
+    <input type="submit" value="Create Place" ng-click="createPlace()" ng-if="newPlace.place_name && newPlace.place_address && newPlace.place_price_range && newPlace.place_external_resource && newPlace.place_image">
+</div>
+
 <div class="container" style="margin-top: 60px;">
     <input type="submit" value="Save" ng-click="saveCity()"> 
 </div>
