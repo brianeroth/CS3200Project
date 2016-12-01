@@ -282,12 +282,12 @@ function deletePlace(req) {
   return query('DELETE FROM places WHERE place_id = ' + req.params.id);
 }
 
-
 /**
  * Updates a place.
  *
  * @param {Object} req The request object
  * @param {Number} placeId The given place id
+ * @return {Promise} The promise
  */
 function updatePlace(req, placeId) {
   return Promise.resolve()
