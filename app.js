@@ -178,11 +178,52 @@ app.post('/places/hotel', function(req, res) {
     });
 });
 
+// Update all types of places.
+
 /**
- * Update a place.
+ * Update a restaurant.
  */
-app.put('/places/:id', function(req, res) {
-  places.updatePlace(req)
+app.put('/places/restaurant/:id', function(req, res) {
+  places.updateRestaurant(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Update an event.
+ */
+app.put('/places/event/:id', function(req, res) {
+  places.updateEvent(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Update a landmark.
+ */
+app.put('/places/landmark/:id', function(req, res) {
+  places.updateLandmark(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Update a hotel.
+ */
+app.put('/places/hotel/:id', function(req, res) {
+  places.updateHotel(req)
     .then(function(data) {
       res.send(data);
     })
