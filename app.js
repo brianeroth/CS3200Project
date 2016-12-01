@@ -29,8 +29,7 @@ app.post('/login/:username/:password', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -43,8 +42,7 @@ app.get('/accounts/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -57,8 +55,7 @@ app.post('/accounts', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -71,8 +68,7 @@ app.put('/accounts/:id', bodyParser, function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -85,8 +81,7 @@ app.delete('/accounts/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -99,8 +94,7 @@ app.get('/places', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -113,8 +107,7 @@ app.get('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -127,22 +120,61 @@ app.get('/places/city/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
+// Creation for all types of places, resturants, events, landmarks, and hotels.
+
 /**
- * Create a place.
+ * Create a resturant.
  */
-app.post('/places', function(req, res) {
-  places.createPlace(req)
+app.post('/places/restaurant', function(req, res) {
+  places.createRestaurant(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Create an event.
+ */
+app.post('/places/event', function(req, res) {
+  places.createEvent(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Create a landmark.
+ */
+app.post('/places/landmark', function(req, res) {
+  places.createLandmark(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Create a resturant.
+ */
+app.post('/places/hotel', function(req, res) {
+  places.createHotel(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
     });
 });
 
@@ -155,8 +187,7 @@ app.put('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -169,8 +200,7 @@ app.delete('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -183,8 +213,7 @@ app.get('/cities', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -197,8 +226,7 @@ app.get('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -211,8 +239,7 @@ app.post('/cities', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -225,8 +252,7 @@ app.put('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -239,8 +265,7 @@ app.delete('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -253,8 +278,7 @@ app.get('/cityImages', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -267,8 +291,7 @@ app.get('/cityImages/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -281,8 +304,7 @@ app.get('/cityImages/city/:id', function(req, res) {
       res.send(data);
     })
     .then(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -295,8 +317,7 @@ app.post('/cityImages', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -309,8 +330,7 @@ app.put('/cityImages/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -323,8 +343,7 @@ app.delete('/cityImages/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -337,8 +356,7 @@ app.get('/reviews', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -351,8 +369,7 @@ app.get('/reviews/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -365,8 +382,7 @@ app.get('/review/:place', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -379,8 +395,7 @@ app.post('/reviews', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -393,8 +408,7 @@ app.put('/reviews/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -407,8 +421,7 @@ app.delete('/reviews/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -421,8 +434,7 @@ app.get('/interests/', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -435,8 +447,7 @@ app.get('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -449,8 +460,7 @@ app.post('/interests', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -463,8 +473,7 @@ app.put('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 
@@ -477,8 +486,7 @@ app.delete('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      res.sendStatus(err.status);
-      res.send(err.message);
+      res.status(err.status).send(err);
     });
 });
 

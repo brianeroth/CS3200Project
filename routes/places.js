@@ -41,20 +41,80 @@ function getPlacesInCity(req) {
 }
 
 /**
- * Create a place.
+ * Create a restaurant.
  *
  * @param {Object} req The request object
  * @return {Promise} The promise
  */
-function createPlace(req) {
-  if (!req.body || !req.body.place_name || !req.body.place_address || !req.body.place_price_range || !req.body.place_external_resource || !req.body.place_city_id) {
+function createRestaurant(req) {
+  if (!req.body || !req.body.place_name || !req.body.place_description || !req.body.place_address || !req.body.place_price_range || !req.body.place_external_resource || !req.body.place_image || !req.body.place_city_id || !req.body.restaurant_cuisine_type) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide a place\'s name, address, price range, external resource, and place'
+      message: 'Must provide resturants place\'s name, description, address, price range, external resource, image, city, and cuisine type'
     });
   }
 
-  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_image, place_place_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "' + req.body.place_external_resource + ', "' + req.body.place_image + ', "' + req.body.place_city_id + '")');
+  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_image, place_city_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "' + req.body.place_external_resource + '", "' + req.body.place_image + '", "' + req.body.place_city_id + '")')
+    .then(function(data) {
+      return query('INSERT INTO restaurants (restaurant_cuisine_type, place_id) VALUES("' + req.body.restaurant_cuisine_type + '", "' + data.insertId + '")');
+    });
+}
+
+/**
+ * Create an event.
+ *
+ * @param {Object} req The request object
+ * @return {Promise} The promise
+ */
+function createEvent(req) {
+  if (!req.body || !req.body.place_name || !req.body.place_description || !req.body.place_address || !req.body.place_price_range || !req.body.place_external_resource || !req.body.place_image || !req.body.place_city_id || !req.body.event_date || !req.body.event_cost) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide event place\'s name, description, address, price range, external resource, image, city, date, and cost'
+    });
+  }
+
+  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_image, place_city_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "' + req.body.place_external_resource + '", "' + req.body.place_image + '", "' + req.body.place_city_id + '")')
+    .then(function(data) {
+      return query('INSERT INTO events (event_date, event_cost, place_id) VALUES("' + req.body.event_date + '", "' + req.body.event_cost + '", "' + data.insertId + '")');
+    });
+}
+
+/**
+ * Create a landmark.
+ *
+ * @param {Object} req The request object
+ * @return {Promise} The promise
+ */
+function createLandmark(req) {
+  if (!req.body || !req.body.place_name || !req.body.place_description || !req.body.place_address || !req.body.place_price_range || !req.body.place_external_resource || !req.body.place_image || !req.body.place_city_id || !req.body.landmark_cost) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide landmark place\'s name, description, address, price range, external resource, image, city, and cost'
+    });
+  }
+
+  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_image, place_city_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "' + req.body.place_external_resource + '", "' + req.body.place_image + '", "' + req.body.place_city_id + '")')
+    .then(function(data) {
+      return query('INSERT INTO landmarks (landmark_cost, place_id) VALUES("' + req.body.landmark_cost + '", "' + data.insertId + '")');
+    });
+}
+
+/**
+ * Create a hotel.
+ *
+ * @param {Object} req The request object
+ * @return {Promise} The promise
+ */
+function createHotel(req) {
+  if (!req.body || !req.body.place_name || !req.body.place_description || !req.body.place_address || !req.body.place_price_range || !req.body.place_external_resource || !req.body.place_image || !req.body.place_city_id) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide hotel place\'s name, description, address, price range, external resource, image, city'
+    });
+  }
+
+  return query('INSERT INTO places (place_name, place_description, place_address, place_price_range, place_external_resource, place_image, place_city_id) VALUES ("' + req.body.place_name + '",  "' + req.body.place_description + '", "' + req.body.place_address + '", "' + req.body.place_price_range + '", "' + req.body.place_external_resource + '", "' + req.body.place_image + '", "' + req.body.place_city_id + '")');
 }
 
 /**
@@ -110,5 +170,5 @@ function deletePlace(req) {
 }
 
 module.exports = {
-  getPlaces, getPlace, getPlacesInCity, createPlace, updatePlace, deletePlace
+  getPlaces, getPlace, getPlacesInCity, createRestaurant, createEvent, createLandmark, createHotel, updatePlace, deletePlace
 };
