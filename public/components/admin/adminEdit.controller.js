@@ -133,7 +133,7 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
           $route.reload();
         })
         .catch(function(err) {
-        });      
+        });
     } else if ($scope.newPlaceType === 'event') {
       Data.createEvent($scope.newEvent)
         .then(function(res) {

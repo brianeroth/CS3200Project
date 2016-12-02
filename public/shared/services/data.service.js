@@ -203,7 +203,6 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
-
   Data.createEvent = function(event) {
     var defer = $q.defer();
 
