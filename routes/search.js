@@ -13,7 +13,7 @@ function search(req) {
   if (!req.query || !req.query.search) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide city\'s name, description, country, and state'
+      message: 'Must provide a search query'
     });
   }
 

@@ -3,6 +3,20 @@
 angular.module('cs3200project').service('Data', ['$http', '$q', function($http, $q) {
   var Data = this;
 
+  Data.search = function(query) {
+    var defer = $q.defer();
+
+    $http.get('/search?search=' + query)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   Data.getCities = function() {
     var defer = $q.defer();
 

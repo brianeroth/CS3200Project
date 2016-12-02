@@ -10,6 +10,10 @@ angular.module('cs3200project').config(function($routeProvider, CONFIG) {
       templateUrl: 'components/home/views/home.html',
       controller: 'homeController'
     })
+    .when('/search', {
+      templateUrl: 'components/search/views/search.html',
+      controller: 'searchController'
+    })
     .when('/city/:id', {
       templateUrl: 'components/city/views/city.html',
       controller: 'cityController'
