@@ -10,7 +10,6 @@ const cities = require('./routes/cities');
 const cityImages = require('./routes/cityImages');
 const interests = require('./routes/interests');
 const places = require('./routes/places');
-const reviews = require('./routes/reviews');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -380,84 +379,6 @@ app.put('/cityImages/:id', function(req, res) {
  */
 app.delete('/cityImages/:id', function(req, res) {
   cityImages.deleteCityImage(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.status(err.status).send(err);
-    });
-});
-
-/**
- * Get all reviews.
- */
-app.get('/reviews', function(req, res) {
-  reviews.getReviews(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.status(err.status).send(err);
-    });
-});
-
-/**
- * Get a review with id.
- */
-app.get('/reviews/:id', function(req, res) {
-  reviews.getReview(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.status(err.status).send(err);
-    });
-});
-
-/**
- * Get all reviews for a place.
- */
-app.get('/review/:place', function(req, res) {
-  reviews.getReviewsForPlace(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.status(err.status).send(err);
-    });
-});
-
-/**
- * Create a review.
- */
-app.post('/reviews', function(req, res) {
-  reviews.createReview(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.status(err.status).send(err);
-    });
-});
-
-/**
- * Update a review.
- */
-app.put('/reviews/:id', function(req, res) {
-  reviews.updateReview(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      res.status(err.status).send(err);
-    });
-});
-
-/**
- * Delete a review.
- */
-app.delete('/reviews/:id', function(req, res) {
-  reviews.deleteReview(req)
     .then(function(data) {
       res.send(data);
     })

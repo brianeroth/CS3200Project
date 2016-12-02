@@ -11,26 +11,48 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
 
     $scope.newPlaceType = 'landmark';
 
-    $scope.newPlace = {
+    $scope.newLandmark = {
       place_name: '',
       place_description: '',
       place_address: '',
       place_price_range: '',
       place_external_resource: '',
-      place_image: ''
-    };
-
-    $scope.newLandmark = {
+      place_image: '',
+      place_city_id: $routeParams.id,
       landmark_cost: ''
     };
 
     $scope.newEvent = {
+      place_name: '',
+      place_description: '',
+      place_address: '',
+      place_price_range: '',
+      place_external_resource: '',
+      place_image: '',
+      place_city_id: $routeParams.id,
       event_cost: '',
       event_date: null
     };
 
     $scope.newRestaurant = {
+      place_name: '',
+      place_description: '',
+      place_address: '',
+      place_price_range: '',
+      place_external_resource: '',
+      place_image: '',
+      place_city_id: $routeParams.id,
       restaurant_cuisine_type: ''
+    };
+
+    $scope.newHotel = {
+      place_name: '',
+      place_description: '',
+      place_address: '',
+      place_price_range: '',
+      place_external_resource: '',
+      place_image: '',
+      place_city_id: $routeParams.id
     };
 
     Data.getCity($routeParams.id)
@@ -105,14 +127,34 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
   };
 
   $scope.createPlace = function() {
-    console.log($scope.newPlace);
-
     if ($scope.newPlaceType === 'landmark') {
-      console.log($scope.newLandmark);
+      Data.createLandmark($scope.newLandmark)
+        .then(function(res) {
+          $route.reload();
+        })
+        .catch(function(err) {
+        });      
     } else if ($scope.newPlaceType === 'event') {
-      console.log($scope.newEvent);
+      Data.createEvent($scope.newEvent)
+        .then(function(res) {
+          $route.reload();
+        })
+        .catch(function(err) {
+        });
     } else if ($scope.newPlaceType === 'restaurant') {
-      console.log($scope.newRestaurant);
+      Data.createRestaurant($scope.newRestaurant)
+        .then(function(res) {
+          $route.reload();
+        })
+        .catch(function(err) {
+        });
+    } else if ($scope.newPlaceType === 'hotel') {
+      Data.createHotel($scope.newHotel)
+        .then(function(res) {
+          $route.reload();
+        })
+        .catch(function(err) {
+        });
     }
   };
 

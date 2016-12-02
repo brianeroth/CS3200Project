@@ -189,5 +189,62 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.createLandmark = function(landmark) {
+    var defer = $q.defer();
+
+    $http.post('/places/landmark', JSON.stringify(landmark))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+
+  Data.createEvent = function(event) {
+    var defer = $q.defer();
+
+    $http.post('/places/event', JSON.stringify(event))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.createRestaurant = function(restaurant) {
+    var defer = $q.defer();
+
+    $http.post('/places/restaurant', JSON.stringify(restaurant))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.createHotel = function(hotel) {
+    var defer = $q.defer();
+
+    $http.post('/places/hotel', JSON.stringify(hotel))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   return Data;
 }]);
