@@ -4,6 +4,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const search = require('./routes/search');
 const auth = require('./routes/auth');
 const accounts = require('./routes/accounts');
 const cities = require('./routes/cities');
@@ -19,6 +20,19 @@ app.set('port', (process.env.PORT || 5000));
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(express.static(path.join(__dirname, '/public')));
+
+/**
+ * Search via city.
+ */
+app.get('/search', function(req, res) {
+  search.search(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
 
 /**
  * Login to the service.
