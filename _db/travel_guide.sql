@@ -1,6 +1,6 @@
--- Setting variables for Heroku
-SET FOREIGN_KEY_CHECKS = 0;
-SET @@auto_increment_increment = 1;
+DROP DATABASE IF EXISTS travel_guide;
+CREATE DATABASE travel_guide;
+USE travel_guide;
 
 DROP TABLE IF EXISTS cities;
 CREATE TABLE cities (
@@ -16,9 +16,9 @@ CREATE TABLE places (
   place_id                  INT           PRIMARY KEY AUTO_INCREMENT,
   place_name                VARCHAR(128)  NOT NULL,
   place_description         TEXT,
-  place_address             VARCHAR(128)  NOT NULL,
+  place_address             TEXT          NOT NULL,
   place_price_range         INT           NOT NUll DEFAULT 0,
-  place_external_resource   VARCHAR(128)  NOT NULL,
+  place_external_resource   TEXT          NOT NULL,
   place_image               TEXT,
   place_city_id             INT           NOT NULL,
   FOREIGN KEY	(place_city_id) REFERENCES cities(city_id)
@@ -69,22 +69,10 @@ CREATE TABLE admins (
   admin_password    VARCHAR(128)  NOT NULL
 );
 
-DROP TABLE IF EXISTS reviews;
-CREATE TABLE reviews (
-  review_id             INT           PRIMARY KEY AUTO_INCREMENT,
-  review_author         VARCHAR(128)  NOT NULL,
-  review_star_rating    INT           NOT NULL DEFAULT 0,
-  review_description    TEXT,
-  review_date_posted    DATE          NOT NULL,
-  review_place_id       INT           NOT NULL,
-  FOREIGN KEY (review_place_id) REFERENCES places(place_id)
-    ON UPDATE CASCADE ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS city_images;
 CREATE TABLE city_images (
   image_id        INT                        PRIMARY KEY AUTO_INCREMENT,
-  image_path      VARCHAR(128)               NOT NULL,
+  image_path      TEXT                        NOT NULL,
   image_caption   VARCHAR(128),
   image_type      ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero',
   image_city_id   INT                        NOT NULL,
@@ -105,9 +93,6 @@ CREATE TABLE places_interesttypes (
   interest_type_id    INT  NOT NULL,
   FOREIGN KEY (place_id) REFERENCES places(place_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (interest_type_id) REFERENCES interest_type(interest_id)
+  FOREIGN KEY (interest_type_id) REFERENCES interest_types(interest_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
-
--- Setting variables for Heroku
-SET FOREIGN_KEY_CHECKS = 1;

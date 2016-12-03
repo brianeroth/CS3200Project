@@ -259,5 +259,70 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.saveLandmarks = function(landmarks) {
+    var defer = $q.defer();
+
+    for (var i = 0; i < landmarks.length; i++) {
+      $http.put('/places/landmark/' + landmarks[i].place_id, JSON.stringify(landmarks[i]))
+        .then(function(res) {
+          defer.resolve(res);
+        })
+        .catch(function(err) {
+          defer.reject(err);
+        });
+    }
+
+    return defer.promise;
+  };
+
+  Data.saveHotels = function(hotels) {
+    var defer = $q.defer();
+
+    for (var i = 0; i < hotels.length; i++) {
+      $http.put('/places/hotel/' + hotels[i].place_id, JSON.stringify(hotels[i]))
+        .then(function(res) {
+          defer.resolve(res);
+        })
+        .catch(function(err) {
+          defer.reject(err);
+        });
+    }
+
+    return defer.promise;
+  };
+
+  Data.saveEvents = function(events) {
+    var defer = $q.defer();
+
+    for (var i = 0; i < events.length; i++) {
+      $http.put('/places/event/' + events[i].place_id, JSON.stringify(events[i]))
+        .then(function(res) {
+          defer.resolve(res);
+        })
+        .catch(function(err) {
+          defer.reject(err);
+        });
+    }
+
+    return defer.promise;
+  };
+
+  Data.saveRestaurants = function(restaurants) {
+    var defer = $q.defer();
+    
+    for (var i = 0; i < restaurants.length; i++) {
+      $http.put('/places/restaurant/' + restaurants[i].place_id, JSON.stringify(restaurants[i]))
+        .then(function(res) {
+          defer.resolve(res);
+        })
+        .catch(function(err) {
+          defer.reject(err);
+        });
+    }
+
+    return defer.promise;
+  };
+
+
   return Data;
 }]);

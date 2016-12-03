@@ -106,6 +106,31 @@ angular.module('cs3200project').controller('adminEditController', ['$scope', '$r
       })
       .catch(function(err) {
       });
+
+    Data.saveLandmarks($scope.landmarks)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });
+    Data.saveRestaurants($scope.restaurants)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });
+    Data.saveEvents($scope.events)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });
+    Data.saveHotels($scope.hotels)
+      .then(function(res) {
+        $route.reload();
+      })
+      .catch(function(err) {
+      });
   };
 
   $scope.deletePlace = function(id) {

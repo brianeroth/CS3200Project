@@ -40,7 +40,6 @@ function getCityImagesForCity(req) {
  * @return {Promise} The promise
  */
 function createCityImage(req) {
-  console.log(req.body);
   if (!req.body || !req.body.image_path || !req.body.image_type || !req.body.image_city_id) {
     return Promise.reject({
       status: 406,
@@ -58,7 +57,6 @@ function createCityImage(req) {
  * @return {Promise} The promise
  */
 function updateCityImage(req) {
-  console.log(req.body);
   if (!req.body || (!req.body.image_path && !req.body.image_type && !req.body.image_city_id)) {
     return Promise.reject({
       status: 406,

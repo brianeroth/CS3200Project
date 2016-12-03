@@ -127,34 +127,21 @@ function createHotel(req) {
  * @return {Promise} The promise
  */
 function updateRestaurant(req) {
-  var placeId;
-  if (!req.body || (!req.body.place_name && !req.body.place_description && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.restaurant_cuisine_type)) {
+  if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.restaurant_cuisine_type)) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide resturants place\'s name, description, address, price range, external resource, image, city, or cuisine type'
+      message: 'Must provide resturants place\'s name, address, price range, external resource, image, city, or cuisine type'
     });
   }
 
-  return query('SELECT * FROM restaurants WHERE restaurant_id = ' + req.params.id)
-    .then(function(rows) {
-      if (!rows[0]) {
-        return Promise.reject({
-          status: 404,
-          message: 'Restaurant not found'
-        });
-      }
-      placeId = rows[0].place_id;
-    })
-    .then(function() {
-      return updatePlace(req, placeId);
-    })
+  return updatePlace(req, req.body.place_id)
     .then(function() {
       if (req.body.restaurant_cuisine_type) {
         return query('UPDATE restaurants SET restaurant_cuisine_type = "' + req.body.restaurant_cuisine_type + '" WHERE restaurant_id = ' + req.params.id);
       }
     })
     .then(function() {
-      return query('SELECT * FROM places JOIN restaurants ON places.place_id = restaurants.place_id WHERE places.place_id = ' + placeId);
+      return query('SELECT * FROM places JOIN restaurants ON places.place_id = restaurants.place_id WHERE places.place_id = ' + req.body.place_id);
     });
 }
 
@@ -166,26 +153,14 @@ function updateRestaurant(req) {
  */
 function updateEvent(req) {
   var placeId;
-  if (!req.body || (!req.body.place_name && !req.body.place_description && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.event_date && !req.body.event_cost)) {
+  if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.event_date && !req.body.event_cost)) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide event place\'s name, description, address, price range, external resource, image, city, date, or cost'
+      message: 'Must provide event place\'s name, address, price range, external resource, image, city, date, or cost'
     });
   }
 
-  return query('SELECT * FROM events WHERE event_id = ' + req.params.id)
-    .then(function(rows) {
-      if (!rows[0]) {
-        return Promise.reject({
-          status: 404,
-          message: 'Event not found'
-        });
-      }
-      placeId = rows[0].place_id;
-    })
-    .then(function() {
-      return updatePlace(req, placeId);
-    })
+  return updatePlace(req, req.body.place_id)
     .then(function() {
       if (req.body.event_date) {
         return query('UPDATE events SET event_date = "' + req.body.event_date + '" WHERE event_id = ' + req.params.id);
@@ -197,7 +172,7 @@ function updateEvent(req) {
       }
     })
     .then(function() {
-      return query('SELECT * FROM places JOIN events ON places.place_id = events.place_id WHERE places.place_id = ' + placeId);
+      return query('SELECT * FROM places JOIN events ON places.place_id = events.place_id WHERE places.place_id = ' + req.body.place_id);
     });
 }
 
@@ -209,33 +184,21 @@ function updateEvent(req) {
  */
 function updateLandmark(req) {
   var placeId;
-  if (!req.body || (!req.body.place_name && !req.body.place_description && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.landmark_cost)) {
+  if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.landmark_cost)) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide landmark place\'s name, description, address, price range, external resource, image, city, or cost'
+      message: 'Must provide landmark place\'s name, address, price range, external resource, image, city, or cost'
     });
   }
 
-  return query('SELECT * FROM landmarks WHERE landmark_id = ' + req.params.id)
-    .then(function(rows) {
-      if (!rows[0]) {
-        return Promise.reject({
-          status: 404,
-          message: 'Landmark not found'
-        });
-      }
-      placeId = rows[0].place_id;
-    })
-    .then(function() {
-      return updatePlace(req, placeId);
-    })
+  return updatePlace(req, req.body.place_id)
     .then(function() {
       if (req.body.landmark_cost) {
         return query('UPDATE landmarks SET landmark_cost = "' + req.body.landmark_cost + '" WHERE landmark_id = ' + req.params.id);
       }
     })
     .then(function() {
-      return query('SELECT * FROM places JOIN landmarks ON places.place_id = hotels.place_id WHERE landmarks.place_id = ' + placeId);
+      return query('SELECT * FROM places JOIN landmarks ON places.place_id = landmarks.place_id WHERE landmarks.place_id = ' + req.body.place_id);
     });
 }
 
@@ -247,28 +210,16 @@ function updateLandmark(req) {
  */
 function updateHotel(req) {
   var placeId;
-  if (!req.body || (!req.body.place_name && !req.body.place_description && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id)) {
+  if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id)) {
     return Promise.reject({
       status: 406,
-      message: 'Must provide hotel place\'s name, description, address, price range, external resource, image, or city'
+      message: 'Must provide hotel place\'s name, address, price range, external resource, image, or city'
     });
   }
 
-  return query('SELECT * FROM hotels WHERE hotel_id = ' + req.params.id)
-    .then(function(rows) {
-      if (!rows[0]) {
-        return Promise.reject({
-          status: 404,
-          message: 'Hotel not found'
-        });
-      }
-      placeId = rows[0].place_id;
-    })
+  return updatePlace(req, req.body.place_id)
     .then(function() {
-      return updatePlace(req, placeId);
-    })
-    .then(function() {
-      return query('SELECT * FROM places JOIN hotels ON places.place_id = hotels.place_id WHERE places.place_id = ' + placeId);
+      return query('SELECT * FROM places JOIN hotels ON places.place_id = hotels.place_id WHERE places.place_id = ' + req.body.place_id);
     });
 }
 
@@ -323,7 +274,7 @@ function updatePlace(req, placeId) {
     })
     .then(function() {
       if (req.body.place_city_id) {
-        return query('UPDATE places SET place_city_id = "' + req.body.place_city_id + '" WHERE place_id = ' + req.params.placeId);
+        return query('UPDATE places SET place_city_id = "' + req.body.place_city_id + '" WHERE place_id = ' + placeId);
       }
     });
 }
