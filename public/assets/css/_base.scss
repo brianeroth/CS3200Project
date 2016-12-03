@@ -46,13 +46,48 @@ h6 {
 
 }
 
+img {
+    max-width: 100%;
+}
+
+input, textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid $gray--lighter;
+    padding: 15px;
+    font-size: 1.1em;
+    min-width: 300px;
+    font-weight: 300;
+    color: $text-color;
+
+    & + input, & + textarea {
+        margin-top: 15px;
+    }
+}
+
+input[type="submit"] {
+    background-color: $blue;
+    color: $white;
+    border-color: transparent;
+    cursor: pointer;
+
+    &.delete {
+        width: auto;
+        background-color: #d50000;
+    }
+}
+
 p {
 	margin: 0;
+	margin-bottom: 15px;
 }
 
 a {
-	&:hover {
+	color: $blue;
+	text-decoration: none;
 
+	&:hover {
+		text-decoration: underline;
 	}
 }
 

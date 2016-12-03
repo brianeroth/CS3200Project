@@ -3,23 +3,48 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
-// const request = require('request'); TODO
-// const querystring = require('querystring'); TODO
 const cookieParser = require('cookie-parser');
-// const constants = require('./lib/constants'); TODO
+const search = require('./routes/search');
+const auth = require('./routes/auth');
 const accounts = require('./routes/accounts');
 const cities = require('./routes/cities');
-const hours = require('./routes/hours');
-const images = require('./routes/images');
+const cityImages = require('./routes/cityImages');
 const interests = require('./routes/interests');
 const places = require('./routes/places');
-const reviews = require('./routes/reviews');
+const bodyParser = require('body-parser');
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(cookieParser());
+app.use(bodyParser());
 app.use(express.static(path.join(__dirname, '/public')));
+
+/**
+ * Search via city.
+ */
+app.get('/search', function(req, res) {
+  search.search(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Login to the service.
+ */
+app.post('/login/:username/:password', function(req, res) {
+  auth.login(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
 
 /*
  * Get account with the given id.
@@ -30,33 +55,33 @@ app.get('/accounts/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /*
  * Create an account.
  */
-app.post('/accounts/:id', function(req, res) {
+app.post('/accounts', function(req, res) {
   accounts.createAccount(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
  * Update an account.
  */
-app.put('/accounts/:id', function(req, res) {
+app.put('/accounts/:id', bodyParser, function(req, res) {
   accounts.updateAccount(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -69,7 +94,7 @@ app.delete('/accounts/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -82,7 +107,7 @@ app.get('/places', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -95,59 +120,128 @@ app.get('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
  * Get all places in a city.
  */
-app.get('/places/:city', function(req, res) {
+app.get('/places/city/:id', function(req, res) {
   places.getPlacesInCity(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
+// Creation for all types of places, resturants, events, landmarks, and hotels.
+
 /**
- * Get all places with intereset.
+ * Create a resturant.
  */
-app.get('/places/:interest', function(req, res) {
-  places.getPlaceWithInterest(req)
+app.post('/places/restaurant', function(req, res) {
+  places.createRestaurant(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Create a place.
+ * Create an event.
  */
-app.post('/places/:id', function(req, res) {
-  places.createPlace(req)
+app.post('/places/event', function(req, res) {
+  places.createEvent(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Update a place.
+ * Create a landmark.
  */
-app.put('/places/:id', function(req, res) {
-  places.updatePlace(req)
+app.post('/places/landmark', function(req, res) {
+  places.createLandmark(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Create a resturant.
+ */
+app.post('/places/hotel', function(req, res) {
+  places.createHotel(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+// Update all types of places.
+
+/**
+ * Update a restaurant.
+ */
+app.put('/places/restaurant/:id', function(req, res) {
+  places.updateRestaurant(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Update an event.
+ */
+app.put('/places/event/:id', function(req, res) {
+  places.updateEvent(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Update a landmark.
+ */
+app.put('/places/landmark/:id', function(req, res) {
+  places.updateLandmark(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
+    });
+});
+
+/**
+ * Update a hotel.
+ */
+app.put('/places/hotel/:id', function(req, res) {
+  places.updateHotel(req)
+    .then(function(data) {
+      res.send(data);
+    })
+    .catch(function(err) {
+      res.status(err.status).send(err);
     });
 });
 
@@ -160,85 +254,7 @@ app.delete('/places/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Get all hours of operation.
- */
-app.get('/hours', function(req, res) {
-  hours.getHours(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Get the hours of opperation with id.
- */
-app.get('/hours/:id', function(req, res) {
-  hours.getHour(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Get hours of operation for a place.
- */
-app.get('/hours/:place', function(req, res) {
-  hours.getHoursForPlace(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Create an hour of operation.
- */
-app.post('/hours/:id', function(req, res) {
-  hours.createHour(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Update an hour of operation.
- */
-app.put('/hours/:id', function(req, res) {
-  hours.updateHour(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Delete an hour of opperation.
- */
-app.delete('/hours/:id', function(req, res) {
-  hours.deleteHour(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -251,7 +267,7 @@ app.get('/cities', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -264,20 +280,20 @@ app.get('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
  * Create a city.
  */
-app.post('/cities/:id', function(req, res) {
+app.post('/cities', function(req, res) {
   cities.createCity(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -290,7 +306,7 @@ app.put('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -303,176 +319,85 @@ app.delete('/cities/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Get all images.
+ * Get all city images.
  */
-app.get('/images', function(req, res) {
-  images.getImages(req)
+app.get('/cityImages', function(req, res) {
+  cityImages.getCityImages(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Get an image with id.
+ * Get a city image with id.
  */
-app.get('/images/:id', function(req, res) {
-  images.getImage(req)
+app.get('/cityImages/:id', function(req, res) {
+  cityImages.getCityImage(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Get all images for a city.
+ * Gets all city images for a city.
  */
-app.get('images/:city', function(req, res) {
-  images.getImagesForCity(req)
+app.get('/cityImages/city/:id', function(req, res) {
+  cityImages.getCityImagesForCity(req)
     .then(function(data) {
       res.send(data);
     })
-    .catch(function(err) {
-      console.error(err);
+    .then(function(err) {
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Get all images for a place.
+ * Create a cityImage.
  */
-app.get('images/:place', function(req, res) {
-  images.getImagesForPlace(req)
+app.post('/cityImages', function(req, res) {
+  cityImages.createCityImage(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Create an image.
+ * Update a city image.
  */
-app.post('images/:id', function(req, res) {
-  images.createImage(req)
+app.put('/cityImages/:id', function(req, res) {
+  cityImages.updateCityImage(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
- * Update an image.
+ * Delete a city image.
  */
-app.put('images/:id', function(req, res) {
-  images.updateImage(req)
+app.delete('/cityImages/:id', function(req, res) {
+  cityImages.deleteCityImage(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Delete an image.
- */
-app.delete('images/:id', function(req, res) {
-  images.deleteImage(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Get all reviews.
- */
-app.get('/reviews', function(req, res) {
-  reviews.getReviews(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Get a review with id.
- */
-app.get('/reviews/:id', function(req, res) {
-  reviews.getReview(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Get all reviews for a place.
- */
-app.get('/review/:place', function(req, res) {
-  reviews.getReviewsForPlace(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Create a review.
- */
-app.post('/reviews/:id', function(req, res) {
-  reviews.createReview(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Update a review.
- */
-app.put('/reviews/:id', function(req, res) {
-  reviews.updateReview(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-});
-
-/**
- * Delete a review.
- */
-app.delete('/reviews/:id', function(req, res) {
-  reviews.deleteReview(req)
-    .then(function(data) {
-      res.send(data);
-    })
-    .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -485,7 +410,7 @@ app.get('/interests/', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -498,20 +423,20 @@ app.get('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
 /**
  * Create an interest.
  */
-app.post('/interests/:id', function(req, res) {
+app.post('/interests', function(req, res) {
   interests.createInterest(req)
     .then(function(data) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -524,7 +449,7 @@ app.put('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 
@@ -537,7 +462,7 @@ app.delete('/interests/:id', function(req, res) {
       res.send(data);
     })
     .catch(function(err) {
-      console.error(err);
+      res.status(err.status).send(err);
     });
 });
 

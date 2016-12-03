@@ -1,0 +1,296 @@
+.city-chooser {
+    .city-chooser__city {
+        background-size: cover;
+        background-position: center center;
+        padding: 30px;
+        width: calc(33.3% - 15px);
+        height: 450px;
+        margin-top: 30px;
+        border-radius: 3px;
+        text-decoration: none;
+        position: relative;
+        z-index: 0;
+        @include transition(0.3s all);
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparentize($text-color, 0.5);
+            z-index: -1;
+        }
+
+        .city-chooser__city__country {
+            text-transform: uppercase;
+            color: $white;
+            font-weight: 300;
+        }
+
+        .city-chooser__city__name {
+            font-weight: 300;
+            color: $white;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.city__hero {
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 700px;
+    margin-bottom: 45px;
+}
+
+.city__places__featured {
+    .city__place__featured {
+        background-size: cover;
+        background-position: center center;
+
+        padding: 30px;
+        width: calc(33.3% - 15px);
+        height: 450px;
+        margin-top: 30px;
+
+        border-radius: 3px;
+        text-decoration: none;
+
+        @include transition(0.3s all);
+
+        position: relative;
+        z-index: 0;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparentize($text-color, 0.5);
+            z-index: -1;
+        }
+
+        .city__place__featured__extra {
+            text-transform: uppercase;
+            color: $white;
+            font-weight: 300;
+        }
+
+        .city__place__featured__name {
+            font-weight: 300;
+            color: $white;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.city__places {
+    margin-top: 30px;
+    margin-bottom: 60px;
+
+    & + .city__places {
+        margin-top: 60px;
+    }
+
+    .city__place {
+        border-top: 1px solid $gray--lighter;
+        padding: 7px 0;
+        width: calc(33.3% - 15px);
+        text-decoration: none;
+        color: $text-color;
+
+        &:hover {
+            color: $blue;
+        }
+
+        .city__place__info {
+            margin-left: 30px;
+        }
+
+        .city__place__image {
+            position: relative;
+
+            img {
+                max-width: 100px;
+            }
+        }
+
+        .city__place__number {
+            position: absolute;
+            top: 25%;
+            right: -20%;
+            padding: 5px 0;
+            width: 30px;
+            height: 30px;
+            background-color: $white;
+            border-radius: 50%;
+            box-shadow: 0 0 4px $gray;
+            text-align: center;
+            font-size: 0.95em;
+            color: $gray;
+        }
+
+        .city__place__headline {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .city__place__address {
+            font-weight: 300;
+            color: $gray;
+            font-size: 0.95em;
+        }
+    }
+}
+
+.city__event {
+    margin-top: 30px;
+
+    & + .city__event {
+        padding-top: 30px;
+        border-top: 1px solid $gray--lighter;
+    }
+
+    .city__event__image {
+        img {
+            max-width: 300px;
+        }
+    }
+
+    .city__event__cost {
+        color: $gray;
+    }
+
+    .city__event__info {
+        margin-left: 30px;
+        @include flex(1);
+        
+        .city__event__headline__info {
+            margin-bottom: 15px;
+        }
+
+        .city__event__date {
+            .city__event__date__month {
+                padding: 7px;
+                text-transform: uppercase;
+                background-color: #d50000;
+                text-align: center;
+                color: $white;
+                font-size: 0.75em;
+            }
+
+            .city__event__date__day {
+                text-align: center;
+                font-weight: 700;
+                padding: 15px 0;
+                font-size: 1.4em;
+                border-left: 1px solid $gray--lighter;
+                border-bottom: 1px solid $gray--lighter;
+                border-right: 1px solid $gray--lighter;
+            }
+        }
+
+        .city__event__link {
+            display: block;
+            border-top: 1px solid $gray--lighter;
+            padding-top: 15px;
+            font-size: 0.95em;
+            text-decoration: none;
+            color: $gray;
+            text-transform: uppercase;
+
+            &:after {
+                content: '\2192';
+                margin-left: 7px;
+            }
+        }
+    }
+}
+
+.login-form {
+    margin-top: 30px;
+    width: 50%;
+}
+
+.admin-city {
+    margin-top: 30px;
+
+    & + .admin-city {
+        border-top: 1px solid $gray--lighter;
+        padding-top: 30px;
+    }
+
+    .admin-city__image {
+        img {
+            width: 500px;
+        }
+    }
+
+    .admin-city__info {
+        margin-left: 30px;
+        @include flex(1);
+
+        .admin-city__edit__link {
+            display: block;
+            border-top: 1px solid $gray--lighter;
+            padding-top: 15px;
+            font-size: 0.95em;
+            text-decoration: none;
+            color: $gray;
+            text-transform: uppercase;
+
+            &:after {
+                content: '\2192';
+                margin-left: 7px;
+            }
+        }
+    }
+}
+
+.admin-edit-place {
+    margin-top: 30px;
+
+    & + .admin-edit-place {
+        border-top: 1px solid $gray--lighter;
+        padding-top: 30px;
+    }
+}
+
+.admin-city-images__entry {
+    margin-top: 15px;
+
+    .admin-city-images__entry__path {
+        @include flex(1);
+    }
+
+    .admin-city-images__entry__image {
+        padding-right: 30px;
+
+        img {
+            max-width: 250px;
+        }
+    }
+}
+
+.city__images {
+    margin-bottom: 30px;
+    
+    img {
+        width: 100px;
+        height: 100px;
+
+        & + img {
+            margin-left: 15px;
+        }
+    }
+}

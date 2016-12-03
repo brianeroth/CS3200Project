@@ -1,0 +1,146 @@
+<div class="page-headline container">
+    <input type="text" ng-model="city.city_name" placeholder="City Name">
+    <textarea ng-model="city.city_description" placeholder="City Description"></textarea>
+    <input ng-model="city.city_country" placeholder="City Country">
+    <input ng-model="city.city_state" placeholder="City State">
+
+    <div class="admin-city-images">
+        <div class="admin-city-images__entry" ng-repeat="img in cityImages">
+            <div class="admin-city-images__entry__image">
+                <img ng-src="{{img.image_path}}">
+            </div>
+            <div class="admin-city-images__entry__path">
+                <input type="text" placeholder="Image URL" ng-model="img.image_path">
+                <select ng-model="img.image_type">
+                    <option value="hero">Hero</option>
+                    <option value="thumbnail">Thumbnail</option>
+                </select>
+                <input type="submit" value="Delete" class="delete" ng-click="deleteImg(img.image_id)">
+            </div>
+        </div>
+        <div class="admin-city-images__entry">
+            <div class="admin-city-images__entry__image">
+                <img ng-src="{{newImg.image_path}}">
+            </div>
+            <div class="admin-city-images__entry__path">
+                <input type="text" placeholder="Image URL" ng-model="newImg.image_path">
+                <select ng-model="newImg.image_type">
+                    <option value="hero">Hero</option>
+                    <option selected value="thumbnail">Thumbnail</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="block-headline container">Landmarks</h4>
+<div class="container">
+    <div class="admin-edit-place" ng-repeat="landmark in landmarks">
+        <input type="text" ng-model="landmark.place_name" placeholder="Landmark Name">
+        <textarea ng-model="landmark.place_description" placeholder="Landmark Description"></textarea>
+        <input type="text" ng-model="landmark.place_address" placeholder="Landmark Address">
+        <input type="text" ng-model="landmark.place_price_range" placeholder="Landmark Price Range">
+        <input type="text" ng-model="landmark.place_external_resource" placeholder="Landmark External Resource">
+        <input type="text" ng-model="landmark.place_image" placeholder="Landmark Image">
+        <input type="text" ng-model="landmark.landmark_cost" placeholder="Landmark Cost">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(landmark.place_id)">
+    </div>
+</div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">Events</h4>
+<div class="container">
+    <div class="admin-edit-place" ng-repeat="event in events">
+        <input type="text" ng-model="event.place_name" placeholder="Event Name">
+        <textarea ng-model="event.place_description" placeholder="Event Description"></textarea>
+        <input type="text" ng-model="event.place_address" placeholder="Event Address">
+        <input type="text" ng-model="event.place_price_range" placeholder="Event Price Range">
+        <input type="text" ng-model="event.place_external_resource" placeholder="Event External Resource">
+        <input type="text" ng-model="event.place_image" placeholder="Event Image">
+        <input type="text" ng-model="event.event_date" placeholder="Event Date">
+        <input type="text" ng-model="event.event_cost" placeholder="Event Cost">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(event.place_id)">
+    </div>
+</div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">Restaurants</h4>
+<div class="container">
+    <div class="admin-edit-place" ng-repeat="restaurant in restaurants">
+        <input type="text" ng-model="restaurant.place_name" placeholder="Restaurant Name">
+        <textarea ng-model="restaurant.place_description" placeholder="Restaurant Description"></textarea>
+        <input type="text" ng-model="restaurant.place_address" placeholder="Restaurant Address">
+        <input type="text" ng-model="restaurant.place_price_range" placeholder="Restaurant Price Range">
+        <input type="text" ng-model="restaurant.place_external_resource" placeholder="Restaurant External Resource">
+        <input type="text" ng-model="restaurant.place_image" placeholder="Restaurant Image">
+        <input type="text" ng-model="restaurant.restaurant_cuisine_type" placeholder="Restaurant Cuisine Type">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(restaurant.place_id)">
+    </div>
+</div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">Hotels</h4>
+<div class="container">
+    <div class="admin-edit-place" ng-repeat="hotel in hotels">
+        <input type="text" ng-model="hotel.place_name" placeholder="Hotel Name">
+        <textarea ng-model="hotel.place_description" placeholder="Hotel Description"></textarea>
+        <input type="text" ng-model="hotel.place_address" placeholder="Hotel Address">
+        <input type="text" ng-model="hotel.place_price_range" placeholder="Hotel Price Range">
+        <input type="text" ng-model="hotel.place_external_resource" placeholder="Hotel External Resource">
+        <input type="text" ng-model="hotel.place_image" placeholder="Hotel Image">
+        <input type="submit" value="Delete" class="delete" ng-click="deletePlace(hotel.place_id)">
+    </div>
+</div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">New Place</h4>
+<div class="container">
+    <select style="margin: 15px 0;" ng-model="newPlaceType">
+        <option value="landmark">Landmark</option>
+        <option value="event">Event</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="hotel">Hotel</option>
+    </select>
+
+    <div>
+    </div>
+
+    <div ng-if="newPlaceType == 'landmark'">
+        <input type="text" ng-model="newLandmark.place_name" placeholder="Landmark Name">
+        <textarea ng-model="newLandmark.place_description" placeholder="Landmark Description"></textarea>
+        <input type="text" ng-model="newLandmark.place_address" placeholder="Landmark Address">
+        <input type="text" ng-model="newLandmark.place_price_range" placeholder="Landmark Price Range">
+        <input type="text" ng-model="newLandmark.place_external_resource" placeholder="Landmark External Resource">
+        <input type="text" ng-model="newLandmark.place_image" placeholder="Landmark Image">        
+        <input style="margin-top: 15px;" type="text" ng-model="newLandmark.landmark_cost" placeholder="Landmark Cost">
+    </div>
+    <div ng-if="newPlaceType == 'event'">
+        <input type="text" ng-model="newEvent.place_name" placeholder="Event Name">
+        <textarea ng-model="newEvent.place_description" placeholder="Event Description"></textarea>
+        <input type="text" ng-model="newEvent.place_address" placeholder="Event Address">
+        <input type="text" ng-model="newEvent.place_price_range" placeholder="Event Price Range">
+        <input type="text" ng-model="newEvent.place_external_resource" placeholder="Event External Resource">
+        <input type="text" ng-model="newEvent.place_image" placeholder="Event Image">        
+        <input style="margin-top: 15px;" type="text" ng-model="newEvent.event_cost" placeholder="Event Cost">
+        <input type="text" ng-model="newEvent.event_date" placeholder="Event Date">
+    </div>
+    <div ng-if="newPlaceType == 'restaurant'">
+        <input type="text" ng-model="newRestaurant.place_name" placeholder="Restaurant Name">
+        <textarea ng-model="newRestaurant.place_description" placeholder="Restaurant Description"></textarea>
+        <input type="text" ng-model="newRestaurant.place_address" placeholder="Restaurant Address">
+        <input type="text" ng-model="newRestaurant.place_price_range" placeholder="Restaurant Price Range">
+        <input type="text" ng-model="newRestaurant.place_external_resource" placeholder="Restaurant External Resource">
+        <input type="text" ng-model="newRestaurant.place_image" placeholder="Restaurant Image">        
+        <input style="margin-top: 15px;" type="text" ng-model="newRestaurant.restaurant_cuisine_type" placeholder="Restaurant Cuisine Type">
+    </div>
+    <div ng-if="newPlaceType == 'hotel'">
+        <input type="text" ng-model="newHotel.place_name" placeholder="Hotel Name">
+        <textarea ng-model="newHotel.place_description" placeholder="Hotel Description"></textarea>
+        <input type="text" ng-model="newHotel.place_address" placeholder="Hotel Address">
+        <input type="text" ng-model="newHotel.place_price_range" placeholder="Hotel Price Range">
+        <input type="text" ng-model="newHotel.place_external_resource" placeholder="Hotel External Resource">
+        <input type="text" ng-model="newHotel.place_image" placeholder="Hotel Image">        
+    </div>
+
+    <input type="submit" value="Create Place" ng-click="createPlace()">
+</div>
+
+<div class="container" style="margin-top: 60px;">
+    <input type="submit" value="Save" ng-click="saveCity()"> 
+</div>

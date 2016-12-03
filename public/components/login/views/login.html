@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Login</h1>
+
+    <p style="margin-top: 15px;">Don't have an account? <a href="#login/create">Create one.</a></p>
+
+    <p style="color: #d50000">{{errorMessage}}</p>
+
+    <form class="login-form" ng-submit="login()">
+        <input type="text" placeholder="Username" name="username" ng-model="user.admin_username" required>
+        <input type="password" placeholder="Password" name="password" ng-model="user.admin_password" required>
+        <input type="submit" value="Login">
+    </form>
+</div>

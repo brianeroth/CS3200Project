@@ -1,0 +1,13 @@
+<div class="page-headline container">
+    <h1 class="page-headline__header">Search Results</h1>
+    <form ng-submit="search()">
+        <input type="text" name="" placeholder="Search for a city" autofocus ng-model="query">
+    </form>
+</div>
+
+<div class="city-chooser container">
+    <a href="#city/{{city.city_id}}" class="city-chooser__city" ng-repeat="city in searchResults" style="background-image: url({{getCityHeroImage(city.city_id)}})">
+        <h4 class="city-chooser__city__country">{{city.city_state}}, {{city.city_country}}</h4>
+        <h2 ng-bind="city.city_name" class="city-chooser__city__name"></h2>
+    </a>
+</div>

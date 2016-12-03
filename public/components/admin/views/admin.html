@@ -1,0 +1,35 @@
+<div class="page-headline container">
+    <h1 class="page-headline__header">Admin</h1>
+</div>
+
+<h4 class="block-headline container">Cities</h4>
+<div class="container">
+    <div class="admin-city" ng-repeat="city in cities">
+        <div class="admin-city__image">
+            <img ng-src="{{getCityHeroImage(city.city_id)}}">
+        </div>
+        <div class="admin-city__info">
+            <h3 class="admin-city__headline" ng-bind="city.city_name"></h3>
+            <p class="admin-city__description" ng-bind="city.city_description"></p>
+            <a class="admin-city__edit__link" href="#admin/edit/{{city.city_id}}">Edit</a>
+            <input type="submit" value="Delete" ng-click="deleteCity(city.city_id)" class="delete">
+        </div>
+    </div>
+</div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">New City</h4>
+<div class="container">
+    <div class="admin-city">
+        <div class="admin-city__image">
+            <img src="http://placehold.it/500x312">
+        </div>
+        <div class="admin-city__info">
+            <p style="color: #d50000">{{errorMessage}}</p>
+            <input type="text" placeholder="City Name" ng-model="newCity.city_name" required>
+            <textarea placeholder="City Description" ng-model="newCity.city_description"></textarea>
+            <input type="text" placeholder="City Country" ng-model="newCity.city_country" required>
+            <input type="text" placeholder="City State/Province" ng-model="newCity.city_state" required>
+            <input type="submit" value="Create" ng-click="createCity()">
+        </div>
+    </div>
+</div>

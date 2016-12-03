@@ -1,0 +1,75 @@
+.container {
+    max-width: 1100px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+
+.city-chooser {
+    @include flexbox();
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .city-chooser__city {
+        @include flexbox();
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+#site-header {
+    @include flexbox();
+    @include flex-center();
+    justify-content: space-between;
+}
+
+.header__search {
+    @include flexbox();
+    @include flex-center();
+}
+
+.city__places__featured {
+    @include flexbox();
+    justify-content: space-between;
+
+    .city__place__featured {
+        @include flexbox();
+        flex-direction: column;
+        justify-content: space-between;        
+    }
+}
+
+.city__places {
+    @include flexbox();
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .city__place {
+        @include flexbox();
+        @include flex-center();
+        justify-content: space-around;
+    }
+}
+
+.city__event {
+    @include flexbox();
+    @include flex-center();
+
+    .city__event__headline__info {
+        @include flexbox();
+        @include flex-center();
+        justify-content: space-between;
+    }
+}
+
+.admin-city {
+    @include flexbox();
+}
+
+.modal-content__main {
+    @include flexbox();
+}
+
+.admin-city-images__entry {
+    @include flexbox();
+}

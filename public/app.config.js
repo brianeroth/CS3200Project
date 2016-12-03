@@ -3,5 +3,5 @@
  */
 angular.module('cs3200project', ['ngRoute']).constant('CONFIG', {
   DEBUG: true,
-  SITE_NAME: 'CS 3200 Project'
+  SITE_NAME: 'Travel Guide'
 });

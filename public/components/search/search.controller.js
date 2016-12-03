@@ -1,18 +1,22 @@
 'use strict';
 
-angular.module('cs3200project').controller('homeController', ['$scope', 'Data', function($scope, Data) {
+angular.module('cs3200project').controller('searchController', ['$scope', '$location', 'Data', function($scope, $location, Data) {
   $scope.init = function() {
-    Data.getCities()
-      .then(function(res) {
-        $scope.cities = res.data;
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
+    $scope.query = '';
 
     Data.getAllCityImages()
       .then(function(res) {
         $scope.allCityImages = res.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  };
+
+  $scope.search = function() {
+    Data.search($scope.query)
+      .then(function(res) {
+        $scope.searchResults = res.data;
       })
       .catch(function(err) {
         console.log(err);
