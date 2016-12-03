@@ -152,7 +152,6 @@ function updateRestaurant(req) {
  * @return {Promise} The promise
  */
 function updateEvent(req) {
-  var placeId;
   if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.event_date && !req.body.event_cost)) {
     return Promise.reject({
       status: 406,
@@ -183,7 +182,6 @@ function updateEvent(req) {
  * @return {Promise} The promise
  */
 function updateLandmark(req) {
-  var placeId;
   if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id && !req.body.landmark_cost)) {
     return Promise.reject({
       status: 406,
@@ -209,7 +207,6 @@ function updateLandmark(req) {
  * @return {Promise} The promise
  */
 function updateHotel(req) {
-  var placeId;
   if (!req.body || (!req.body.place_name && !req.body.place_address && !req.body.place_price_range && !req.body.place_external_resource && !req.body.place_image && !req.body.place_city_id)) {
     return Promise.reject({
       status: 406,

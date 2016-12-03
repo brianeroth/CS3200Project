@@ -309,7 +309,7 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
 
   Data.saveRestaurants = function(restaurants) {
     var defer = $q.defer();
-    
+
     for (var i = 0; i < restaurants.length; i++) {
       $http.put('/places/restaurant/' + restaurants[i].place_id, JSON.stringify(restaurants[i]))
         .then(function(res) {
@@ -322,7 +322,6 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
 
     return defer.promise;
   };
-
 
   return Data;
 }]);
