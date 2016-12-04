@@ -63,7 +63,7 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
 
   $scope.filterByInterest = function(place) {
     return true;
-  }
+  };
 
   $scope.setActiveImg = function(img) {
     $scope.activeImg = img;
