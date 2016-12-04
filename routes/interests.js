@@ -14,13 +14,13 @@ function getInterests(req) {
 }
 
 /**
- * Get an interest with id.
+ * Get an interest with place id.
  *
  * @param {Object} req The request object
  * @return {Promise} The promise
  */
-function getInterest(req) {
-  return Promise.resolve('stub');
+function getInterestsForPlace(req) {
+  return query('SELECT interest_description FROM interest_types JOIN places_interesttypes ON interest_type_id = interest_id AND place_id = ' + req.params.id);
 }
 
 /**
@@ -41,13 +41,21 @@ function createInterest(req) {
 }
 
 /**
- * Update an interest.
+ * Add an interest type to a place.
  *
  * @param {Object} req The request object
  * @return {Promise} The promise
  */
-function updateInterest(req) {
-  return Promise.resolve('stub');
+function addInterestTypeToPlaces(req) {
+  return Promise.resolve()
+    .then(function() {
+      query('DELETE FROM places_interesttypes WHERE interest_type_id = ' + req.params.id);
+    })
+    .then(function() {
+      for (var i = 0; i < req.body.places.length; i++) {
+        query('INSERT INTO places_interesttypes (place_id, interest_type_id) VALUES ("' + req.body.places[i] + '", "' + req.params.id + '")');
+      }
+    });
 }
 
 /**
@@ -61,5 +69,5 @@ function deleteInterest(req) {
 }
 
 module.exports = {
-  getInterests, getInterest, createInterest, updateInterest, deleteInterest
+  getInterests, getInterestsForPlace, createInterest, addInterestTypeToPlaces, deleteInterest
 };

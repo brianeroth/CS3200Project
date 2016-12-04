@@ -39,7 +39,15 @@
     <ul class="" ng-repeat="interest in interest_types">
         <li style="margin-top: 15px;">
             {{interest.interest_description}}
-            <a href="#" ng-click="deleteInterestType($event, interest.interest_id)">x</a>
+            <div>
+                <select ng-model="interest.places" multiple>
+                    <option ng-value="place.place_id" ng-repeat="place in places">{{place.place_name}}</option>
+                </select>
+            </div>
+            <div class="interest__actions">
+                <input type="submit" value="Save" ng-click="saveInterestTypeForPlaces(interest)">
+                <input type="submit" value="Delete" class="delete" ng-click="deleteInterestType(interest.interest_id)">
+            </div>
         </li>
     </ul>
     <div class="">

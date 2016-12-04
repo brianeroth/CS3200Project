@@ -1,3 +1,116 @@
+DROP DATABASE IF EXISTS travel_guide;
+CREATE DATABASE travel_guide;
+USE travel_guide;
+
+DROP TABLE IF EXISTS cities;
+CREATE TABLE cities (
+  city_id           INT           PRIMARY KEY AUTO_INCREMENT,
+  city_name         VARCHAR(128)  NOT NULL,
+  city_description  TEXT,
+  city_country      VARCHAR(128)  NOT NULL,
+  city_state        VARCHAR(128)  NOT NULL
+);
+
+DROP TABLE IF EXISTS places;
+CREATE TABLE places (
+  place_id                  INT           PRIMARY KEY AUTO_INCREMENT,
+  place_name                VARCHAR(128)  NOT NULL,
+  place_description         TEXT,
+  place_address             TEXT          NOT NULL,
+  place_price_range         INT           NOT NUll DEFAULT 0,
+  place_external_resource   TEXT          NOT NULL,
+  place_image               TEXT,
+  place_city_id             INT           NOT NULL,
+  FOREIGN KEY   (place_city_id) REFERENCES cities(city_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS restaurants;
+CREATE TABLE restaurants (
+  restaurant_id             INT           PRIMARY KEY AUTO_INCREMENT,
+  restaurant_cuisine_type   VARCHAR(128)  NOT NULL,
+  place_id                  INT           NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS events;
+CREATE TABLE events (
+  event_id        INT             PRIMARY KEY AUTO_INCREMENT,
+  event_date      DATE            NOT NULL,
+  event_cost      DECIMAL(21, 0),
+  place_id        INT             NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS landmarks;
+CREATE TABLE landmarks (
+  landmark_id     INT               PRIMARY KEY AUTO_INCREMENT,
+  landmark_cost   DECIMAL(21, 0),
+  place_id        INT               NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS hotels;
+CREATE TABLE hotels (
+  hotel_id  INT  PRIMARY KEY AUTO_INCREMENT,
+  place_id  INT  NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS admins;
+CREATE TABLE admins (
+  admin_id          INT           PRIMARY KEY AUTO_INCREMENT,
+  admin_name        VARCHAR(128)  NOT NULL,
+  admin_username    VARCHAR(128)  NOT NULL,
+  admin_password    VARCHAR(128)  NOT NULL
+);
+
+DROP TABLE IF EXISTS city_images;
+CREATE TABLE city_images (
+  image_id        INT                        PRIMARY KEY AUTO_INCREMENT,
+  image_path      TEXT                        NOT NULL,
+  image_caption   VARCHAR(128),
+  image_type      ENUM('thumbnail', 'hero')  NOT NULL DEFAULT 'hero',
+  image_city_id   INT                        NOT NULL,
+  FOREIGN KEY (image_city_id) REFERENCES cities(city_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS interest_types;
+CREATE TABLE interest_types (
+  interest_id             INT           PRIMARY KEY AUTO_INCREMENT,
+  interest_description    VARCHAR(128)  NOT NULL
+);
+
+DROP TABLE IF EXISTS places_interesttypes;
+CREATE TABLE places_interesttypes (
+  place_interest_id   INT  PRIMARY KEY AUTO_INCREMENT,
+  place_id            INT  NOT NULL,
+  interest_type_id    INT  NOT NULL,
+  FOREIGN KEY (place_id) REFERENCES places(place_id)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (interest_type_id) REFERENCES interest_types(interest_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+DROP FUNCTION IF EXISTS does_username_exist;
+
+DELIMITER //
+CREATE FUNCTION does_username_exist(uname VARCHAR(45)) RETURNS BOOLEAN
+BEGIN
+  DECLARE exist BOOLEAN;
+  SET exist = TRUE;
+
+  IF ((SELECT COUNT(*) FROM admins WHERE admin_username = uname) > 0) THEN RETURN TRUE;
+    ELSE RETURN FALSE;
+  END IF;
+END //
+DELIMITER ;
+
 INSERT INTO cities(city_id, city_name, city_description, city_country, city_state) VALUES
 (1, 'Rome', 'Rome wasn\'t built in a day--and you\'ll need much more than a day to take in this timeless city. The city is a real-life collage of piazzas, open-air markets, and astonishing historic sites. Toss a coin into the Trevi Fountain, contemplate the Colosseum and the Pantheon, and sample a perfect espresso or gelato before spending an afternoon shopping at the Campo de’Fiori or Via Veneto. Enjoy some of the most memorable meals of your life here, too, from fresh pasta to succulent fried artichokes or a tender oxtail stew.', 'Italy', 'Lazio'),
 (2, 'San Fransisco', 'Every neighborhood in San Francisco has its own personality, from the hippie chic of the Upper Haight to the hipster grit of the Mission. The Marina district boasts trendy bistros and postcard-perfect views of the Golden Gate Bridge, while Noe Valley offers quaint and quiet boutiques. Wave hello to the sea lions at Pier 39, and sample local cheese and charcuterie at the Ferry Building. Sit in on a yoga session in Dolores Park or marvel at the Dutch Windmill across from Ocean Beach.', 'United States', 'CA'),
@@ -262,3 +375,12 @@ INSERT INTO city_images(image_id, image_path, image_caption, image_type, image_c
 (4, 'http://handluggageonly.co.uk/wp-content/uploads/2016/01/Paris-3.jpg', '', 'hero', 4),
 (5, 'http://happypeoplebarcelona.com/wp-content/uploads/2016/04/happy-people-barcelona-11.jpg', '', 'hero', 5),
 (6, 'http://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/tokyo-mud-bath-bar-mudbath0716.jpg?itok=dJ8lDXJh', '', 'hero', 6);
+
+INSERT INTO interest_types(interest_description) VALUES
+('History'),
+('Scenic'),
+('Sports'),
+('City Life');
+
+INSERT INTO admins(admin_name, admin_username, admin_password) VALUES
+('Admin', 'admin', 'admin');

@@ -18,10 +18,52 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     return defer.promise;
   };
 
+  Data.getAllPlaces = function() {
+    var defer = $q.defer();
+
+    $http.get('/places')
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
   Data.getInterestTypes = function() {
     var defer = $q.defer();
 
     $http.get('/interests')
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.saveInterestTypeForPlaces = function(interest) {
+    var defer = $q.defer();
+
+    $http.post('/interests/' + interest.interest_id, JSON.stringify(interest))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.getInterestTypesForPlace = function(place_id) {
+    var defer = $q.defer();
+
+    $http.get('/interests/' + place_id)
       .then(function(res) {
         defer.resolve(res);
       })

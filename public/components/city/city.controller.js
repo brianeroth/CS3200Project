@@ -1,9 +1,18 @@
 'use strict';
 
+/* eslint-disable camelcase */
 angular.module('cs3200project').controller('cityController', ['$scope', '$routeParams', 'Data', function($scope, $routeParams, Data) {
   $scope.init = function() {
     $scope.activeImg = {};
+    $scope.interestFilter = 'all';
 
+    Data.getInterestTypes()
+      .then(function(res) {
+        $scope.interest_types = res.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
     Data.getCity($routeParams.id)
       .then(function(res) {
         $scope.city = res.data[0];
@@ -51,6 +60,10 @@ angular.module('cs3200project').controller('cityController', ['$scope', '$routeP
     $scope.modalOpen = false;
     $scope.modalPlace = {};
   };
+
+  $scope.filterByInterest = function(place) {
+    return true;
+  }
 
   $scope.setActiveImg = function(img) {
     $scope.activeImg = img;
