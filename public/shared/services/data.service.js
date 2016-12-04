@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint-disable camelcase */
 angular.module('cs3200project').service('Data', ['$http', '$q', function($http, $q) {
   var Data = this;
 
@@ -7,6 +8,48 @@ angular.module('cs3200project').service('Data', ['$http', '$q', function($http, 
     var defer = $q.defer();
 
     $http.get('/search?search=' + query)
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.getInterestTypes = function() {
+    var defer = $q.defer();
+
+    $http.get('/interests')
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.createInterestType = function(interestType) {
+    var defer = $q.defer();
+
+    $http.post('/interests', JSON.stringify({interest_description: interestType}))
+      .then(function(res) {
+        defer.resolve(res);
+      })
+      .catch(function(err) {
+        defer.reject(err);
+      });
+
+    return defer.promise;
+  };
+
+  Data.deleteInterestType = function(interestId) {
+    var defer = $q.defer();
+
+    $http.delete('/interests/' + interestId)
       .then(function(res) {
         defer.resolve(res);
       })

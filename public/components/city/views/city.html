@@ -5,7 +5,7 @@
 
 <div class="city__hero" style="background-image: url({{activeImg.image_path}});"></div>
 
-<div class="container city__images" ng-if="cityImages.length > 2">
+<div class="container city__images" ng-if="cityImages.length > 1">
     <img ng-src="{{img.image_path}}" ng-repeat="img in cityImages" ng-click="setActiveImg(img)">
 </div>
 

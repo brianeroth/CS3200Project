@@ -1,6 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
+const query = require('../lib/utils').query;
 
 /**
  * Get all interests.
@@ -9,7 +10,7 @@ const Promise = require('bluebird');
  * @return {Promise} The promise
  */
 function getInterests(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM interest_types');
 }
 
 /**
@@ -29,7 +30,14 @@ function getInterest(req) {
  * @return {Promise} The promise
  */
 function createInterest(req) {
-  return Promise.resolve('stub');
+  if (!req.body || !req.body.interest_description) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide interest type\'s description'
+    });
+  }
+
+  return query('INSERT INTO interest_types (interest_description) VALUES ("' + req.body.interest_description + '")');
 }
 
 /**
@@ -49,7 +57,7 @@ function updateInterest(req) {
  * @return {Promise} The promise
  */
 function deleteInterest(req) {
-  return Promise.resolve('stub');
+  return query('DELETE FROM interest_types WHERE interest_id = ' + req.params.id);
 }
 
 module.exports = {
