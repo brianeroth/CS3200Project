@@ -33,3 +33,25 @@
         </div>
     </div>
 </div>
+
+<h4 class="block-headline container" style="margin-top: 60px;">Interest Types</h4>
+<div class="container">
+    <ul class="" ng-repeat="interest in interest_types">
+        <li style="margin-top: 15px;">
+            {{interest.interest_description}}
+            <div>
+                <select ng-model="interest.places" multiple>
+                    <option ng-value="place.place_id" ng-repeat="place in places">{{place.place_name}}</option>
+                </select>
+            </div>
+            <div class="interest__actions">
+                <input type="submit" value="Save" ng-click="saveInterestTypeForPlaces(interest)">
+                <input type="submit" value="Delete" class="delete" ng-click="deleteInterestType(interest.interest_id)">
+            </div>
+        </li>
+    </ul>
+    <div class="">
+        <input style="margin-top: 15px;" type="text" placeholder="New interest type" ng-model="newInterestType">
+        <input type="submit" value="Create" ng-click="createInterestType()">
+    </div>
+</div>

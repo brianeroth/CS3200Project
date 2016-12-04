@@ -1,6 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
+const query = require('../lib/utils').query;
 
 /**
  * Get all interests.
@@ -9,17 +10,17 @@ const Promise = require('bluebird');
  * @return {Promise} The promise
  */
 function getInterests(req) {
-  return Promise.resolve('stub');
+  return query('SELECT * FROM interest_types');
 }
 
 /**
- * Get an interest with id.
+ * Get an interest with place id.
  *
  * @param {Object} req The request object
  * @return {Promise} The promise
  */
-function getInterest(req) {
-  return Promise.resolve('stub');
+function getInterestsForPlace(req) {
+  return query('SELECT interest_description FROM interest_types JOIN places_interesttypes ON interest_type_id = interest_id AND place_id = ' + req.params.id);
 }
 
 /**
@@ -29,17 +30,32 @@ function getInterest(req) {
  * @return {Promise} The promise
  */
 function createInterest(req) {
-  return Promise.resolve('stub');
+  if (!req.body || !req.body.interest_description) {
+    return Promise.reject({
+      status: 406,
+      message: 'Must provide interest type\'s description'
+    });
+  }
+
+  return query('INSERT INTO interest_types (interest_description) VALUES ("' + req.body.interest_description + '")');
 }
 
 /**
- * Update an interest.
+ * Add an interest type to a place.
  *
  * @param {Object} req The request object
  * @return {Promise} The promise
  */
-function updateInterest(req) {
-  return Promise.resolve('stub');
+function addInterestTypeToPlaces(req) {
+  return Promise.resolve()
+    .then(function() {
+      query('DELETE FROM places_interesttypes WHERE interest_type_id = ' + req.params.id);
+    })
+    .then(function() {
+      for (var i = 0; i < req.body.places.length; i++) {
+        query('INSERT INTO places_interesttypes (place_id, interest_type_id) VALUES ("' + req.body.places[i] + '", "' + req.params.id + '")');
+      }
+    });
 }
 
 /**
@@ -49,9 +65,9 @@ function updateInterest(req) {
  * @return {Promise} The promise
  */
 function deleteInterest(req) {
-  return Promise.resolve('stub');
+  return query('DELETE FROM interest_types WHERE interest_id = ' + req.params.id);
 }
 
 module.exports = {
-  getInterests, getInterest, createInterest, updateInterest, deleteInterest
+  getInterests, getInterestsForPlace, createInterest, addInterestTypeToPlaces, deleteInterest
 };

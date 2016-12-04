@@ -415,10 +415,10 @@ app.get('/interests/', function(req, res) {
 });
 
 /**
- * Get an interest with id.
+ * Get interests with place id.
  */
 app.get('/interests/:id', function(req, res) {
-  interests.getInterest(req)
+  interests.getInterestsForPlace(req)
     .then(function(data) {
       res.send(data);
     })
@@ -441,10 +441,10 @@ app.post('/interests', function(req, res) {
 });
 
 /**
- * Update an interest.
+ * Add places to an interest.
  */
-app.put('/interests/:id', function(req, res) {
-  interests.updateInterest(req)
+app.post('/interests/:id', function(req, res) {
+  interests.addInterestTypeToPlaces(req)
     .then(function(data) {
       res.send(data);
     })
